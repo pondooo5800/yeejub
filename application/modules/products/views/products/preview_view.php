@@ -33,7 +33,7 @@
 								</tr>
 								<tr>
 									<td class="text-right fit"><b>ประเภทสินค้า :</b></td>
-									<td>{record_pro_t}</td>
+									<td>{record_product_type_name}</td>
 								</tr>
 								<tr>
 									<td class="text-right fit"><b>ราคา :</b></td>

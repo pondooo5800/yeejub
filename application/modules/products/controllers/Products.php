@@ -642,8 +642,8 @@ class Products extends CRUD_Controller
 
 		$this->data['record_product_code'] = $data['product_code'];
 		$this->data['record_product_name'] = $data['product_name'];
-		$rows = rowArray($this->common_model->custom_query("select tb_products_types.product_name AS pro_t FROM tb_products LEFT JOIN tb_products_types ON tb_products.product_type = tb_products_types.product_type_id WHERE tb_products.fag_allow != 'delete' and tb_products.product_id =" .$data['product_id']));
-		$this->data['record_pro_t'] = $rows['pro_t'];
+		$rows = rowArray($this->common_model->custom_query("select tb_products_types.product_type_name FROM tb_products LEFT JOIN tb_products_types ON tb_products.product_type = tb_products_types.product_type_id WHERE tb_products.fag_allow != 'delete' and tb_products.product_id =" .$data['product_id']));
+		$this->data['record_product_type_name'] = $rows['product_type_name'];
 		$this->data['record_product_type'] = $data['product_type'];
 		$this->data['record_price'] = $data['price'];
 		$this->data['record_user_delete'] = $data['user_delete'];
