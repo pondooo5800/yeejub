@@ -1,7 +1,5 @@
 <script>
-	var data_id = {
-		data_id
-	};
+	var data_id = {data_id};
 	var state = 'edit';
 </script>
 <!--  [ View File name : edit_view.php ] -->

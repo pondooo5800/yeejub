@@ -11,12 +11,12 @@
             <div id="user-info-top" class="user-info pull-right">
                 <div class="dropdown">
                     <a class="current-open" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
-                        <span>ข้อมูลลูกค้า</span>
+                        <span>Hi <?php echo ($this->session->userdata('member_fname'))?></span>
                     </a>
-                    <!-- <ul class="dropdown-menu mega_dropdown" role="menu">
-                        <li><a href="login.html">สมัครสมาชิก</a></li>
-                        <li><a href="login.html">เข้าสู่ระบบ</a></li>
-                    </ul> -->
+                    <ul class="dropdown-menu mega_dropdown" role="menu">
+                        <li><a href="{site_url}index/member_index/<?php echo ($this->session->userdata('url_encrypt_id'))?>">ข้อมูลบัญชี</a></li>
+                        <li><a href="{site_url}member_login/destroy">ออกจากระบบ</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -26,7 +26,7 @@
     <div class="container main-header">
         <div class="row">
             <div class="col-xs-12 col-sm-3 col-md-2 logo">
-                <a href="index.html"><img class="img-logo" alt="Kute Shop" src="{base_url}/assets/themes/frontend/assets/img/icon/logo_yeejub.png"></a>
+                <a href="{site_url}"><img class="img-logo" alt="Kute Shop" src="{base_url}/assets/themes/frontend/assets/img/icon/logo_yeejub.png"></a>
             </div>
             <div class="col-xs-7 col-sm-7 col-md-8 header-search-box">
                 <form class="form-inline" action="products.html" method="post">
@@ -103,7 +103,7 @@
                             </div>
                             <div id="navbar" class="navbar-collapse collapse">
                                 <ul class="nav navbar-nav">
-                                    <li class="active"><a href="index.php">หน้าแรก</a></li>
+                                    <li class="active"><a href="{site_url}">หน้าแรก</a></li>
                                     <li><a href="about-วิธีการสั่งซื้อ-28.html">วิธีการสั่งซื้อ</a></li>
                                     <li><a href="how_payment-วิธีการชำระเงิน.html">วิธีการแจ้งชำระเงิน และการจัดส่ง</a></li>
                                     <li><a href="about-เกี่ยวกับเรา-33.html">เกี่ยวกับเรา </a></li>

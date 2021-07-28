@@ -15,6 +15,7 @@ class Index extends CI_Controller
 	private $another_css;
 	public $PAGE;
 
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -38,9 +39,8 @@ class Index extends CI_Controller
 		$this->data = $data;
 		$this->breadcrumb_data = $data;
 		$this->left_sidebar_data = $data;
-
-		$this->another_js .= '<script src="' . base_url('assets/themes/sb-admin/vendor/chart.js/Chart.min.js') . '"></script>';
-		$this->another_js .= '<script src="' . base_url('assets/themes/sb-admin/js/sb-admin-charts.min.js') . '"></script>';
+		$js_url = 'assets/js_modules/members/members.js?ft=' . filemtime('assets/js_modules/members/members.js');
+		$this->another_js = '<script src="' . base_url($js_url) . '"></script>';
 	}
 
 	// ------------------------------------------------------------------------
@@ -75,60 +75,46 @@ class Index extends CI_Controller
 	public function index()
 	{
 		$this->render_view('index');
+	}
+	public function member_index($encrypt_id = '')
+	{
+		$encrypt_id = urldecode($encrypt_id);
+		$id = decrypt($encrypt_id);
+		$this->load->model('common_model');
+		$rows = rowArray($this->common_model->custom_query("select * from tb_members where member_id=" . $id));
+		if ($rows['same'] == 1) {
+			$this->data['record_same'] = 'checked';
+		}elseif ($rows['same'] == 0){
+			$this->data['record_same'] = '';
+		}
+		$this->data['record_member_addr'] = $rows['member_addr'];
+		$this->data['record_member_same'] = $rows['member_same'];
+		$this->data['record_member_note'] = $rows['member_note'];
+		$this->render_view('member_index');
 
 		// echo '<pre>';
-		// print_r($data);
+		// print_r($rows);
 		// echo '</pre>';
 		// print_r($this->db->last_query());
 		// die();
+
+
+		// if ($id == "") {
+		// 	$this->data['message'] = "กรุณาระบุรหัสอ้างอิงที่ต้องการแก้ไขข้อมูล";
+		// 	$this->render_view('ci_message/warning');
+		// } else {
+		// 	$results = $this->Members->load($id);
+		// 	if (empty($results)) {
+		// 		$this->data['message'] = "ไม่พบข้อมูลตามรหัสอ้างอิง <b>$id</b>";
+		// 		$this->render_view('ci_message/danger');
+		// 	} else {
+		// 		$this->data['csrf_field'] = insert_csrf_field(true);
+		// 		$this->setPreviewFormat($results);
+		// 		$this->data['data_id'] = $id;
+		// 	}
+		// }
 	}
-	public function news_page()
-	{
-		$start_row = $this->uri->segment($this->uri_segment, '0');
-		if (!is_numeric($start_row)) {
-			$start_row = 0;
-		}
-		$per_page = $this->per_page;
-		$results_news = $this->Frontend_news->read($start_row, $per_page);
-		$total_row = $results_news['total_row'];
-		$search_row = $results_news['search_row'];
-		$list_data_news = $this->setDataListFormat($results_news['list_data'], $start_row);
 
-
-		$page_url = site_url('frontend_page');
-		$pagination = $this->create_pagination($page_url . '/news_page', $search_row);
-		$end_row = $start_row + $per_page;
-		if ($search_row < $per_page) {
-			$end_row = $search_row;
-		}
-
-		if ($end_row > $search_row) {
-			$end_row = $search_row;
-		}
-
-		$this->data['data_news_list'] = $list_data_news;
-		$this->data['current_page_offset'] = $start_row;
-		$this->data['start_row']	= $start_row + 1;
-		$this->data['end_row']	= $end_row;
-		$this->data['total_row']	= $total_row;
-		$this->data['search_row']	= $search_row;
-		$this->data['page_url']	= $page_url;
-		$this->data['pagination_link']	= $pagination;
-		$this->data['csrf_protection_field']	= insert_csrf_field(true);
-
-		$this->render_view('news_page');
-		// $start_row = 0;
-		// $results_news = $this->Frontend_news->read($start_row);
-		// $list_data_news = $this->setDataListFormat($results_news['list_data'], $start_row);
-
-		// $this->data['data_list_get_news'] = $list_data_news;
-		// $this->data['data_news_list'] = $list_data_news;
-
-		// $this->render_view('news_page');
-		// die(print_r($this->data['data_list_shops']));
-		// print_r($this->db->last_query());
-		// die();
-	}
 
 	public function news_detail_page($blog_id)
 	{

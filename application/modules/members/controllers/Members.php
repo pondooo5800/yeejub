@@ -370,6 +370,40 @@ class Members extends CRUD_Controller
 			echo $json;
 		}
 	}
+	public function update_member()
+	{
+		$message = '';
+		// $message .= $this->formValidateUpdate();
+		$post = $this->input->post(NULL, TRUE);
+		// die(print_r($post));
+		$error_pk_id = $this->checkRecordKey($post);
+		if ($error_pk_id != '') {
+			$message .= "รหัสอ้างอิงที่ใช้สำหรับอัพเดตข้อมูลไม่ถูกต้อง";
+		}
+		if ($message != '') {
+			$json = json_encode(array(
+				'is_successful' => FALSE,
+				'message' => $message
+			));
+			echo $json;
+		} else {
+
+			$result = $this->Members->update_member($post);
+			if ($result == false) {
+				$message = $this->Members->error_message;
+				$ok = FALSE;
+			} else {
+				$message = '<strong>บันทึกข้อมูลเรียบร้อย</strong>' . $this->Members->error_message;
+				$ok = TRUE;
+			}
+			$json = json_encode(array(
+				'is_successful' => $ok,
+				'message' => $message
+			));
+
+			echo $json;
+		}
+	}
 
 	/**
 	 * Delete Record

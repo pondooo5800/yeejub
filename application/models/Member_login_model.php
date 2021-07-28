@@ -80,6 +80,7 @@ class Member_login_model extends CI_Model
 					'member_lname' => $row->member_lname,
 					'login_validated' => TRUE,
 					'encrypt_member_id'=>encrypt($row->member_id),
+					'url_encrypt_id' => urlencode(encrypt($row->member_id))
 					);
 			$this->session->set_userdata($data);
 			return TRUE;
