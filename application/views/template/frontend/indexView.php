@@ -18,6 +18,7 @@
     <link rel="stylesheet" type="text/css" href="{base_url}assets/themes/frontend/assets/css/style.css" />
     <link rel="stylesheet" type="text/css" href="{base_url}assets/themes/frontend/assets/css/responsive.css" />
     <link rel="stylesheet" type="text/css" href="{base_url}assets/themes/frontend/assets/lib/fancyBox/jquery.fancybox.css" />
+    <link rel="stylesheet" type="text/css" href="{base_url}assets/themes/frontend/assets/css/fancybox.css" />
 	<style type="text/css">
 		* {
 			font-family: 'Sarabun', sans-serif;
@@ -45,6 +46,7 @@
         {page_footer}
     <!-- END Footer -->
 
+    <script type="text/javascript" src="{base_url}assets/themes/frontend/assets/js/fancybox.umd.js"></script>
     <script type="text/javascript" src="{base_url}assets/themes/frontend/assets/lib/jquery/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="{base_url}assets/themes/frontend/assets/lib/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="{base_url}assets/themes/frontend/assets/lib/select2/js/select2.min.js"></script>

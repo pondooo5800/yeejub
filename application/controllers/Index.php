@@ -74,6 +74,25 @@ class Index extends CI_Controller
 
 	public function index()
 	{
+		$this->load->model('common_model');
+		$product = $this->db->query("select * from tb_products_types");
+		$this->data['product_type'] = $product->result_array();
+
+		// $product_type_id = $this->common_model->custom_query("select product_type_id from tb_products_types");
+		// foreach ($product_type_id as $key => $value) {
+		// 	$product = $this->db->query("select * from tb_products where product_type =" . $value['product_type_id']);
+			// $this->data['product_type'] = $product->result_array();
+			// $this->data['product_type'] = $product->result_array();
+		// }
+		// echo '<pre>';
+		// print_r($product);
+		// echo '</pre>';
+		// print_r($this->db->last_query());
+		// die();
+
+		// $query = $this->db->query('select product_type_id from tb_products_types');
+        // $this->data['product_type'] = $query->result_array();
+
 		$this->render_view('index');
 	}
 	public function member_index($encrypt_id = '')
@@ -91,53 +110,7 @@ class Index extends CI_Controller
 		$this->data['record_member_same'] = $rows['member_same'];
 		$this->data['record_member_note'] = $rows['member_note'];
 		$this->render_view('member_index');
-
-		// echo '<pre>';
-		// print_r($rows);
-		// echo '</pre>';
-		// print_r($this->db->last_query());
-		// die();
-
-
-		// if ($id == "") {
-		// 	$this->data['message'] = "กรุณาระบุรหัสอ้างอิงที่ต้องการแก้ไขข้อมูล";
-		// 	$this->render_view('ci_message/warning');
-		// } else {
-		// 	$results = $this->Members->load($id);
-		// 	if (empty($results)) {
-		// 		$this->data['message'] = "ไม่พบข้อมูลตามรหัสอ้างอิง <b>$id</b>";
-		// 		$this->render_view('ci_message/danger');
-		// 	} else {
-		// 		$this->data['csrf_field'] = insert_csrf_field(true);
-		// 		$this->setPreviewFormat($results);
-		// 		$this->data['data_id'] = $id;
-		// 	}
-		// }
 	}
-
-
-	public function news_detail_page($blog_id)
-	{
-		$start_row = 0;
-		$results_news = $this->Frontend_news->detail_read($blog_id);
-		//$list_data_news = $this->setDataListFormat($results_news['list_data'], $start_row);
-		//$this->data['data_list_get_news'] = $list_data_news;
-		$this->data['data_news'] = $results_news;
-		$this->data['blog_name_title'] = $results_news['blog_name_title'];
-		$this->data['blog_detail'] = $results_news['blog_detail'];
-		$this->data['encrypt_name'] = $results_news['encrypt_name'];
-		$this->data['userAddUserFname'] = $results_news['userAddUserFname'];
-
-		// $results_shops = $this->Frontend_shops->read($start_row);
-		// $list_data_shops = $results_shops['list_data'];
-		// $this->data['data_list_shops'] = $list_data_shops;
-
-		$this->render_view('news_detail_page');
-		// die(print_r($this->data['data_list_shops']));
-		// print_r($this->db->last_query());
-		// die();
-	}
-
 	public function shops_page()
 	{
 		$start_row = $this->uri->segment($this->uri_segment, '0');
