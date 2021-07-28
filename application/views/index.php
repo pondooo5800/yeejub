@@ -805,7 +805,7 @@
 
             <!-- featured category fashion -->
             <div class="category-featured">
-                <nav class="navbar nav-menu nav-menu-green show-brand">
+                <nav class="navbar nav-menu nav-menu-blue show-brand">
                     <div class="container">
                         <!-- Brand and toggle get grouped for better mobile display -->
                         <div class="navbar-brand" style="text-align: center"><a
