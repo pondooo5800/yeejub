@@ -19,8 +19,7 @@ class Shop extends CI_Controller
 	{
 		parent::__construct();
         // Load cart library
-		// Load cart library
-		check_lang();
+		chkMemberPerm();
 		$this->load->model("Shop_model");
     	$this->load->library("pagination");
 		$this->load->library('cart');
@@ -56,11 +55,12 @@ class Shop extends CI_Controller
 	 */
 	private function render_view($path)
 	{
-		$this->data['top_navbar'] = $this->parser->parse('template/majestic/frontendpage_navbar_view', $this->data, TRUE);
+		$this->data['page_header'] = $this->parser->parse('template/frontend/headerView', $this->data, TRUE);
 		$this->data['page_content'] = $this->parser->parse_repeat($path, $this->data, TRUE);
+		$this->data['page_footer'] = $this->parser->parse('template/frontend/footerView', $this->data, TRUE);
 		$this->data['another_css'] = $this->another_css;
 		$this->data['another_js'] = $this->another_js;
-		$this->parser->parse('template/majestic/frontendpage_view', $this->data);
+		$this->parser->parse('template/frontend/indexView', $this->data);
 	}
 	public function create_pagination($page_url, $total)
 	{
@@ -98,8 +98,8 @@ class Shop extends CI_Controller
 		$config['next_tag_close']   = '</li>';
 		$config['last_tag_open']    = '<li class="page-item">';
 		$config['last_tag_close']   = '</li>';
-		$config['cur_tag_open']     = '<li class="page-item active"><span class="page-link">';
-		$config['cur_tag_close']    = '<span class="sr-only">(current)</span></span></li>';
+		$config['cur_tag_open']     = '<li class="page-item active"><a class="page-link">';
+		$config['cur_tag_close']    = '<span class="sr-only">(current)</span></a></li>';
 		$config['num_tag_open']     = '<li class="page-item">';
 		$config['num_tag_close']    = '</li>';
 		$this->pagination->initialize($config);
@@ -108,12 +108,7 @@ class Shop extends CI_Controller
         $this->data['products'] = $this->Shop_model->
             fetch_product($config["per_page"], $page);
 		$this->data['links'] = $this->pagination->create_links();
-		$this->data['language'] = $this->session->userdata('language');
 		$this->render_view('shop');
-
-		// $query = $this->db->query('SELECT * FROM products');
-        // $this->data['products'] = $query->result_array();
-
 		// die(print_r($this->data['data_list_shops']));
 		// print_r($this->db->last_query());
 		// die();

@@ -17,7 +17,7 @@
 */
 @media (min-width: 993px) and (max-width: 1200px) {
 	.fix_menu {margin-left: 5px; margin-right: 5px;}
-	
+
 	.nav-menu .nav > li > a{
 		padding: 15px 15px;
 	}
@@ -133,8 +133,8 @@
 [3. Styles for devices(>=768px and <=992px)]
 */
 @media (min-width: 768px) and (max-width: 992px) {
-	.fix_menu {margin-left: 5px; margin-right: 5px;} 
-	 
+	.fix_menu {margin-left: 5px; margin-right: 5px;}
+
 	.home .box-vertical-megamenus .vertical-menu-content{
 		display: none;
 	}
@@ -316,7 +316,7 @@
 /*--------------------
 [4. Styles for devices(>=481px and <=767px)]
 */
-@media (min-width: 481px) and (max-width: 767px) { 
+@media (min-width: 481px) and (max-width: 767px) {
 	.nav-top-menu { background: none}
 	.fix_menu {margin-left: 0px; margin-right: 0px; }
 	.home .box-vertical-megamenus .vertical-menu-content{
@@ -352,7 +352,7 @@
 	.main-header .shopping-cart-box{
 		padding-left: 15px;
 		padding-right: 15px;
-		margin-left:0; 
+		margin-left:0;
 		width: 100%;
 	}
 	#box-vertical-megamenus{
@@ -376,7 +376,7 @@
 	}
 	.box-vertical-megamenus .vertical-menu-content ul li a.parent:before {
 		display: none;
-	} 
+	}
 	.popular-tabs .nav-tab li{
 		padding: 0;
 	}
@@ -516,7 +516,7 @@
 	#main-menu .navbar-header {
 	  display: block;
 	  margin: 0;
-	  background: #FF0000;
+	  background: #3366cc;
 	  color: #fff;
 	  margin-left: -15px;
 	  margin-right: -15px;
@@ -569,7 +569,7 @@
 		border-right: none;
 		position: relative;
 	}
-	#main-menu .navbar .navbar-nav>li:hover>a, 
+	#main-menu .navbar .navbar-nav>li:hover>a,
 	#main-menu .navbar .navbar-nav>li.active>a {
 	  color: #333;
 	  border-right: 1px solid transparent;
@@ -722,7 +722,7 @@
 	.main-header .shopping-cart-box{
 		padding-left: 15px;
 		padding-right: 15px;
-		margin-left:0; 
+		margin-left:0;
 		width: 100%;
 		margin-top: 30px;
 	}
@@ -876,7 +876,7 @@
 	.category-slider{
 		margin-top: 30px;
 	}
-	.category-slider .owl-controls .owl-prev, 
+	.category-slider .owl-controls .owl-prev,
 	.category-slider .owl-controls .owl-next {
 	  width: 20px;
 	  height: 20px;
@@ -974,7 +974,7 @@
 	#main-menu .navbar-header {
 	  display: block;
 	  margin: 0;
-	  background: #FF0000;
+	  background: #3366cc;
 	  color: #fff;
 	 margin-left: -15px;
 	  margin-right: : -15px;
@@ -1027,7 +1027,7 @@
 		border-right: none;
 		position: relative;
 	}
-	#main-menu .navbar .navbar-nav>li:hover>a, 
+	#main-menu .navbar .navbar-nav>li:hover>a,
 	#main-menu .navbar .navbar-nav>li.active>a {
 	  color: #333;
 	  border-right: 1px solid transparent;
@@ -1087,7 +1087,7 @@
 		margin-top: 10px;
 	}
 	.page-order ul.step li.current-step{
-		border-left: 3px solid #FF0000;
+		border-left: 3px solid #3366cc;
 		border-bottom: none;
 	}
 	#footer2 .footer-top .footer-menu li{

@@ -77,22 +77,6 @@ class Index extends CI_Controller
 		$this->load->model('common_model');
 		$product = $this->db->query("select * from tb_products_types");
 		$this->data['product_type'] = $product->result_array();
-
-		// $product_type_id = $this->common_model->custom_query("select product_type_id from tb_products_types");
-		// foreach ($product_type_id as $key => $value) {
-		// 	$product = $this->db->query("select * from tb_products where product_type =" . $value['product_type_id']);
-			// $this->data['product_type'] = $product->result_array();
-			// $this->data['product_type'] = $product->result_array();
-		// }
-		// echo '<pre>';
-		// print_r($product);
-		// echo '</pre>';
-		// print_r($this->db->last_query());
-		// die();
-
-		// $query = $this->db->query('select product_type_id from tb_products_types');
-        // $this->data['product_type'] = $query->result_array();
-
 		$this->render_view('index');
 	}
 	public function member_index($encrypt_id = '')

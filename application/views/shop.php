@@ -1,83 +1,55 @@
-<?php $CI =& get_instance(); ?>
+<?php $CI = &get_instance(); ?>
+<div class="columns-container">
+    <div class="container" id="columns">
+        <!-- row -->
+        <div class="row">
+            <!-- Center colunm-->
+            <div class="center_column col-xs-12 col-sm-12" id="center_column">
+                <!-- view-product-list-->
+                <div id="view-product-list" class="view-product-list">
+                    <h2 class="page-heading"><span class="page-heading-title">สินค้าทั้งหมด</span></h2>
+                    <ul class="row product-list style2 grid">
+                        <p id="oneflashsale" style="display:none">EXPIRED</p>
+                        <?php
+                        foreach ($products as $row) { ?>
+                            <li class="col-sx-12 col-sm-4">
+                                <div class="product-container">
+                                    <div class="left-block" style="position: relative; ">
+                                        <a href="<?php echo base_url($row['product_img1']); ?>" data-fancybox data-type="image">
+                                            <img class="img-responsive" style="width:350px; height:350px; object-fit:contain" alt="product" src="<?php echo base_url($row['product_img1']); ?>" /></a>
+                                    </div>
+                                    <div class="right-block">
+                                        <h5 class="product-name" style="font-weight: bold;">
+                                            <? echo $row['product_name'] ?>
+                                        </h5>
+                                        <div class="content_price">
+                                            <span class="price product-price" style="color: red; font-weight: bold;"><? echo $row['price'] ?> บาท </span>
 
-<!-- Inner Banner -->
-<div class="inner-banner bg-shape3 bg-color5">
-    <div class="d-table">
-        <div class="d-table-cell">
-            <div class="conatiner">
-                <div class="inner-title text-center">
-                    <h3><?php echo lang('nav_shop'); ?></h3>
-                    <ul>
-                        <li>
-                            <a href="{base_url}index"><?php echo lang('nav_home'); ?></a>
-                        </li>
-                        <li>
-                            <i class="fas fa-chevron-right"></i>
-                        </li>
-                        <li>
-                            <?php echo lang('nav_shop'); ?>
+                                        </div>
+                                        <div class="add-to-cart">
 
-                        </li>
+                                            <a class="" onclick="add_to_cart('no','no','4927','1','1','')" title="Add to Cart" href="#"><span></span>คลิก ซื้อเลย !</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                        <? } ?>
                     </ul>
+                    <!-- ./PRODUCT LIST -->
+                </div>
+                <!-- ./view-product-list-->
+
+                <div class="sortPagiBar">
+                    <div class="bottom-pagination">
+                        <nav>
+                        <?php echo $links; ?>
+                        </nav>
+                    </div>
+
                 </div>
             </div>
         </div>
+        <!-- ./row-->
     </div>
 </div>
-<!-- Inner Banner End -->
-
-<!-- Product Area -->
-<section class="product-area pt-94 pb-70">
-<!-- <div class="cart-view">
-        <a href="<?php echo base_url('cart'); ?>" title="View Cart"><i class="icart"></i> (<?php echo ($this->cart->total_items() > 0) ? $this->cart->total_items() . ' Items' : 'Empty'; ?>)</a>
-    </div>
- -->
-    <div class="container">
-        <div class="scetion-title text-center mb-50">
-            <h2><?php echo lang('s_h1'); ?></h2>
-        </div>
-        <div class="row">
-        <!-- <?php
-        foreach ($products as $row) {
-            echo "{" . $row->id . "}" . $row->name . " - " . $row->price . "<br>";
-        }
-        ?>
-      <p><?php echo $links; ?></p> -->
-
-            <?php if (!empty($products)) {
-                foreach ($products as $row) { ?>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="product-item">
-                            <a href="<?php echo base_url('shop/shop_details/' . $row['product_id']); ?>">
-                                <img src="<?php echo base_url($row['product_img1']); ?>" alt="Product Images">
-                            </a>
-                            <div class="product-cotent">
-                                <div class="product-text">
-                                    <h5><?php echo $row['product_name_'.$language]; ?></h5>
-                                    <span>฿<?php echo '$' . number_format($row["price"]); ?></span>
-                                </div>
-                                <a href="<?php echo base_url('shop/addToCart/' . $row['product_id']); ?>" class="add-product border-radius">
-                                    <i class="flaticon-plus"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                <?php }
-            } else { ?>
-                <p><?php echo lang('sh_m2'); ?></p>
-            <?php } ?>
-            <div class="col-lg-12 col-md-12">
-            <?php echo $links; ?>
-                <!-- <div class="pagination-area">
-                    <a href="#" class="page-numbers current" aria-current="page">1</a>
-                    <a href="#" class="page-numbers ">2</a>
-                    <a href="#" class="page-numbers">3</a>
-                    <a href="#" class="next page-numbers">
-                        <i class="fas fa-chevron-right"></i>
-                    </a>
-                </div> -->
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Product Area End -->
