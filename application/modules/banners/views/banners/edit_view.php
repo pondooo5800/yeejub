@@ -12,7 +12,7 @@
 					<div class="card-icon">
 						<i class="material-icons">edit</i>
 					</div>
-					<h4 class="card-title">แก้ไขรายการสินค้า</h4>
+					<h4 class="card-title">แก้ไข Banner</h4>
 				</div>
 				<div class="card-body">
 				<form class='form-horizontal' id='formEdit' accept-charset='utf-8'>
@@ -22,16 +22,16 @@
 						<div class="container">
 							<div class="form-row justify-content-around">
 								<div class="form-group col-md-4 ">
-									<label class="control-label" for="banner_name">ชื่อสินค้า :</label>
+									<label class="control-label" for="banner_name">Banner :</label>
 									<div class="form-group has-info">
 										<input type="text" class="form-control" id="banner_name" name="banner_name" value="{record_banner_name}" />
 									</div>
 								</div>
 								<div class="form-group col-md-4 ">
-									<label class="control-label" for="banner_type">ประเภทสินค้า :</label>
+									<label class="control-label" for="banner_type">ประเภท Banner :</label>
 									<div class="form-group has-success">
 										<select id="banner_type" name="banner_type" value="{record_banner_type}">
-											<option value="">- เลือก ประเภทสินค้า -</option>
+											<option value="">- เลือก ประเภท Banner -</option>
 											{banners_types_option_list}
 										</select>
 									</div>

@@ -1,34 +1,8 @@
 <div class="container" id="container">
         <div class="row fix_menu" style="margin:  2px;">
-
-            <div class="col-sm-3 my_menu my_menu1 select_menu">Promotion</div>
-
             <div class="col-sm-3 my_menu my_menu3">หมวดหมู่สินค้า</div>
             <div class="col-sm-3 my_menu my_menu2">แบรนด์สินค้า</div>
             <div class="col-sm-3 "></div>
-
-        </div>
-
-        <div class="row fix_menu" id="my_menu1_des" style="margin:  2px;">
-            <div class="col-sm-4 ads">
-                <a href="https://goo.gl/NyqY4Q"> <img src="files/banner/M211212-1.jpg"> </a>
-            </div>
-            <div class="col-sm-4 ads">
-                <a href="https://goo.gl/Vh9BHB"> <img src="files/banner/SHOPEE.jpg"> </a>
-            </div>
-            <div class="col-sm-4 ads">
-                <a href="https://bit.ly/36ylLPn"> <img src="files/banner/Banner_Hyper_Kgg_Dart.png"> </a>
-            </div>
-            <div class="col-sm-4 ads">
-                <a href="https://goo.gl/wKGFjw"> <img src="files/banner/Y-9115%20KGGIT01.jpg"> </a>
-            </div>
-            <div class="col-sm-4 ads">
-                <a href="http://bit.ly/2puUcWh"> <img src="files/banner/666-x-450-CloudAL-S.jpg"> </a>
-            </div>
-            <div class="col-sm-4 ads">
-                <a href="https://bit.ly/2X5IVJN"> <img src="files/banner/Banner_Hyper_Kgg_Raid.png"> </a>
-            </div>
-
 
         </div>
 
