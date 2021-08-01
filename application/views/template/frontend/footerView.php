@@ -187,16 +187,6 @@
                             </ul>
                         </div>
                         <div class="col-sm-4">
-                            <div class="introduce-title">My Account</div>
-                            <ul id="introduce-Account" class="introduce-list">
-                                <li><a href="http://www.kgg.co.th/member-history.html">ประวัติการสั่งซื้อ</a></li>
-                                <li><a href="http://www.kgg.co.th/member-payment_detail.html">ประวัติการชำระเงิน</a>
-                                </li>
-
-
-                            </ul>
-                        </div>
-                        <div class="col-sm-4">
                             <div class="introduce-title">Contact</div>
                             <ul id="introduce-Account" class="introduce-list">
                                 <li>

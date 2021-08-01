@@ -107,8 +107,8 @@
                                     <li class="<?php if ($this->uri->segment(1) == 'shop') { ?>active<?php } ?>"><a href="{site_url}"><a href="{site_url}shop">สินค้าทั้งหมด</a></li>
                                     <li><a href="about-วิธีการสั่งซื้อ-28.html">วิธีการสั่งซื้อ</a></li>
                                     <li><a href="how_payment-วิธีการชำระเงิน.html">วิธีการแจ้งชำระเงิน และการจัดส่ง</a></li>
-                                    <li><a href="about-เกี่ยวกับเรา-33.html">เกี่ยวกับเรา </a></li>
-                                    <li><a href="contact.html">ติดต่อเรา</a></li>
+                                    <li class="<?php if ($this->uri->segment(1) == 'about') { ?>active<?php } ?>"><a href="{site_url}"><a href="{site_url}about">เกี่ยวกับเรา</a></li>
+                                    <li class="<?php if ($this->uri->segment(1) == 'contact') { ?>active<?php } ?>"><a href="{site_url}"><a href="{site_url}contact">ติดต่อเรา</a></li>
                                 </ul>
                             </div>
                             <!--/.nav-collapse -->

@@ -17,7 +17,7 @@ class About extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		check_lang();
+		chkMemberPerm();
 
 		$data['base_url'] = base_url();
 		$data['site_url'] = site_url();
@@ -47,11 +47,12 @@ class About extends CI_Controller
 	 */
 	private function render_view($path)
 	{
-		$this->data['top_navbar'] = $this->parser->parse('template/majestic/frontendpage_navbar_view', $this->data, TRUE);
+		$this->data['page_header'] = $this->parser->parse('template/frontend/headerView', $this->data, TRUE);
 		$this->data['page_content'] = $this->parser->parse_repeat($path, $this->data, TRUE);
+		$this->data['page_footer'] = $this->parser->parse('template/frontend/footerView', $this->data, TRUE);
 		$this->data['another_css'] = $this->another_css;
 		$this->data['another_js'] = $this->another_js;
-		$this->parser->parse('template/majestic/frontendpage_view', $this->data);
+		$this->parser->parse('template/frontend/indexView', $this->data);
 	}
 	public function create_pagination($page_url, $total)
 	{
@@ -68,20 +69,7 @@ class About extends CI_Controller
 
 	public function index()
 	{
-		// $start_row = 0;
-		// $results_news = $this->Frontend_news->read_about($start_row);
-		// $list_data_news = $this->setDataListFormat($results_news['list_data'], $start_row);
-		// $this->data['data_list_get_news'] = $list_data_news;
-		// $this->data['data_news_list'] = $list_data_news;
-
-		// $results_shops = $this->Frontend_shops->read_about($start_row);
-		// $list_data_shops = $results_shops['list_data'];
-		// $this->data['data_list_shops'] = $list_data_shops;
-
 		$this->render_view('about');
-		// die(print_r($this->data['data_list_shops']));
-		// print_r($this->db->last_query());
-		// die();
 	}
 }
 /*---------------------------- END Controller Class --------------------------------*/

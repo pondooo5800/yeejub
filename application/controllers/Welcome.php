@@ -50,4 +50,10 @@ class Welcome extends CI_Controller
 		$this->session->set_flashdata('msg_class', 'alert-success');
 		return redirect('Welcome');
 	}
+	public function check_database()
+	{
+		echo CI_VERSION;
+        // phpinfo();
+
+	}
 }

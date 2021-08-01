@@ -1,120 +1,77 @@
-        <!-- Inner Banner -->
-        <div class="inner-banner bg-shape2 bg-color2">
-            <div class="d-table">
-                <div class="d-table-cell">
-                    <div class="conatiner">
-                        <div class="inner-title text-center">
-                            <h3><?php echo lang('nav_contact');  ?></h3>
-                            <ul>
-                                <li>
-                                    <a href="{base_url}index"><?php echo lang('nav_home'); ?></a>
-                                </li>
-                                <li>
-                                    <i class="fas fa-chevron-right"></i>
-                                </li>
-                                <li>
-                                    <?php echo lang('nav_contact');  ?>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Inner Banner End -->        <!-- Contact Area -->
-        <div class="contact-area pt-100 pb-70">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="contact-item">
-                            <div class="icon-contact text-center"><i class="far fa-clock"></i></div>
-                            <h3>10:00 AM - 7:00 PM</h3>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="contact-item">
-                            <div class="icon-contact text-center"><i class="fas fa-map-marker-alt"></i></div>
-                            <h3><?php echo lang('ct_footer_addr');  ?></h3>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0">
-                        <div class="contact-item text-center">
-                            <div class="icon-contact"><i class="flaticon-telephone"></i></div>
-                            <h3>
-                                <a href="tel:061-848-1948">
-                                    061-848-1948
-                                </a>
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Contact Area End -->
+<div class="columns-container">
+    <div class="container" id="columns">
+        <h2 class="page-heading"><span class="page-heading-title2">ติดต่อเรา</span></h2>
+        <!-- ../page heading-->
+        <div id="contact" class="page-content page-contact">
+            <div id="message-box-conact"></div>
+            <div class="row">
+                <div class="col-sm-7">
 
-        <!-- Contact Form -->
-        <div class="contact-form pb-70">
-            <div class="container-fluid">
-                <div class="row align-items-center">
-                    <div class="col-lg-6 p-0">
-                        <div class="contact-img">
-                        <img src="{base_url}assets/images/gallery/13.jpg" alt="Contact Images">
-                        </div>
+                    <div class="content-text clearfix">
+                        <h2><span style="font-size:16px;font-weight: bold;">สนใจสั่งซื้อสินค้า หรือสอบถามข้อมูลเพิ่มเติมได้ที่:</span></h2>
+<br>
+                        <p><span style="font-size:14px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;โทรศัพท์: 091-123-4561</span></p>
+
+                        <p><span style="font-size:14px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;แฟ็กซ์: 02-874-2002</span></p>
+
+                        <p><span style="font-size:14px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;อีเมล: pronktwenty@hotmail.com</span></p>
+
+                        <h2><span style="font-size:16px;font-weight: bold;">แผนที่และการเดินทาง:</span></h2>
+<br>
+
+                        <p><span style="font-size:14px">&nbsp; &nbsp; &nbsp; • มาทาง ถ.สุขสวัสดิ์ ให้เลี้ยวซ้ายไปประมาณ 600 เมตร</span><br>
+                        <p><span style="font-size:14px">&nbsp; &nbsp; &nbsp; • มาทาง ดาวคะนอง ให้เลี้ยวขวาด้านล่าง ห้ามขึ้นสะพาน ตรงมาประมาณ 600 เมตร</span><br>
+                        <p><span style="font-size:14px">&nbsp; &nbsp; &nbsp; • มาทาง ทางด่วนดาวคะนอง ให้ชิดขวากลับรถ ในช่องที่ 2 แล้วเข้าเส้นทางคู่ขนาด ตรงมาประมาณ 600 เมตร</span><br>
+                        <p><span style="font-size:14px">&nbsp; &nbsp; &nbsp; • ร้านของเรา (กำแพงสีขาว) อยู่ติดกับ บริษัท ตั้งไท่ฮั้วเฮง จำกัด (กำแพงสีเขียวอ่อน)</span><br>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="form-area">
-                            <div class="form-section">
-                                <h2><?php echo lang('c_h1');  ?></h2>
-                                <form action="<?php echo site_url('send_mail/send');?>" method="post">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-sm-6">
-                                            <div class="form-group">
-                                                <input type="text" name="name" id="name" class="form-control" placeholder="<?php echo lang('c_m1');  ?>">
-                                                <div class="help-block with-errors"></div>
-                                            </div>
-                                        </div>
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="mapouter">
+                                <div class="gmap_canvas"><iframe class="gmap_iframe" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=250&amp;height=250&amp;hl=en&amp;q=หยี่จั๊บ แฟรนไชส์ ขายส่งทุกอย่าง 20 บาท (เฮียพ้ง-เจ้แขก)&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe><a href="https://www.fridaynightfunkin.net/friday-night-funkin-mods-fnf-play-online/">FNF Mods</a></div>
+                                <style>
+                                    .mapouter {
+                                        position: relative;
+                                        text-align: right;
+                                        width: 100%;
+                                        height: 270px;
+                                    }
 
-                                        <div class="col-lg-6 col-sm-6">
-                                            <div class="form-group">
-                                                <input type="email" name="email" id="email" class="form-control " placeholder="<?php echo lang('c_m2');  ?>">
-                                                <div class="help-block with-errors"></div>
-                                            </div>
-                                        </div>
+                                    .gmap_canvas {
+                                        overflow: hidden;
+                                        background: none !important;
+                                        width: 100%;
+                                        height: 270px;
+                                    }
 
-                                        <div class="col-lg-6 col-sm-6">
-                                            <div class="form-group">
-                                                <input type="text" name="phone_number" id="phone_number" class="form-control" placeholder="<?php echo lang('c_m3');  ?>">
-                                                <div class="help-block with-errors"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-sm-6">
-                                            <div class="form-group">
-                                                <input type="text" name="msg_subject" id="msg_subject" class="form-control" placeholder="<?php echo lang('c_m4');  ?>">
-                                                <div class="help-block with-errors"></div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-12 col-md-12">
-                                            <div class="form-group">
-                                                <textarea name="message" class="form-message textarea-hight" id="message" cols="30" rows="5" placeholder="<?php echo lang('c_m5');  ?>"></textarea>
-                                                <div class="help-block with-errors"></div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-12 col-md-12">
-                                            <button type="submit" class="default-btn1 btn-two">
-                                                <?php echo lang('c_sm');  ?>
-                                            </button>
-                                            <div id="msgSubmit" class="h3 text-center hidden"></div>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                    </div>
-                                </form>
+                                    .gmap_iframe {
+                                        height: 270px !important;
+                                    }
+                                </style>
                             </div>
-                        </div>
+
+                        </div><!-- card content -->
                     </div>
+
+                </div>
+                <div class="col-xs-12 col-sm-5" id="contact_form_map" style="padding-left: 50px">
+                    <p>
+                    <a href="https://line.me/ti/p/~@yeejub"><img src="{base_url}/assets/themes/frontend/assets/img/icon/line-yeejub.png" alt="generated QR Code"></a><br><br>
+                    </p>
+
+
+                    <br>
+                    <ul class="store_info">
+                        <i class="fa fa-user"></i>ADMIN <li><i class="fa fa-phone"></i><span>091-123-4561</span></li>
+                        <li>
+                            <i class="fa fa-facebook"></i><span><a href="https://web.facebook.com/yeejub20rama2">ร้านหยี่จั๊บ พระราม 2 Thailand.</a></span>
+                        </li>
+
+                        <li>
+                            <i class="fa fa-envelope"></i>Email: <span><a href="mailto:kggit.seller@gmail.com">pronktwenty@hotmail.com</a></span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
-        <!-- Contact Form End -->
-
+    </div>
+</div>
