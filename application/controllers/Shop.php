@@ -163,6 +163,13 @@ class Shop extends CI_Controller
 
         $this->load->view("welcome_message", $data);
   }
+	public function search()
+	{
+		$key = $this->input->post('search');
+		$this->data['txt_search']	= $key;
+		$this->data['products'] = $this->Shop_model->search($key);
+		$this->render_view('shop');
+  	}
 
 }
 /*---------------------------- END Controller Class --------------------------------*/

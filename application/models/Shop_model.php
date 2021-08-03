@@ -23,4 +23,11 @@ class Shop_model extends CI_Model
     }
     return false;
   }
+  public function search($key)
+  {
+    $this->db->like('product_name', $key);
+    $query = $this->db->get('tb_products');
+    return $query->result_array();
+  }
+
 }

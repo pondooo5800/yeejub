@@ -28,34 +28,18 @@
             <div class="col-xs-12 col-sm-3 col-md-2 logo">
                 <a href="{site_url}"><img class="img-logo" alt="Kute Shop" src="{base_url}/assets/themes/frontend/assets/img/icon/logo_yeejub.png"></a>
             </div>
-            <div class="col-xs-7 col-sm-7 col-md-8 header-search-box">
-                <form class="form-inline" action="products.html" method="post">
+            <div class="col-xs-7 col-sm-7 col-md-7 header-search-box">
+                <form class="form-inline" action="{site_url}shop/search" method="post">
                     <div class="form-group form-category">
-                        <select onchange="select_cat()" class="select-category select2-hidden-accessible" id="select_category" tabindex="-1" aria-hidden="true">
-                            <option>แบรนด์ชั้นนำ</option>
-                            <option value="10">MARVO</option>
-                            <option value="66">MAXTILL</option>
-                            <option value="11">MD-TECH</option>
-                            <option value="22">MELON</option>
-                            <option value="31">Microlab</option>
-                            <option value="39">MOBILCAM</option>
-                            <option value="42">Music D.j.</option>
-                            <option value="27">MYE</option>
-                            <option value="62">NAVRA</option>
-                            <option value="12">NEOLUTION</option>
-                            <option value="13">NOBI</option>
-                            <option value="2">NUBWO</option>
-                            <option value="45">UGREEN</option>
-                        </select>
                     </div>
                     <div class="form-group input-serach">
-                        <input type="text" name="search" placeholder="สินค้าที่ต้องการค้นหา">
+                        <input type="text" name="search" placeholder="ค้าหาสินค้า" value="<?php echo ($this->uri->segment(2) == "search" ? "{txt_search}" : "")?>">
                     </div>
                     <button type="submit" class="pull-right btn-search"></button>
                 </form>
             </div>
 
-            <div id="cart-block" class="col-xs-5 col-sm-2 col-md-2 shopping-cart-box">
+            <div id="cart-block" class="col-xs-5 col-sm-2 col-md-3 shopping-cart-box">
                 <div id="view_cart_mini">
                     <a class="cart-link" href="cart.html">
                         <span class="title">Shopping cart</span>
