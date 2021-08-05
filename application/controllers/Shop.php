@@ -113,56 +113,23 @@ class Shop extends CI_Controller
 		// print_r($this->db->last_query());
 		// die();
 	}
-
-	public function shop_details($product_id)
-	{
-		$query = $this->db->query('SELECT * FROM products WHERE product_id ='.$product_id);
-        $this->data['products'] = $query->result_array();
-        $this->data['language'] = $this->session->userdata('language');
-
-		$this->render_view('shop_details');
-	}
 	public function addToCart($proID){
-		// Fetch specific product by ID
-		$size=$this->input->post('size');
-
         $product = $this->product->getRows($proID);
-
 		// Add product to the cart
 		$data = array(
             'id'    => $product['product_id'],
             'qty'    => 1,
             'price'    => $product['price'],
-            'name'    => $product['product_name_en'],
+            'name'    => $product['product_name'],
 			'image' => $product['product_img1'],
-			'size' => $size,
         );
+
+
         $this->cart->insert($data);
 
         // Redirect to the cart page
         redirect('cart');
 	}
-	public function change($type)
-	{
-		$this->langlib->chooseLang($type); // ใช้สำหรับเปลี่ยนภาษาในทุก ๆ controller
-	}
-	public function pg()
-	{
-		$config = array();
-        $config["base_url"] = base_url() . "shop/pg";
-        $config["total_rows"] = $this->Shop_model->record_count();
-        $config["per_page"] = 3;
-        $config["uri_segment"] = 3;
-
-        $this->pagination->initialize($config);
-
-        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-        $data["results"] = $this->Shop_model->
-            fetch_product($config["per_page"], $page);
-        $data["links"] = $this->pagination->create_links();
-
-        $this->load->view("welcome_message", $data);
-  }
 	public function search()
 	{
 		$key = $this->input->post('search');

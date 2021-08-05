@@ -28,7 +28,7 @@
                                         </div>
                                         <div class="add-to-cart">
 
-                                            <a class="" onclick="add_to_cart('no','no','4927','1','1','')" title="Add to Cart" href="#"><span></span>คลิก ซื้อเลย !</a>
+                                            <a class="" title="Add to Cart" href="<?php echo base_url('shop/addToCart/' . $row['product_id']); ?>"><span></span>คลิก ซื้อเลย !</a>
                                         </div>
                                     </div>
                                 </div>

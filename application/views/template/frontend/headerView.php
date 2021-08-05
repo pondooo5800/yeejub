@@ -11,10 +11,10 @@
             <div id="user-info-top" class="user-info pull-right">
                 <div class="dropdown">
                     <a class="current-open" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
-                        <span>Hi <?php echo ($this->session->userdata('member_fname'))?></span>
+                        <span>Hi <?php echo ($this->session->userdata('member_fname')) ?></span>
                     </a>
                     <ul class="dropdown-menu mega_dropdown" role="menu">
-                        <li><a href="{site_url}index/member_index/<?php echo ($this->session->userdata('url_encrypt_id'))?>">ข้อมูลบัญชี</a></li>
+                        <li><a href="{site_url}index/member_index/<?php echo ($this->session->userdata('url_encrypt_id')) ?>">ข้อมูลบัญชี</a></li>
                         <li><a href="{site_url}member_login/destroy">ออกจากระบบ</a></li>
                     </ul>
                 </div>
@@ -25,15 +25,15 @@
     <!-- MAIN HEADER -->
     <div class="container main-header">
         <div class="row">
-            <div class="col-xs-12 col-sm-3 col-md-2 logo">
+            <div class="col-xs-12 col-sm-3 col-md-3 logo">
                 <a href="{site_url}"><img class="img-logo" alt="Kute Shop" src="{base_url}/assets/themes/frontend/assets/img/icon/logo_yeejub.png"></a>
             </div>
-            <div class="col-xs-7 col-sm-7 col-md-7 header-search-box">
+            <div class="col-xs-7 col-sm-7 col-md-6 header-search-box">
                 <form class="form-inline" action="{site_url}shop/search" method="post">
                     <div class="form-group form-category">
                     </div>
                     <div class="form-group input-serach">
-                        <input type="text" name="search" placeholder="ค้าหาสินค้า" value="<?php echo ($this->uri->segment(2) == "search" ? "{txt_search}" : "")?>">
+                        <input type="text" name="search" placeholder="ค้าหาสินค้า" value="<?php echo ($this->uri->segment(2) == "search" ? "{txt_search}" : "") ?>">
                     </div>
                     <button type="submit" class="pull-right btn-search"></button>
                 </form>
@@ -41,11 +41,15 @@
 
             <div id="cart-block" class="col-xs-5 col-sm-2 col-md-3 shopping-cart-box">
                 <div id="view_cart_mini">
-                    <a class="cart-link" href="cart.html">
+                    <a class="cart-link" href="{site_url}cart">
                         <span class="title">Shopping cart</span>
-                        <span class="total"> items - 0</span>
+                        <span class="total">รวมราคาทั้งหมด <b><span><?php echo $this->cart->total() . ' ' . 'บาท'; ?></span></b></span>
+                        <?php
+                        if ($this->cart->total_items() > 0) { ?>
+                            <span class="notify notify-left"><?php echo $this->cart->total_items(); ?></span>
+                        <?php } ?>
                     </a>
-                    <div class="cart-block">
+                    <!-- <div class="cart-block">
                         <div class="cart-block-content">
                             <h5 class="cart-title"> Items in my cart</h5>
                             <div class="cart-block-list">
@@ -57,10 +61,10 @@
                                 <span class="toal-price pull-right">0</span>
                             </div>
                             <div class="cart-buttons">
-                                <a href="cart.html" class="btn-check-out">View Cart</a>
+                                <a href="{site_url}cart" class="btn-check-out">View Cart</a>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

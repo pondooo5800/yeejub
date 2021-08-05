@@ -7,161 +7,23 @@
             <div id="trademark-box" class="row" align="center" style="padding-top: 15px">
                 <div class="col-sm-12">
 
-                    <ul class="owl-intab owl-carousel" data-loop="true" data-items="9" data-autoplay="true" data-dots="false" data-nav="true">
+                    <ul class="owl-intab owl-carousel" data-loop="true" data-items="6" data-autoplay="true" data-dots="false" data-nav="true">
                         <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=35"> <img src="http://www.kgg.co.th/files/brand/Razer-logo.png" alt="" /></a>
+                            <img src="https://via.placeholder.com/120x90" alt="" />
                         </li>
                         <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=36"> <img src="http://www.kgg.co.th/files/brand/AWEI.png" alt="" /></a>
+                            <img src="https://via.placeholder.com/120x90" alt="" />
                         </li>
                         <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=37"> <img src="http://www.kgg.co.th/files/brand/hoco.png" alt="" /></a>
+                            <img src="https://via.placeholder.com/120x90" alt="" />
                         </li>
                         <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=38"> <img src="http://www.kgg.co.th/files/brand/GEARMASTER.png" alt="" /></a>
+                            <img src="https://via.placeholder.com/120x90" alt="" />
                         </li>
                         <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=39"> <img src="http://www.kgg.co.th/files/brand/mobil.png" alt="" /></a>
+                           <img src="https://via.placeholder.com/120x90" alt="" />
                         </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=40"> <img src="http://www.kgg.co.th/files/brand/blackman.png" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=41"> <img src="http://www.kgg.co.th/files/brand/redragon.png" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=42"> <img src="http://www.kgg.co.th/files/brand/Untitled-1.jpg" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=43"> <img src="http://www.kgg.co.th/files/brand/Bosston.png" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=44"> <img src="http://www.kgg.co.th/files/brand/FANTECH.png" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=45"> <img src="http://www.kgg.co.th/files/brand/UGREEN.png" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=49"> <img src="http://www.kgg.co.th/files/brand/JOYROOM.png" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=48"> <img src="http://www.kgg.co.th/files/brand/HP.png" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=50"> <img src="http://www.kgg.co.th/files/brand/Attacker.png" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=51"> <img src="http://www.kgg.co.th/files/brand/DOOLIKE.png" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=52"> <img src="http://www.kgg.co.th/files/brand/Corsair.png" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=53"> <img src="http://www.kgg.co.th/files/brand/Hyperx.png" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=54"> <img src="http://www2.kgg.co.th/files/brand/Sennheiser.png" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=55"> <img src="http://www.kgg.co.th/files/brand/ceflar1.png" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=56"> <img src="http://www2.kgg.co.th/files/brand/W-KING.png" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=57"> <img src="http://www2.kgg.co.th/files/brand/WOPOW.png" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=58"> <img src="http://www2.kgg.co.th/files/brand/RAPOO.png" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=59"> <img src="http://www.kgg.co.th/files/brand/ROCCAT.png" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=60"> <img src="http://www.kgg.co.th/files/brand/SPARCO.png" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=61"> <img src="http://www.kgg.co.th/files/brand/zowie.png" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=62"> <img src="http://www.kgg.co.th/files/brand/NAVRA.png" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=63"> <img src="http://www.kgg.co.th/files/brand/gamdias.png" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=65"> <img src="http://www.kgg.co.th/files/brand/VARMILO-LOGO.png" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=66"> <img src="http://www.kgg.co.th/files/brand/MAXTILL%20400x300.png" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=67"> <img src="http://www.kgg.co.th/files/brand/SONY.png" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=68"> <img src="http://www.kgg.co.th/files/brand/PHANTEK.jpg" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=69"> <img src="http://www.kgg.co.th/files/brand/D-power.jpg" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=70"> <img src="http://www.kgg.co.th/files/brand/LiSNjGQ7_400x400.jpg" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=71"> <img src="http://www.kgg.co.th/files/brand/400x300.jpg" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=72"> <img src="http://www.kgg.co.th/files/brand/MARK.jpg" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=73"> <img src="http://www.kgg.co.th/files/brand/EGA.jpg" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=74"> <img src="http://www.kgg.co.th/files/brand/SODO.jpg" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=75"> <img src="http://www.kgg.co.th/files/brand/Philips-Logo.png" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=76"> <img src="http://www.kgg.co.th/files/brand/SENDEM.jpg" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=87"> <img src="http://www.kgg.co.th/files/brand/tsunami.png" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=78"> <img src="http://www.kgg.co.th/files/brand/screen_shot_2019-03-26_at_11.05.45_am_1_1.jpg" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=79"> <img src="http://www.kgg.co.th/files/brand/Gamesir-logo.png" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=80"> <img src="http://www.kgg.co.th/files/brand/FLYDIGI.jpg" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=89"> <img src="http://www.kgg.co.th/files/brand/vox.jpg" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=82"> <img src="http://www.kgg.co.th/files/brand/LOGO-THUNDERX3.png" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=83"> <img src="http://www.kgg.co.th/files/brand/LOGO-PLENTY.png" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=84"> <img src="http://www.kgg.co.th/files/brand/LOGO-RAZEAK.png" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=85"> <img src="http://www.kgg.co.th/files/brand/about-us_logo_2048x.png" alt="" /></a>
-                        </li>
-                        <li style="margin: 5px">
-                            <a href="http://www.kgg.co.th/products.html&amp;bid=86"> <img src="http://www.kgg.co.th/files/brand/gadonx.png" alt="" /></a>
-                        </li>
-
                     </ul>
-
-
-
-
-
                 </div>
             </div>
             <!-- introduce-box -->
@@ -177,7 +39,7 @@
                         <div class="col-sm-4">
                             <div class="introduce-title">About Us</div>
                             <ul id="introduce-company" class="introduce-list">
-                                <li><a href="http://www.kgg.co.th/about-%E0%B9%80%E0%B8%81%E0%B8%B5%E0%B9%88%E0%B8%A2%E0%B8%A7%E0%B8%81%E0%B8%B1%E0%B8%9A%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%99%E0%B8%84%E0%B9%89%E0%B8%B2-25.html">เกี่ยวกับร้านค้า</a>
+                                <li><a href="{site_url}about">เกี่ยวกับเรา</a>
                                 </li>
                                 <li><a href="http://www.kgg.co.th/about-%E0%B8%A7%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%AA%E0%B8%B1%E0%B9%88%E0%B8%87%E0%B8%8B%E0%B8%B7%E0%B9%89%E0%B8%AD-23.html">วิธีการสั่งซื้อ</a>
                                 </li>
@@ -186,19 +48,27 @@
 
                             </ul>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-5">
                             <div class="introduce-title">Contact</div>
                             <ul id="introduce-Account" class="introduce-list">
                                 <li>
-                                    <p>ติดต่อ : ADMIN</p>
+                                    <p>บริษัท หยี่จั๊บ จำกัด (สำนักงานใหญ่)</p>
                                 </li>
                                 <li>
-                                    <p>0911234561</p>
+                                    <p>91/5 ซอยเทียนทะเล 20 ถนนบางขุนเทียน-ชายทะเล แขวงแสมดำ เขตบางขุนเทียน กรุงเทพฯ 10150</p>
                                 </li>
                                 <li>
-                                    <p>pronktwenty@hotmail.com</p>
+                                    <p>โทร. 088-025 8888</p>
                                 </li>
-                                <li><a href="{base_url}user_login">ระบบบริหารจัดการข้อมูล</a></li>
+                                <li>
+                                    <p>yeejub20online@gmail.com</p>
+                                </li>
+                                <li>
+                                    <p>Facebook : <a href="https://www.facebook.com/yeejub20rama2">ร้านหยี่จั๊บ พระราม 2 Thailand.</a> </p>
+                                </li>
+                                <li>
+                                    <p>Line : 0880258888 , @yeejub</p>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -249,7 +119,7 @@
 
             <!-- #trademark-text-box -->
             <div id="footer-menu-box">
-                <p class="text-center">Copyrights &#169; 2021 YeeJub.com</p>
+                <p class="text-center">Copyrights &#169; 2021 YeeJub.net</p>
             </div><!-- /#footer-menu-box -->
         </div>
     </footer>

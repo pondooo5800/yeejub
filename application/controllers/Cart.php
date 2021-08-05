@@ -37,9 +37,6 @@ class Cart extends CI_Controller
 		$this->data = $data;
 		$this->breadcrumb_data = $data;
 		$this->left_sidebar_data = $data;
-
-		$this->another_js .= '<script src="' . base_url('assets/themes/sb-admin/vendor/chart.js/Chart.min.js') . '"></script>';
-		$this->another_js .= '<script src="' . base_url('assets/themes/sb-admin/js/sb-admin-charts.min.js') . '"></script>';
 	}
 
 	// ------------------------------------------------------------------------
@@ -51,11 +48,12 @@ class Cart extends CI_Controller
 	 */
 	private function render_view($path)
 	{
-		$this->data['top_navbar'] = $this->parser->parse('template/majestic/frontendpage_navbar_view', $this->data, TRUE);
+		$this->data['page_header'] = $this->parser->parse('template/frontend/headerView', $this->data, TRUE);
 		$this->data['page_content'] = $this->parser->parse_repeat($path, $this->data, TRUE);
+		$this->data['page_footer'] = $this->parser->parse('template/frontend/footerView', $this->data, TRUE);
 		$this->data['another_css'] = $this->another_css;
 		$this->data['another_js'] = $this->another_js;
-		$this->parser->parse('template/majestic/frontendpage_view', $this->data);
+		$this->parser->parse('template/frontend/indexView', $this->data);
 	}
 	public function create_pagination($page_url, $total)
 	{
@@ -73,9 +71,12 @@ class Cart extends CI_Controller
 	public function index()
 	{
 		$data['cart_value'] = $this->cart->contents();
-		// die(print_r($this->cart->contents()));
-
 		$this->data['cartItems'] = $data['cart_value'];
+		// echo'<per>';
+		// print_r($data['cart_value']);
+		// echo'</per>';
+		// die();
+
 		$this->render_view('cart');
 	}
 
@@ -99,14 +100,10 @@ class Cart extends CI_Controller
         echo $update?'ok':'err';
 	}
 
-	public function removeItem($rowid){
-        // Remove item from cart
-        $remove = $this->cart->remove($rowid);
-
-        // Redirect to the cart page
+	public function removeItem($rowid)
+	{
+		$remove = $this->cart->remove($rowid);
         redirect('cart');
-    }
-
-
+	}
 }
 /*---------------------------- END Controller Class --------------------------------*/

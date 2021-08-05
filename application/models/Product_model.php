@@ -4,7 +4,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Product_model extends CI_Model{
 
     function __construct() {
-        $this->proTable = 'products';
+        $this->proTable = 'tb_products';
         $this->custTable = 'customers';
         $this->ordTable = 'orders';
         $this->ordItemsTable = 'order_items';

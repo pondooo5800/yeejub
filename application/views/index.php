@@ -768,7 +768,7 @@
                                             >
                                                 <img class="img-responsive" style="width:350px; height:350px; object-fit:contain" alt="product" src="<?php echo base_url($value['product_img1']); ?>" /></a>
                                             <div class="add-to-cart">
-                                                <a onclick="add_to_cart('no','no','5242','1','1','')" title="Add to Cart" href="#">คลิก ซื้อเลย !</a>
+                                                <a title="Add to Cart" href="<?php echo base_url('shop/addToCart/' . $value['product_id']); ?>">คลิก ซื้อเลย !</a>
                                             </div>
                                         </div>
                                         <div class="right-block">

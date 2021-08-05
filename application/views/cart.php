@@ -1,159 +1,178 @@
-        <!-- Inner Banner -->
-        <div class="inner-banner bg-shape1 bg-color2">
-        	<div class="d-table">
-        		<div class="d-table-cell">
-        			<div class="conatiner">
-        				<div class="inner-title text-center">
-        					<h3><?php echo lang('nav_shop_cart'); ?></h3>
-        					<ul>
-        						<li>
-									<a href="{base_url}index"><?php echo lang('nav_home'); ?></a>
-        						</li>
-        						<li>
-        							<i class="fas fa-chevron-right"></i>
-        						</li>
-        						<li>
-        							<?php echo lang('nav_shop_cart'); ?>
-        						</li>
-        					</ul>
-        				</div>
-        			</div>
-        		</div>
-        	</div>
-        </div>
-        <!-- Inner Banner End -->
+<div class="columns-container">
+	<div class="container" id="columns">
+		<!-- page heading-->
+		<h2 class="page-heading"><span class="page-heading-title2">รายการสั่งซื้อสินค้าทั้งหมด</span></h2>
+		<!-- ../page heading-->
+		<div class="page-content page-order">
+			<div class="order-detail-content" id="view_cart">
+				<table class="table table-bordered table-responsive cart_summary">
+					<thead>
+						<tr>
+							<th class="cart_product" style="font-weight: bold;text-align: center; vertical-align: middle;">รูปสินค้า</th>
+							<th style="font-weight: bold;text-align: center; vertical-align: middle;">ชื่อสินค้า</th>
+							<th style="font-weight: bold;text-align: center; vertical-align: middle;width: 10%">ราคา</th>
+							<th style="font-weight: bold;text-align: center; vertical-align: middle; width: 10%;">จำนวน</th>
+							<th style="font-weight: bold;text-align: center; vertical-align: middle;"></th>
+							<th style="font-weight: bold;text-align: right; vertical-align: middle;">รวมเป็น</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php if ($this->cart->total_items() > 0) {
+							foreach ($cartItems as $item) {    ?>
+								<tr>
+									<td class="cart_product" style="text-align: center; vertical-align: middle;">
+										<img src="<?php echo $item["image"] ?>" alt="Image" />
+									</td>
+									<td class="cart_description">
+										<p class="product-name"><?php echo $item["name"] ?></p>
+									</td>
+									<td class="price" style="text-align: center; vertical-align: middle;">
+										<span>
+											<?php echo $item["price"] ?>
+										</span>
+									</td>
 
-        <!-- Start Cart Area -->
-        <section class="cart-area ptb-100">
-        	<div class="container">
-        		<div class="row">
-        			<div class="col-lg-12 col-md-12">
-        				<form>
-        					<div class="cart-wraps">
-        						<div class="cart-table table-responsive">
-        							<table class="table table-bordered">
-        								<thead>
-        									<tr>
-        										<th scope="col"><?php echo lang('cs_m1'); ?></th>
-        										<th scope="col"><?php echo lang('cs_m2'); ?></th>
-        										<th scope="col"><?php echo lang('cs_m9'); ?></th>
-        										<th scope="col"><?php echo lang('cs_m3'); ?></th>
-        										<th scope="col"><?php echo lang('cs_m4'); ?></th>
-        										<th scope="col"><?php echo lang('cs_m5'); ?></th>
-        									</tr>
-        								</thead>
+									<td class="product-quantity" style="text-align: center; vertical-align: middle;">
+										<div class="input-counter">
+											<input type="number" min="1" id="qty" class="form-control text-center" value="<?php echo $item["qty"]; ?>" onchange="updateCartItem(this, '<?php echo $item["rowid"]; ?>')">
+										</div>
+									</td>
+									<td class="product-subtotal" style="text-align: center; vertical-align: middle;">
+										<a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#my_modal" data-row-id="<?php echo $item["rowid"] ?>"><i class="fa fa-trash"></i> </a>
+									</td>
+									<td class="price">
+										<span class="subtotal-amount"><?php echo $item["subtotal"]; ?></span>
+									</td>
+								</tr>
+							<?php }
+						} else { ?>
+							<tr>
+								<td colspan="6">
+									<p style="text-align: center;">รถเข็นของคุณว่างเปล่า .....</p>
+								</td>
+							<?php } ?>
+							<?php if ($this->cart->total_items() > 0) { ?>
+					<tfoot>
+						<tr>
+							<td colspan="3" rowspan="4"></td>
+							<td colspan="2">รวมเป็น :</td>
+							<td colspan="2"><?php echo $this->cart->total(); ?></td>
+						</tr>
+						<tr>
+						</tr>
+						<tr>
+						</tr>
+						<tr>
+							<td colspan="2">ค่าจัดส่ง :</td>
+							<td colspan="2"> 0 </td>
+						</tr>
+						<tr>
+							<td colspan="3">
+							</td>
+							<td colspan="2"><strong>รวมทั้งสิ้น :</strong></td>
+							<td colspan="2"><strong><label id="dc_price_total"><?php echo $this->cart->total() . ' ' . 'บาท' ?></label></strong></td>
+						</tr>
+					</tfoot>
+				<?php } ?>
 
-        								<tbody>
-        									<?php if ($this->cart->total_items() > 0) {
-												foreach ($cartItems as $item) {    ?>
-        											<tr>
-        												<td class="product-thumbnail">
-        													<a href="#">
-        														<?php $imageURL = !empty($item["image"]) ? base_url($item["image"]) : base_url('assets/images/pro-demo-img.jpeg'); ?>
-        														<img src="<?php echo $imageURL; ?>" width="50" alt="Image" />
-        													</a>
-        												</td>
+				</tbody>
+				</table>
+				<div class="cart_navigation">
+					<a class="prev-btn" href="{base_url}shop" style="background-color: #3366cc; color: #FFFFFF"> เลือกสินค้าอื่น เพิ่มเติม</a>
+				</div>
+				<br><br><br>
+				<br><br>
+				<?php if ($this->cart->total_items() > 0) { ?>
+					<h4 class="page-heading"><span class="page-heading-title2" style="font-weight: bold;color: red;font-size:20px">เงื่อนไขการสั่งซื้อสินค้า</span></h4>
+				<div class="box-border">
+					<div style="padding-left: 25px;padding-right: 25px;text-align: center;">
+						<br><b><label style="font-size: 18px;">กรุณาสั่งซื้อสินค้าขั้นต่ำ 5,000 บาทขึ้นไป</label></b>
+						<br>
+						<br><b><label class="required"> Yeejub ขอขอบคุณทุกท่านที่ให้ความสนใจซื้อสินค้าของเรา
+								สำหรับการสั่งซื้อสินค้าทางเราได้กำหนดยอดสั่งซื้อขั้นต่ำ 5,000 บาท
+								โดยจะมีค่าขนส่ง 300 บาทสำหรับยอดสั่งซื้อไม่ถึง 10,000 บาท
+								และฟรีค่าจัดส่งเมื่อสั่งซื้อสินค้าตั้งแต่ 10,000 บาทขึ้นไป</label></b>
+						<br>
+						<br>
+						<label class="required"><input type="checkbox" id="checkboxDetermine">
+							ยอมรับเงื่อนไข</label>
+					</div>
+					<hr>
+					<div class="cart_navigation text-center">
+						<button disabled type="button" id="checkboxConditioned" class="btn btn-success" href="{base_url}shop">
+							&nbsp;&nbsp;<i class="fa fa-shopping-cart"></i> &nbsp;สั่งซื้อสินค้า &nbsp;&nbsp;
+						</button>
+					</div>
+				</div>
 
-        												<td class="product-name">
-        													<?php echo $item["name"]; ?>
-        												</td>
+				<?php } ?>
+			</div>
+		</div>
+	</div>
+</div>
 
-        												<td class="product-size">
-        													<?php echo $item["size"]; ?>
-        												</td>
-
-        												<td class="product-price">
-        													<span class="unit-amount"><?php echo '฿' . $item["price"]; ?></span>
-        												</td>
-
-        												<td class="product-quantity">
-        													<div class="input-counter">
-        														<input type="number" class="form-control text-center" value="<?php echo $item["qty"]; ?>" onchange="updateCartItem(this, '<?php echo $item["rowid"]; ?>')">
-        													</div>
-        												</td>
-
-        												<td class="product-subtotal">
-        													<span class="subtotal-amount"><?php echo '$' . $item["subtotal"] . ' '. lang('cs_m8'); ?></span>
-        														<a class="btn btn-sm btn-danger" onclick="return confirm('Are you sure to delete item?')?window.location.href='<?php echo base_url('cart/removeItem/' . $item["rowid"]); ?>':false;"><i class="fas fa-trash-alt"></i> </a>
-														</td>
-
-        											</tr>
-        										<?php }
-											} else { ?>
-        										<tr>
-        											<td colspan="6">
-        												<p><?php echo lang('cs_m6'); ?></p>
-        											</td>
-        										<?php } ?>
-        										<?php if ($this->cart->total_items() > 0) { ?>
-        										<tr>
-        											<td></td>
-        											<td></td>
-        											<td></td>
-        											<td><strong><?php echo lang('cs_m7'); ?></strong></td>
-        											<td class="text-right"><strong><?php echo '฿' . $this->cart->total() . ' '. lang('cs_m8'); ?></strong></td>
-        											<td></td>
-        										</tr>
-        									<?php } ?>
-        								</tbody>
-        							</table>
-        						</div>
-
-        						<div class="cart-buttons">
-        							<div class="row align-items-center">
-        								<div class="col-lg-7 col-sm-7 col-md-7">
-        									<div class="continue-shopping-box">
-        										<a href="<?php echo base_url('shop'); ?>" class="default-btn1">
-												<?php echo lang('cs_b1'); ?>
-        										</a>
-        									</div>
-        								</div>
-
-        								<div class="col-lg-5 col-sm-5 col-md-5 text-right">
-        									<a href="{base_url}checkout" <?php echo ($this->cart->total_items() > 0) ? 'class="default-btn1"' : 'class="default-btn1 disabled"' ?> >
-											<?php echo lang('cs_b2'); ?>
-        									</a>
-        								</div>
-        							</div>
-        						</div>
-        					</div>
-
-        					<!-- <div class="row">
-        						<div class="col-lg-12">
-        							<div class="cart-totals">
-        								<h3>Cart Totals</h3>
-        								<ul>
-        									<li>Subtotal <span>$150.00</span></li>
-        									<li>Shipping <span>$30.00</span></li>
-        									<li>Coupon <span>$20.00</span></li>
-        									<li>Total <span><b>$160.00</b></span></li>
-        								</ul>
-        								<a href="{site_url}checkout" class="default-btn1">
-        									Proceed To Checkout
-        								</a>
-        							</div>
-        						</div>
-        					</div> -->
-        				</form>
-        			</div>
-        		</div>
-        	</div>
-        </section>
-		<!-- End Cart Area -->
-		<script src="<?php echo base_url('assets/js/jquery.min.js'); ?>"></script>
-
-        <script>
-        	// Update item quantity
-        	function updateCartItem(obj, rowid) {
-        		$.get("<?php echo base_url('cart/updateItemQty/'); ?>", {
-        			rowid: rowid,
-        			qty: obj.value
-        		}, function(resp) {
-        			if (resp == 'ok') {
-        				location.reload();
-        			} else {
-        				alert('Cart update failed, please try again.');
-        			}
-        		});
-        	}
-        </script>
+<div class='modal fade' id='my_modal' tabindex='-1' role='dialog' aria-labelledby='delModalLabel' aria-hidden='true'>
+	<div class='modal-dialog' role='document'>
+		<div class='modal-content'>
+			<div class='modal-header'>
+				<h4 class='modal-title' id='delModalLabel'>ยืนยันการลบรายการ</h4>
+			</div>
+			<div class='modal-body' style="text-align: center;">
+				<p class="alert alert-danger">คุณต้องการลบรายการนี้ใช่หรือไม่ ?</p>
+				<form id="formDelete">
+					<input type="hidden" name="rowId" />
+				</form>
+			</div>
+			<div class='modal-footer text-center'>
+				<button type="button" class="btn btn-default" data-dismiss="modal">&nbsp;&nbsp;<i class="fa fa-close"></i> &nbsp;ปิด &nbsp;&nbsp;</button>&emsp;
+				<button type="button" class="btn btn-danger" onclick="removeCartItem()" data-dismiss="modal">&nbsp;&nbsp;<i class="fa fa-trash"></i> &nbsp;ลบ &nbsp;&nbsp;</button>&emsp;
+			</div>
+		</div>
+	</div>
+</div>
+<script src="<?php echo base_url('assets/js/jquery.min.js'); ?>"></script>
+<script>
+	// Update item quantity
+	function updateCartItem(obj, rowid) {
+		$.get("<?php echo base_url('cart/updateItemQty/'); ?>", {
+			rowid: rowid,
+			qty: obj.value
+		}, function(resp) {
+			if (resp == 'ok') {
+				location.reload();
+			} else {
+				alert('โปรดกรอกจำนวนมากกว่า 1 ชิ้น');
+				document.getElementById('qty').value = '1'
+			}
+		});
+	}
+	function removeCartItem() {
+		var fdata = $('#formDelete').serialize();
+		var str = fdata.substring(6);
+		window.location.replace('cart/removeItem/'+str);
+	}
+</script>
+<script>
+	// Get your checkbox who determine the condition
+	var determine = document.getElementById("checkboxDetermine");
+	// Make a function who disabled or enabled your conditioned checkbox
+	var disableCheckboxConditioned = function() {
+		if (determine.checked) {
+			document.getElementById("checkboxConditioned").disabled = false;
+			document.getElementById('checkboxConditioned').value = ''
+		} else {
+			document.getElementById("checkboxConditioned").disabled = true;
+		}
+	}
+	// On click active your function
+	determine.onclick = disableCheckboxConditioned;
+	disableCheckboxConditioned();
+</script>
+<script>
+	$(document).ready(function() {
+		$('#my_modal').on('show.bs.modal', function(e) {
+			var rowId = $(e.relatedTarget).data('row-id');
+			$(e.currentTarget).find('input[name="rowId"]').val(rowId);
+		});
+	});
+</script>
