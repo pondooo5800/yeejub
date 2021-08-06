@@ -114,7 +114,10 @@
             </div>
             <!-- CART ICON ON MMENU -->
             <div id="shopping-cart-box-ontop">
+                <a class="cart-link" href="{site_url}cart">
                 <i class="fa fa-shopping-cart"></i>
+
+                </a>
                 <div class="shopping-cart-box-ontop-content"></div>
             </div>
         </div>

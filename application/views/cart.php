@@ -99,7 +99,7 @@
 					</div>
 					<hr>
 					<div class="cart_navigation text-center">
-						<button disabled type="button" id="checkboxConditioned" class="btn btn-success" href="{base_url}shop">
+						<button type="submit" id="checkboxConditioned" class="btn btn-success" onclick="cart_submit()">
 							&nbsp;&nbsp;<i class="fa fa-shopping-cart"></i> &nbsp;สั่งซื้อสินค้า &nbsp;&nbsp;
 						</button>
 					</div>
@@ -150,6 +150,13 @@
 		var fdata = $('#formDelete').serialize();
 		var str = fdata.substring(6);
 		window.location.replace('cart/removeItem/'+str);
+	}
+	function cart_submit()
+	{
+		setTimeout(function(){
+			window.location.replace('cart/checkout');
+		}, 1000);
+
 	}
 </script>
 <script>
