@@ -55,6 +55,25 @@ class Product_model extends CI_Model{
         // Return fetched data
         return !empty($result)?$result:false;
     }
+    public function getOrderProduct_PDF($id){
+        $this->db->select('oi.*, p.product_code, p.product_name, p.price, p.product_img1');
+        $this->db->from('order_items as oi');
+        $this->db->join('tb_products as p', 'p.product_id = oi.product_id', 'left');
+        $this->db->where('oi.order_id', $id);
+        $query = $this->db->get();
+        $result = $query->result_array();
+        return !empty($result)?$result:false;
+    }
+    public function getOrder_PDF($id){
+        $this->db->select('o.*, c.name, c.email, c.phone, c.address, m.member_user_id, m.member_addr, m.member_same');
+        $this->db->from($this->ordTable.' as o');
+        $this->db->join($this->custTable.' as c', 'c.id = o.customer_id', 'left');
+        $this->db->join('tb_members as m', 'm.member_id = c.member_id', 'left');
+        $this->db->where('o.id', $id);
+        $query = $this->db->get();
+        $result = $query->row_array();
+        return !empty($result)?$result:false;
+    }
 
     /*
      * Insert customer data in the database

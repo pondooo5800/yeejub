@@ -6,7 +6,11 @@ class Welcome extends CI_Controller
 
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		$mpdf = new \Mpdf\Mpdf();
+		$html = $this->load->view('welcome_message',[],true);
+        $mpdf->WriteHTML($html);
+		$mpdf->Output();
+		// $this->load->view('welcome_message');
 	}
 	public function send()
 	{
