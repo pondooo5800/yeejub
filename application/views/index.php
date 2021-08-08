@@ -758,7 +758,10 @@
                                 <ul class="product-list owl-carousel" data-dots="false" data-loop="true" data-nav="true" data-margin="0" data-autoplayTimeout="1000" data-autoplayHoverPause="true" data-responsive='{"0":{"items":1},"600":{"items":3},"1000":{"items":4}}'>
                                 <?php
                                     $this->load->model('common_model');
-                                    $product = $this->common_model->custom_query("select * from tb_products where product_type =" . $row['product_type_id']);
+                                    $product = $this->common_model->custom_query("select * from tb_products where fag_allow = 'allow' and product_type =" . $row['product_type_id']);
+            // print_r($this->db->last_query());
+            // die();
+
                                     foreach ($product as $value) { ?>
                                     <li>
                                         <div class="left-block">

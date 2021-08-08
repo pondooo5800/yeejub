@@ -13,6 +13,7 @@ class Shop_model extends CI_Model
   {
     $this->db->limit($limit, $start);
     $this->db->from("tb_products");
+    $this->db->where("fag_allow = 'allow'");
     $this->db->order_by("product_id", "desc");
     $query = $this->db->get();
     if ($query->num_rows() > 0) {

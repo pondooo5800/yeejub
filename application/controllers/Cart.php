@@ -281,6 +281,11 @@ class Cart extends CI_Controller
     $file_name = 'ใบสั่งซื้อสินค้า.pdf';
     $mpdf->Output($file_name, 'I');
   }
+  public function pdf()
+  {
+    $this->load->view('order_pdfView');
+  }
+
 }
 /*---------------------------- END Controller Class --------------------------------*/
     // 		print_r($this->db->last_query());

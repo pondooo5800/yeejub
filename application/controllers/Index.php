@@ -75,7 +75,7 @@ class Index extends CI_Controller
 	public function index()
 	{
 		$this->load->model('common_model');
-		$product = $this->db->query("select * from tb_products_types");
+		$product = $this->db->query("select * from tb_products_types where fag_allow = 'allow'");
 		$this->data['product_type'] = $product->result_array();
 		$this->render_view('index');
 	}
