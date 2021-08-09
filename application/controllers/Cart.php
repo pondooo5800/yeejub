@@ -17,7 +17,7 @@ class Cart extends CI_Controller
   public function __construct()
   {
     parent::__construct();
-    chkMemberPerm();
+    // chkMemberPerm();
     // Load cart library
     $this->load->library('cart');
     $this->load->model('product_model', 'product');
@@ -280,10 +280,6 @@ class Cart extends CI_Controller
     $mpdf->WriteHTML($html_img);
     $file_name = 'ใบสั่งซื้อสินค้า.pdf';
     $mpdf->Output($file_name, 'I');
-  }
-  public function pdf()
-  {
-    $this->load->view('order_pdfView');
   }
 
 }

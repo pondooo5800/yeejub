@@ -109,7 +109,6 @@ class MY_Model extends CI_Model
         }
         return $data;
     }
-
 	/**
 	 * C = Create Record
 	 * @param array $data
@@ -186,6 +185,23 @@ class MY_Model extends CI_Model
 				//Delete Record
 				$this->set_query_parameter();
 				$this->db->set(array('fag_allow'=>'delete','user_delete'=>$this->session->userdata('user_id'),'datetime_delete'=>date("Y-m-d H:i:s")));
+				return $this->db->update($this->_table_name);
+				//return $this->db->delete($this->_table_name);
+			//}else{
+			//	$this->error_message = 'Could not create LOG';
+			//}
+		}
+	}
+    public function delete_record_order()
+    {
+		if($this->_where == ''){
+			return 'Choose WHERE Clause for Update / Delet';
+		}else{
+			//Move to LOG
+			//if($this->log_delete()){
+				//Delete Record
+				$this->set_query_parameter();
+				$this->db->set(array('fag_allow'=>'delete'));
 				return $this->db->update($this->_table_name);
 				//return $this->db->delete($this->_table_name);
 			//}else{

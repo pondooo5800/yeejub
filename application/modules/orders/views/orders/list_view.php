@@ -1,13 +1,12 @@
-<!-- [ View File name : list_view.php ] -->
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="card">
 				<div class="card-header card-header-info card-header-icon">
 					<div class="card-icon">
-						<i class="material-icons">store</i>
+						<i class="material-icons">category</i>
 					</div>
-					<h4 class="card-title">รายการสินค้า</h4>
+					<h4 class="card-title">รายการสั่งซื้อสินค้า</h4>
 				</div>
 				<div class="card-body">
 					<form class="form-horizontal" name="formSearch" method="post" action="{page_url}/search">
@@ -17,17 +16,17 @@
 								<div class="row align-items-center">
 									<div class="col-md-2">
 										<div class="form-group has-info bmd-form-group">
-											<a href="{page_url}" id="btn-search" class="btn btn-Secondary ">ทั้งหมด</a>
+											<a href="{page_url}" id="btn-search" class="btn btn-success ">ทั้งหมด</a>
 										</div>
 									</div>
 									<div class="col-md-2">
 										<div class="form-group has-warning bmd-form-group" id="search">
 											<select class="select2-search" name="search_field" class="span2">
-												<option value="product_code">รหัสสินค้า</option>
+												<option value="id">เลขที่ใบสั่งซื้อ</option>
 											</select>
 										</div>
 									</div>
-									<div class="col-md-2">
+									<div class="col-md-3">
 										<div class="form-group has-info bmd-form-group">
 											<input type="text" class="form-control col" id="txtSearch" name="txtSearch" value="{txt_search}">
 										</div>
@@ -40,22 +39,22 @@
 											</button>
 										</div>
 									</div>
-									<div class="col-md-2">
+									<div class="col-md-3">
 										<div class="form-group bmd-form-group">
 											<select class="select2-search" id="set_order_by" class="span2" value="{order_by}">
 												<option value="">- จัดเรียงตาม -</option>
-												<option value="product_name_th|asc">ชื่อสินค้า ก - ฮ</option>
-												<option value="product_name_th|desc">ชื่อสินค้า ฮ - ก</option>
+												<option value="id|asc">เลขที่ใบสั่งซื้อ เก่า - ล่าสุด</option>
+												<option value="id|desc">เลขที่ใบสั่งซื้อ ล่าสุด - เก่า</option>
 											</select>
 										</div>
 									</div>
-									<div class="col-md-2">
+									<!-- <div class="col-md-2">
 										<div class="form-group bmd-form-group">
-											<a href="{page_url}/add" class="btn btn-Secondary" data-toggle="tooltip" title="เพิ่มข้อมูลใหม่" id="btn-search">
-												<i class="fa fa-plus-square"></i></span>&nbsp;&nbsp;เพิ่มรายการสินค้า
+											<a href="{page_url}/add" class="btn btn-success" data-toggle="tooltip" title="เพิ่มข้อมูลใหม่" id="btn-search">
+												<i class="fa fa-plus-square"></i></span>&nbsp;&nbsp;เพิ่มรายการ
 											</a>
 										</div>
-									</div>
+									</div> -->
 								</div>
 							</div>
 						</div>
@@ -66,10 +65,10 @@
 							<thead>
 								<tr>
 									<th class="text-center">#</th>
-									<th class="text-center">รหัสสินค้า</th>
-									<th class="text-center">ชื่อสินค้า ภาษาไทย</th>
-									<th class="text-center">ชื่อสินค้า ภาษาอังกฤษ</th>
-									<th class="text-center">ราคา</th>
+									<th class="text-center">วันที่</th>
+									<th class="text-center">เลขที่ใบสั่งซื้อ</th>
+									<th class="text-center">รหัสสมาชิก</th>
+									<th class="text-center">จำนวนเงิน</th>
 									<th class="text-center">สถานะ</th>
 									<th class="text-center" style="width:200px">เครื่องมือ</th>
 								</tr>
@@ -77,19 +76,19 @@
 							<tbody>
 								<tr parser-repeat="[data_list]" id="row_{record_number}">
 									<td style="text-align:center;">{record_number}</td>
-									<td>{product_code}</td>
-									<td style="text-align:left;">{product_name_th}</td>
-									<td style="text-align:left;">{product_name_en}</td>
-									<td style="text-align:center;">{price}</td>
-									<td style="text-align:center;">{preview_fag_allow}</td>
+									<td style="text-align:center;">{created}</td>
+									<td style="text-align:center;">{id}</td>
+									<td style="text-align:center;">{member_user_id}</td>
+									<td style="text-align:center;">{grand_total}</td>
+									<td style="text-align:center;">{status}</td>
 									<td class="td-actions text-center">
-										<a href="{page_url}/preview/{url_encrypt_id}" class="my-tooltip btn btn-info btn-md" data-toggle="tooltip" title="แสดงข้อมูลรายละเอียด">
-											<i class="material-icons">list</i>
+										<a href="{site_url}cart/orderPDF/{id}" target="_blank" class="my-tooltip btn btn-info btn-md" data-toggle="tooltip" title="แสดงข้อมูลรายละเอียด">
+											<i class="material-icons">picture_as_pdf</i>
 										</a>
-										<a href="{page_url}/edit/{url_encrypt_id}" class="my-tooltip btn btn-warning " data-toggle="tooltip" title="แก้ไขข้อมูล">
+										<!-- <a href="{page_url}/edit/{url_encrypt_id}" class="my-tooltip btn btn-warning " data-toggle="tooltip" title="แก้ไขข้อมูล">
 											<i class="material-icons">edit</i>
-										</a>
-										<a href="javascript:void(0);" class="btn-delete-row my-tooltip btn btn-danger" data-toggle="tooltip" title="ลบรายการนี้" data-product_id="{encrypt_product_id}" data-row-number="{record_number}">
+										</a> -->
+										<a href="javascript:void(0);" class="btn-delete-row my-tooltip btn btn-danger" data-toggle="tooltip" title="ลบรายการนี้" data-id="{encrypt_id}" data-row-number="{record_number}">
 											<i class="material-icons">delete_forever</i>
 										</a>
 									</td>
@@ -125,7 +124,7 @@
 			<div class="modal-body">
 				<h4 style="font-weight: bold" class="text-center">* ท่านต้องการลบข้อมูลใช่หรือไม่ *</h4>
 				<form id="formDelete">
-					<input type="hidden" name="encrypt_product_id" />
+					<input type="hidden" name="encrypt_id" />
 				</form>
 			</div>
 			<div class="modal-footer" style="justify-content: center;">
@@ -136,23 +135,6 @@
 	</div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="modalPreview" tabindex="-1" role="dialog" aria-labelledby="modalPreviewLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">ปิด</span></button>
-				<h4 class="modal-title" id="modalPreviewLabel">แสดงข้อมูล</h4>
-			</div>
-			<div class="modal-body">
-				<div id="divPreview"></div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-Secondary" data-dismiss="modal">ปิด</button>
-			</div>
-		</div>
-	</div>
-</div>
 <script>
 	var param_search_field = '{search_field}';
 	var param_current_page = '{current_page_offset}';

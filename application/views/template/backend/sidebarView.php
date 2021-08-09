@@ -7,7 +7,7 @@
 	<div class="sidebar-wrapper">
 		<ul class="nav">
 			<li class="nav-item <?php if ($this->uri->segment(1) == '' || $this->uri->segment(1) == 'orders') { ?>active<?php } ?>">
-				<a class="nav-link" href="./dashboard.html">
+				<a class="nav-link" href="{site_url}orders/orders">
 					<i class="material-icons">shopping_cart</i>
 					<p>รายการสั่งซื้อสินค้า</p>
 				</a>

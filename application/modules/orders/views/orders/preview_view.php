@@ -28,26 +28,13 @@
 									<td>{record_product_code}</td>
 								</tr>
 								<tr>
-									<td class="text-right fit"><b>ชื่อสินค้า ภาษาไทย :</b></td>
-									<td>{record_product_name_th}</td>
+									<td class="text-right fit"><b>ชื่อสินค้า :</b></td>
+									<td>{record_product_name}</td>
 								</tr>
 								<tr>
-									<td class="text-right fit"><b>ชื่อสินค้า ภาษาอังกฤษ :</b></td>
-									<td>{record_product_name_en}</td>
+									<td class="text-right fit"><b>ประเภทสินค้า :</b></td>
+									<td>{record_product_type_name}</td>
 								</tr>
-								<tr>
-									<td class="text-right fit"><b>คำอธิบาย ภาษาไทย :</b></td>
-									<td>{record_description_th}</td>
-								</tr>
-								<tr>
-									<td class="text-right fit"><b>คำอธิบาย ภาษาอังกฤษ :</b></td>
-									<td>{record_description_en}</td>
-								</tr>
-								<tr>
-									<td class="text-right fit"><b>Keyword :</b></td>
-									<td>{record_keyword}</td>
-								</tr>
-
 								<tr>
 									<td class="text-right fit"><b>ราคา :</b></td>
 									<td>{record_price}</td>
@@ -63,24 +50,8 @@
 									<td>{record_datetime_add}</td>
 								</tr>
 								<tr>
-									<td class="text-right fit"><b>รูปภาพสินค้าที่ 1 (รูปหลัก) :</b></td>
+									<td class="text-right fit"><b>รูปภาพสินค้า :</b></td>
 									<td>{preview_products_img1}</td>
-								</tr>
-								<tr>
-									<td class="text-right fit"><b>รูปภาพสินค้าที่ 2 :</b></td>
-									<td>{preview_products_img2}</td>
-								</tr>
-								<tr>
-									<td class="text-right fit"><b>รูปภาพสินค้าที่ 3 :</b></td>
-									<td>{preview_products_img3}</td>
-								</tr>
-								<tr>
-									<td class="text-right fit"><b>รูปภาพสินค้าที่ 4 :</b></td>
-									<td>{preview_products_img4}</td>
-								</tr>
-								<tr>
-									<td class="text-right fit"><b>รูปภาพสินค้าที่ 5 :</b></td>
-									<td>{preview_products_img5}</td>
 								</tr>
 							</tbody>
 						</table>
