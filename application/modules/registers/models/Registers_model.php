@@ -54,6 +54,13 @@ class Registers_model extends MY_Model
 		);
 		return $this->add_record($data);
 	}
+	public function check_id($id)
+	{
+		$this->db->select('member_mobile_no');
+		$this->db->where('member_mobile_no',$id);
+		$query = $this->db->get('tb_members');
+		return $query->num_rows();
+	}
 
 
 	/**

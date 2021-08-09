@@ -41,9 +41,9 @@
                             <ul id="introduce-company" class="introduce-list">
                                 <li><a href="{site_url}about">เกี่ยวกับเรา</a>
                                 </li>
-                                <li><a href="http://www.kgg.co.th/about-%E0%B8%A7%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%AA%E0%B8%B1%E0%B9%88%E0%B8%87%E0%B8%8B%E0%B8%B7%E0%B9%89%E0%B8%AD-23.html">วิธีการสั่งซื้อ</a>
+                                <li><a href="#">วิธีการสั่งซื้อ</a>
                                 </li>
-                                <li><a href="how_payment-%E0%B8%A7%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%8A%E0%B8%B3%E0%B8%A3%E0%B8%B0%E0%B9%80%E0%B8%87%E0%B8%B4%E0%B8%99.html">วิธีการชำระเงิน</a>
+                                <li><a href="#">วิธีการชำระเงิน</a>
                                 </li>
 
                             </ul>
@@ -61,7 +61,7 @@
                                     <p>โทร. 088-025 8888</p>
                                 </li>
                                 <li>
-                                    <p>yeejub20online@gmail.com</p>
+                                    <p>E-mail: yeejub20online@gmail.com</p>
                                 </li>
                                 <li>
                                     <p>Facebook : <a href="https://www.facebook.com/yeejub20rama2">ร้านหยี่จั๊บ พระราม 2 Thailand.</a> </p>

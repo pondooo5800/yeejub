@@ -18,8 +18,9 @@ class Member_login extends CRUD_Controller
 		$this->data['page_url'] = site_url('member_login');
 		$this->data['page_title'] = 'PHP - LOGIN';
 
-
-		$this->another_js = '<script src="'. base_url() .'assets/js/member_login.js"></script>';
+		$js_url = 'assets/js_modules/registers/registers.js?ft=' . filemtime('assets/js_modules/registers/registers.js');
+		$this->another_js .= '<script src="' . base_url($js_url) . '"></script>';
+		$this->another_js .= '<script src="'. base_url() .'assets/js/member_login.js"></script>';
     }
 
 	//ปรับแต่งตาม Template ที่ใช้งาน

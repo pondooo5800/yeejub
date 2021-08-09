@@ -206,9 +206,6 @@ class Registers extends CRUD_Controller
 		$frm->set_rules('member_mobile_no', 'เบอร์โทรศัพท์', 'trim|required');
 		$frm->set_rules('cus_passwd', 'รหัสผ่าน', 'trim|required');
 		$frm->set_rules('confirmpassword', 'ยืนยันรหัสผ่าน', 'trim|required');
-		$frm->set_rules('member_email_addr', 'อีเมล', 'trim|required');
-		$frm->set_rules('member_fname', 'ชื่อ', 'trim|required');
-		$frm->set_rules('member_lname', 'นามสกุล', 'trim|required');
 
 		$frm->set_message('required', '- กรุณาใส่ข้อมูล %s');
 		$frm->set_message('is_natural', '- %s ต้องระบุตัวเลขจำนวนเต็ม');
@@ -218,9 +215,6 @@ class Registers extends CRUD_Controller
 			$message .= form_error('member_mobile_no');
 			$message .= form_error('cus_passwd');
 			$message .= form_error('confirmpassword');
-			$message .= form_error('member_email_addr');
-			$message .= form_error('member_fname');
-			$message .= form_error('member_lname');
 			return $message;
 		}
 	}
@@ -258,6 +252,12 @@ class Registers extends CRUD_Controller
 		$message = '';
 		$message .= $this->formValidate();
 		$post = $this->input->post(NULL, TRUE);
+		$id = $post['member_mobile_no'];
+		$check_id =$this->Registers->check_id($id);
+			if($check_id > 0)
+			{
+				$message = 'เบอร์โทรศัพท์นี้มีในระบบแล้ว';
+			}
 		$password = strlen($post['cus_passwd']);
 		$confirmpassword = strlen($post['confirmpassword']);
 
