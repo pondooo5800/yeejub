@@ -86,9 +86,7 @@ class Orders_model extends MY_Model
 		$total_row = $this->count_record();
 		$search_row = $total_row;
 		if ($where != '') {
-			$this->db->join('customers', "$this->my_table.id = customers.id", 'left');
-			$this->db->join('tb_members', "customers.id = tb_members.member_id", 'left');
-
+			$this->db->join('tb_members', "$this->my_table.member_id = tb_members.member_id", 'left');
 			$this->set_where($where);
 			$search_row = $this->count_record();
 		}
@@ -97,9 +95,8 @@ class Orders_model extends MY_Model
 		$this->set_order_by($order_by);
 		$this->set_offset($offset);
 		$this->set_limit($limit);
-		$this->db->select("$this->my_table.*,customers.member_id,tb_members.member_user_id");
-		$this->db->join('customers', "$this->my_table.id = customers.id", 'left');
-		$this->db->join('tb_members', "customers.id = tb_members.member_id", 'left');
+		$this->db->select("$this->my_table.*,tb_members.member_user_id as code_id");
+		$this->db->join('tb_members', "$this->my_table.member_id = tb_members.member_id", 'left');
 
 		$list_record = $this->list_record();
 		// print_r($this->db->last_query());

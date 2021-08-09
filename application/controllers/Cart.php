@@ -201,7 +201,8 @@ class Cart extends CI_Controller
     // Insert order data
     $ordData = array(
       'customer_id' => $custID,
-      'grand_total' => $this->cart->total()
+      'grand_total' => $this->cart->total(),
+      'member_id' => $this->session->userdata('member_id')
     );
     $insertOrder = $this->product->insertOrder($ordData);
 

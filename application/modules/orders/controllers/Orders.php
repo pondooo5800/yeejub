@@ -577,12 +577,11 @@ class Orders extends CRUD_Controller
 				$pk1 = encrypt($pk1);
 			}
 			$data[$i]['encrypt_id'] = $pk1;
-			$data[$i]['member_user_id'] = $data[$i]['member_user_id'];
+			$data[$i]['member_user_id'] = $data[$i]['code_id'];
 			$data[$i]['grand_total'] = $data[$i]['grand_total'];
 			$data[$i]['status'] = $this->setFagAllowOrder($data[$i]['status']);
 			$data[$i]['created'] = setThaiDate($data[$i]['created']);
 			$data[$i]['modified'] = setThaiDate($data[$i]['modified']);
-			$data[$i]['datetime_delete'] = setThaiDate($data[$i]['datetime_delete']);
 		}
 		return $data;
 	}
