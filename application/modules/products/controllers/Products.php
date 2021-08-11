@@ -381,7 +381,7 @@ class Products extends CRUD_Controller
 	{
 
 		$message = '';
-		$message .= $this->formValidate();
+		// $message .= $this->formValidate();
 		if ($message != '') {
 			$json = json_encode(array(
 				'is_successful' => FALSE,
@@ -397,10 +397,11 @@ class Products extends CRUD_Controller
 			$arr = $this->uploadFile('product_img1');
 			if ($arr['result'] == TRUE) {
 				$post['product_img1'] = $arr['file_path'];
-			} else {
-				$upload_error++;
-				$upload_error_msg .= '<br/>' . print_r($arr['error'], TRUE);
 			}
+			// else {
+			// 	$upload_error++;
+			// 	$upload_error_msg .= '<br/>' . print_r($arr['error'], TRUE);
+			// }
 			// die(print_r($arr = $this->uploadFile('product_img3')));
 
 			$encrypt_id = '';
@@ -469,8 +470,8 @@ class Products extends CRUD_Controller
 	public function update()
 	{
 		$message = '';
-		$message .= $this->formValidateWithFile();
-		$message .= $this->formValidateUpdate();
+		// $message .= $this->formValidateWithFile();
+		// $message .= $this->formValidateUpdate();
 		$post = $this->input->post(NULL, TRUE);
 		// die(print_r($post));
 		$error_pk_id = $this->checkRecordKey($post);
@@ -495,10 +496,11 @@ class Products extends CRUD_Controller
 					$arr = explode('/', $post['product_img1_old_path']);
 					$encrypt_name = end($arr);
 					$this->FileUpload->delete($encrypt_name);
-				} else {
-					$upload_error++;
-					$upload_error_msg .= '<br/>' . print_r($arr['error'], TRUE);
 				}
+				// else {
+				// 	$upload_error++;
+				// 	$upload_error_msg .= '<br/>' . print_r($arr['error'], TRUE);
+				// }
 			}
 			if ($upload_error == 0) {
 				$result = $this->Products->update($post);

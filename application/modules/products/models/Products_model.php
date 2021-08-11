@@ -46,8 +46,8 @@ class Products_model extends MY_Model
 			'product_name' => $post['product_name'],
 			'product_type' => $post['product_type'],
 			'price' => $post['price'],
-			'product_img1' => $post['product_img1'],
-			'fag_allow' => $post['fag_allow'],
+			'product_img1' => ($post['product_img1'] != '' ? $post['product_img1'] : ''),
+			'fag_allow' => ($post['fag_allow'] != '' ? $post['fag_allow'] : 'allow'),
 		);
 		return $this->add_record($data);
 	}
