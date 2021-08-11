@@ -105,13 +105,66 @@ class Shop extends CI_Controller
 		$this->pagination->initialize($config);
 
         $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+		// print_r($page);
+		// die();
+
         $this->data['products'] = $this->Shop_model->
             fetch_product($config["per_page"], $page);
 		$this->data['links'] = $this->pagination->create_links();
+		// $this->load->model('common_model');
+		// $product_type_id = $this->common_model->custom_query("select * from tb_products_types where product_type_id =".$id);
+
+		// $this->data['product_type_id'] = $product_type_id;
 		$this->render_view('shop');
 		// die(print_r($this->data['data_list_shops']));
 		// print_r($this->db->last_query());
 		// die();
+	}
+	public function category($product_type_id = NULL )
+	{
+		$this->load->model('common_model');
+		$total_rows = rowArray($this->common_model->custom_query("select COUNT(*) as total_rows from tb_products where product_type = ".$product_type_id));
+		// print_r($this->db->last_query());
+		// die();
+
+		$config = array();
+        $config["base_url"] = base_url() . "shop/category/".$product_type_id;
+        $config["total_rows"] = $total_rows['total_rows'];
+
+        $config["per_page"] = 12;
+		$config["uri_segment"] = 3;
+
+		$config['next_link']        = 'Next';
+		$config['prev_link']        = 'Prev';
+		$config['first_link']       = false;
+		$config['last_link']        = false;
+		$config['full_tag_open']    = '<ul class="pagination justify-content-center">';
+		$config['full_tag_close']   = '</ul>';
+		$config['attributes']       = ['class' => 'page-link'];
+		$config['first_tag_open']   = '<li class="page-item">';
+		$config['first_tag_close']  = '</li>';
+		$config['prev_tag_open']    = '<li class="page-item">';
+		$config['prev_tag_close']   = '</li>';
+		$config['next_tag_open']    = '<li class="page-item">';
+		$config['next_tag_close']   = '</li>';
+		$config['last_tag_open']    = '<li class="page-item">';
+		$config['last_tag_close']   = '</li>';
+		$config['cur_tag_open']     = '<li class="page-item active"><a class="page-link">';
+		$config['cur_tag_close']    = '<span class="sr-only">(current)</span></a></li>';
+		$config['num_tag_open']     = '<li class="page-item">';
+		$config['num_tag_close']    = '</li>';
+		$this->pagination->initialize($config);
+
+        $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+        $this->data['products'] = $this->Shop_model->
+			fetch_category($config["per_page"], $page ,$product_type_id);
+		// print_r($page);
+		// die();
+		$this->data['links'] = $this->pagination->create_links();
+
+		$product = rowArray($this->common_model->custom_query("select * from tb_products_types where fag_allow = 'allow' and product_type_id =". $product_type_id));
+		$this->data['product_type'] = $product['product_type_name'];
+		$this->render_view('shop');
 	}
 	public function addToCart($proID){
         $product = $this->product->getRows($proID);

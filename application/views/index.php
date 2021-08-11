@@ -744,7 +744,7 @@
             <div class="category-featured">
                 <nav class="navbar nav-menu nav-menu-blue show-brand">
                     <div class="container">
-                        <div class="navbar-brand" style="text-align: center"><a href="http://www.kgg.co.th/products-%E0%B8%84%E0%B8%B5%E0%B8%A2%E0%B9%8C%E0%B8%9A%E0%B8%AD%E0%B8%A3%E0%B9%8C%E0%B8%94%20Keyboard-427.html">
+                        <div class="navbar-brand" style="text-align: center"><a href="<?php echo base_url('shop/category/').$row['product_type_id']; ?>">
                         <?php echo $row['product_type_name']; ?></a>
                         </div>
                 </nav>

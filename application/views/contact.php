@@ -10,12 +10,8 @@
                     <div class="content-text clearfix">
                         <h2><span style="font-size:16px;font-weight: bold;">สนใจสั่งซื้อสินค้า หรือสอบถามข้อมูลเพิ่มเติมได้ที่:</span></h2>
 <br>
-                        <p><span style="font-size:14px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;โทรศัพท์: 091-123-4561</span></p>
-
-                        <p><span style="font-size:14px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;แฟ็กซ์: 02-874-2002</span></p>
-
-                        <p><span style="font-size:14px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;อีเมล: pronktwenty@hotmail.com</span></p>
-
+                        <p><span style="font-size:14px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>โทรศัพท์:</b> 088-025 8888</span></p>
+                        <p><span style="font-size:14px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>อีเมล:</b> yeejub20online@gmail.com</span></p>
                         <h2><span style="font-size:16px;font-weight: bold;">แผนที่และการเดินทาง:</span></h2>
 <br>
 
@@ -61,13 +57,13 @@
 
                     <br>
                     <ul class="store_info">
-                        <i class="fa fa-user"></i>ADMIN <li><i class="fa fa-phone"></i><span>091-123-4561</span></li>
+                        <i class="fa fa-user"></i>ADMIN <li><i class="fa fa-phone"></i><span>088-025 8888</span></li>
                         <li>
                             <i class="fa fa-facebook"></i><span><a href="https://web.facebook.com/yeejub20rama2">ร้านหยี่จั๊บ พระราม 2 Thailand.</a></span>
                         </li>
 
                         <li>
-                            <i class="fa fa-envelope"></i>Email: <span><a href="mailto:kggit.seller@gmail.com">pronktwenty@hotmail.com</a></span>
+                            <i class="fa fa-envelope"></i>Email: <span>yeejub20online@gmail.com</span>
                         </li>
                     </ul>
                 </div>
