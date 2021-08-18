@@ -215,55 +215,115 @@ class Cart extends CI_Controller
   }
   public function order_sendMail($ordID)
   {
-    $mpdf = new \Mpdf\Mpdf([
-      'default_font_size' => 9,
-      'default_font' => 'sarabun'
-    ]);
-    $defaultConfig = (new Mpdf\Config\ConfigVariables())->getDefaults();
-    $fontDirs = $defaultConfig['fontDir'];
+    $post = $this->input->post(NULL, TRUE);
+    if ($post['member_email_order'] != '') {
+      $to = $post['member_email_order'];
+      $mpdf = new \Mpdf\Mpdf([
+        'default_font_size' => 9,
+        'default_font' => 'sarabun'
+      ]);
+      $defaultConfig = (new Mpdf\Config\ConfigVariables())->getDefaults();
+      $fontDirs = $defaultConfig['fontDir'];
 
-    $defaultFontConfig = (new Mpdf\Config\FontVariables())->getDefaults();
-    $fontData = $defaultFontConfig['fontdata'];
+      $defaultFontConfig = (new Mpdf\Config\FontVariables())->getDefaults();
+      $fontData = $defaultFontConfig['fontdata'];
 
-    $mpdf = new \Mpdf\Mpdf([
-      'fontDir' => array_merge($fontDirs, [
-        __DIR__ . '/tmp',
-      ]),
-      'fontdata' => $fontData + [
-        'sarabun' => [
-          'R' => 'THSarabunNew.ttf',
-          'I' => 'THSarabunNew Italic.ttf',
-          'B' => 'THSarabunNew Bold.ttf',
-          'BI' => 'THSarabunNew BoldItalic.ttf',
-        ]
-      ],
+      $mpdf = new \Mpdf\Mpdf([
+        'fontDir' => array_merge($fontDirs, [
+          __DIR__ . '/tmp',
+        ]),
+        'fontdata' => $fontData + [
+          'sarabun' => [
+            'R' => 'THSarabunNew.ttf',
+            'I' => 'THSarabunNew Italic.ttf',
+            'B' => 'THSarabunNew Bold.ttf',
+            'BI' => 'THSarabunNew BoldItalic.ttf',
+          ]
+        ],
 
-      'default_font' => 'sarabun'
-    ]);
-    $order['order'] = $this->product->getOrder_PDF($ordID);
-    $order['order_product'] = $this->product->getOrderProduct_PDF($ordID);
-    $html = $this->load->view('order_pdfView', array(
-      'order'  =>  $order['order'],
-      'order_product'  =>  $order['order_product']
-    ), true);
-    $mpdf->WriteHTML(($html));
-    $mpdf->AddPage();
-    $html_img = $this->load->view('order_img_pdfView', [], true);
-    $mpdf->WriteHTML($html_img);
-    $content = $mpdf->Output('', 'S');
-    $filename = "order.pdf";
-    $fromMail = "admin@yeejub.net";
-    $fromName = "YeeJub | Order";
-    $mailTo = "pondooo5800@gmail.com";
+        'default_font' => 'sarabun'
+      ]);
+      $order['order'] = $this->product->getOrder_PDF($ordID);
+      $order['order_product'] = $this->product->getOrderProduct_PDF($ordID);
+      $html = $this->load->view('order_pdfView', array(
+        'order'  =>  $order['order'],
+        'order_product'  =>  $order['order_product']
+      ), true);
+      $mpdf->WriteHTML(($html));
+      $mpdf->AddPage();
+      $html_img = $this->load->view('order_img_pdfView', [], true);
+      $mpdf->WriteHTML($html_img);
+      $content = $mpdf->Output('', 'S');
+      $filename = "order.pdf";
+      $fromMail = "admin@yeejub.net";
+      $fromName = "YeeJub | Order";
+      $mailTo = $to;
 
-    $this->load->library('email');
-    $this->email->set_mailtype("html");
-    $this->email->set_newline("\r\n");
-    $this->email->from($fromMail, $fromName);
-    $this->email->to($mailTo);
-        $this->email->subject("#คำสั่งซื้อหมายเลข  ".$ordID);
-    $this->email->attach($content, 'attachment', $filename, 'application/pdf');
-    $this->email->send();
+      $this->load->library('email');
+      $this->email->set_mailtype("html");
+      $this->email->set_newline("\r\n");
+      $this->email->from($fromMail, $fromName);
+      $this->email->to($mailTo);
+          $this->email->subject("#คำสั่งซื้อหมายเลข  ".$ordID);
+      $this->email->attach($content, 'attachment', $filename, 'application/pdf');
+      if($this->email->send()){
+        $this->session->set_flashdata('message', 'ใบสั่งซื้อสินค้าของคุณถูกส่งไปยัง Email เรียบร้อยแล้ว โปรดตรวจสอบ');
+        redirect($this->controller . '/orderSuccess/' . $ordID);
+      }else{
+        $this->session->set_flashdata('message', 'ส่ง Email ไม่สำเร็จ');
+        redirect($this->controller . '/orderSuccess/' . $ordID);
+      }
+    } else {
+      $mpdf = new \Mpdf\Mpdf([
+        'default_font_size' => 9,
+        'default_font' => 'sarabun'
+      ]);
+      $defaultConfig = (new Mpdf\Config\ConfigVariables())->getDefaults();
+      $fontDirs = $defaultConfig['fontDir'];
+
+      $defaultFontConfig = (new Mpdf\Config\FontVariables())->getDefaults();
+      $fontData = $defaultFontConfig['fontdata'];
+
+      $mpdf = new \Mpdf\Mpdf([
+        'fontDir' => array_merge($fontDirs, [
+          __DIR__ . '/tmp',
+        ]),
+        'fontdata' => $fontData + [
+          'sarabun' => [
+            'R' => 'THSarabunNew.ttf',
+            'I' => 'THSarabunNew Italic.ttf',
+            'B' => 'THSarabunNew Bold.ttf',
+            'BI' => 'THSarabunNew BoldItalic.ttf',
+          ]
+        ],
+
+        'default_font' => 'sarabun'
+      ]);
+      $order['order'] = $this->product->getOrder_PDF($ordID);
+      $order['order_product'] = $this->product->getOrderProduct_PDF($ordID);
+      $html = $this->load->view('order_pdfView', array(
+        'order'  =>  $order['order'],
+        'order_product'  =>  $order['order_product']
+      ), true);
+      $mpdf->WriteHTML(($html));
+      $mpdf->AddPage();
+      $html_img = $this->load->view('order_img_pdfView', [], true);
+      $mpdf->WriteHTML($html_img);
+      $content = $mpdf->Output('', 'S');
+      $filename = "order.pdf";
+      $fromMail = "admin@yeejub.net";
+      $fromName = "YeeJub | Order";
+      $mailTo = "pondooo5800@gmail.com";
+
+      $this->load->library('email');
+      $this->email->set_mailtype("html");
+      $this->email->set_newline("\r\n");
+      $this->email->from($fromMail, $fromName);
+      $this->email->to($mailTo);
+      $this->email->subject("#คำสั่งซื้อหมายเลข  ".$ordID);
+      $this->email->attach($content, 'attachment', $filename, 'application/pdf');
+      $this->email->send();
+    }
   }
 
 }

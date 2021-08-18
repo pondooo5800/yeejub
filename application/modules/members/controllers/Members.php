@@ -16,7 +16,7 @@ class Members extends CRUD_Controller
 	{
 		parent::__construct();
 
-		chkUserPerm();
+		// chkUserPerm();
 
 		$this->per_page = 30;
 		$this->num_links = 6;
@@ -24,8 +24,8 @@ class Members extends CRUD_Controller
 		$this->load->model('members/Members_model', 'Members');
 		$this->load->model('FileUpload_model', 'FileUpload');
 		$this->data['page_url'] = site_url('members/members');
-		$this->file_allow_type = array_values($this->file_allow);
-		$this->file_allow_mime = array_keys($this->file_allow);
+		$this->file_allow_type = @array_values($this->file_allow);
+		$this->file_allow_mime = @array_keys($this->file_allow);
 		$this->file_check_name = '';
 		$js_url = 'assets/js_modules/members/members.js?ft=' . filemtime('assets/js_modules/members/members.js');
 		$this->another_js = '<script src="' . base_url($js_url) . '"></script>';
@@ -50,6 +50,7 @@ class Members extends CRUD_Controller
 	 */
 	protected function render_view($path)
 	{
+		chkUserPerm();
 		$this->data['top_navbar'] = $this->parser->parse('template/backend/navbarView', $this->top_navbar_data, TRUE);
 		$this->data['left_sidebar'] = $this->parser->parse('template/backend/sidebarView', $this->left_sidebar_data, TRUE);
 		$this->data['page_content'] = $this->parser->parse_repeat($path, $this->data, TRUE);
@@ -168,6 +169,7 @@ class Members extends CRUD_Controller
 	 */
 	public function preview($encrypt_id = "")
 	{
+
 		$encrypt_id = urldecode($encrypt_id);
 		$id = decrypt($encrypt_id);
 		if ($id == "") {
@@ -232,10 +234,9 @@ class Members extends CRUD_Controller
 		$this->load->library('form_validation');
 		$frm = $this->form_validation;
 
-		$frm->set_rules('cus_passwd', 'รหัสผ่าน', 'trim|required');
 		$frm->set_rules('member_fname', 'ชื่อ', 'trim|required');
 		$frm->set_rules('member_lname', 'นามสกุล', 'trim|required');
-		$frm->set_rules('member_email_addr', 'อีเมล', 'trim|required');
+		$frm->set_rules('member_shop', 'ชื่อร้าน', 'trim|required');
 		$frm->set_rules('member_mobile_no', 'เบอร์โทรศัพท์', 'trim|required');
 		$frm->set_rules('member_addr', 'ที่อยู่ในการจัดส่งสินค้า', 'trim|required');
 
@@ -244,10 +245,9 @@ class Members extends CRUD_Controller
 
 		if ($frm->run() == FALSE) {
 			$message  = '';
-			$message .= form_error('cus_passwd');
 			$message .= form_error('member_fname');
 			$message .= form_error('member_lname');
-			$message .= form_error('member_email_addr');
+			$message .= form_error('member_shop');
 			$message .= form_error('member_mobile_no');
 			$message .= form_error('member_addr');
 
@@ -373,7 +373,7 @@ class Members extends CRUD_Controller
 	public function update_member()
 	{
 		$message = '';
-		// $message .= $this->formValidateUpdate();
+		$message .= $this->formValidateUpdate();
 		$post = $this->input->post(NULL, TRUE);
 		// die(print_r($post));
 		$error_pk_id = $this->checkRecordKey($post);

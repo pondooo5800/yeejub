@@ -78,6 +78,7 @@ class Member_login_model extends CI_Model
 					'member_email_addr' => $row->member_email_addr,
 					'member_fname' => $row->member_fname,
 					'member_lname' => $row->member_lname,
+					'member_shop' => $row->member_shop,
 					'login_validated' => TRUE,
 					'encrypt_member_id'=>encrypt($row->member_id),
 					'url_encrypt_id' => urlencode(encrypt($row->member_id))

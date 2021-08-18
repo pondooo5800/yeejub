@@ -24,8 +24,8 @@ class Products_types extends CRUD_Controller
 		$this->load->model('products_types/Products_types_model', 'Products_types');
 		$this->load->model('FileUpload_model', 'FileUpload');
 		$this->data['page_url'] = site_url('products_types/products_types');
-		$this->file_allow_type = array_values($this->file_allow);
-		$this->file_allow_mime = array_keys($this->file_allow);
+		$this->file_allow_type = @array_values($this->file_allow);
+		$this->file_allow_mime = @array_keys($this->file_allow);
 		$this->file_check_name = '';
 		$js_url = 'assets/js_modules/products_types/products_types.js?ft=' . filemtime('assets/js_modules/products_types/products_types.js');
 		$this->another_js = '<script src="' . base_url($js_url) . '"></script>';

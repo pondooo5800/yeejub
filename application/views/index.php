@@ -1,9 +1,28 @@
+<style>
+    .modal {
+        text-align: center;
+        padding: 0 !important;
+    }
+
+    .modal:before {
+        content: '';
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+        margin-right: -4px;
+    }
+
+    .modal-dialog {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+    }
+</style>
 <div class="container" id="container">
     <div class="row fix_menu" style="margin:  2px;">
         <div class="col-sm-3 my_menu my_menu3">หมวดหมู่สินค้า</div>
         <div class="col-sm-3 my_menu my_menu2">แบรนด์สินค้า</div>
         <div class="col-sm-3 "></div>
-
     </div>
 
     <!-- <div class="row fix_menu" id="my_menu2_des" style="margin:  2px;">
@@ -744,8 +763,8 @@
             <div class="category-featured">
                 <nav class="navbar nav-menu nav-menu-blue show-brand">
                     <div class="container">
-                        <div class="navbar-brand" style="text-align: center"><a href="<?php echo base_url('shop/category/').$row['product_type_id']; ?>">
-                        <?php echo $row['product_type_name']; ?></a>
+                        <div class="navbar-brand" style="text-align: center"><a href="<?php echo base_url('shop/category/') . $row['product_type_id']; ?>">
+                                <?php echo $row['product_type_name']; ?></a>
                         </div>
                 </nav>
             </div>
@@ -756,33 +775,27 @@
                             <!-- tab product -->
                             <div class="tab-panel active">
                                 <ul class="product-list owl-carousel" data-dots="false" data-loop="true" data-nav="true" data-margin="0" data-autoplayTimeout="1000" data-autoplayHoverPause="true" data-responsive='{"0":{"items":1},"600":{"items":3},"1000":{"items":4}}'>
-                                <?php
+                                    <?php
                                     $this->load->model('common_model');
                                     $product = $this->common_model->custom_query("select * from tb_products where fag_allow = 'allow' and product_type =" . $row['product_type_id']);
-            // print_r($this->db->last_query());
-            // die();
+                                    // print_r($this->db->last_query());
+                                    // die();
 
                                     foreach ($product as $value) { ?>
-                                    <li>
-                                        <div class="left-block">
-                                            <a
-                                                href="<?php echo base_url($value['product_img1']); ?>"
-                                                data-fancybox data-type="image"
-                                            >
-                                                <img class="img-responsive" style="width:350px; height:350px; object-fit:contain" alt="product" src="<?php echo base_url($value['product_img1']); ?>" /></a>
-                                            <div class="add-to-cart">
-                                                <a title="Add to Cart" href="<?php echo base_url('shop/addToCart/' . $value['product_id']); ?>">คลิก ซื้อเลย !</a>
+                                        <li>
+                                            <div class="left-block">
+                                                <a href="#" data-toggle="modal" data-target="#my_modal" data-row-id='{"product_id":"<?php echo ($value['product_id']); ?>","product_name":"<?php echo ($value['product_name']); ?>","price":"<?php echo ($value['price']); ?>","product_img1":"<?php echo base_url($value['product_img1']); ?>"}'>
+                                                    <img class="img-responsive" style="width:350px; height:350px; object-fit:contain" alt="product" src="<?php echo base_url($value['product_img1']); ?>" /></a>
                                             </div>
-                                        </div>
-                                        <div class="right-block">
-                                            <h5 class="product-name" style="font-weight: bold;">
-                                            <? echo $value['product_name']?>
-                                            </h5>
-                                            <div class="content_price">
-                                                <span class="price product-price" style="color: red; font-weight: bold;"><? echo $value['price']?> บาท </span>
+                                            <div class="right-block">
+                                                <h5 class="product-name" style="font-weight: bold;">
+                                                    <? echo $value['product_name'] ?>
+                                                </h5>
+                                                <div class="content_price">
+                                                    <span class="price product-price" style="color: red; font-weight: bold;"><? echo $value['price'] ?> บาท </span>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </li>
+                                        </li>
                                     <?php } ?>
 
                                 </ul>
@@ -796,3 +809,66 @@
         <?php } ?>
     </div>
 </div>
+<div class='modal fade' id='my_modal' tabindex='-1' role='dialog' aria-labelledby='delModalLabel' aria-hidden='true'>
+    <div class='modal-dialog' role='document'>
+        <div class='modal-content'>
+            <div class='modal-body' style="text-align: center;">
+                <div class="modal-body">
+                    <img style="width:400px; height:400px; object-fit:contain" id="my_image" /></a>
+                </div>
+            </div>
+            <div class='modal-footer text-center'>
+                <form method='post' action='<?php echo base_url('shop/addToCart/'); ?>'>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p style="font-weight: bold; font-size:16px" id="product_name"></p>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-4">
+                            <p style="font-weight: bold; font-size:16px" id="price"></p>
+                        </div>
+                        <div class="col-xs-12 col-md-2">
+                            <p style="font-weight: bold; font-size:16px">จำนวน</p>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="col-xs-6 col-md-6">
+                                <input type="number" min="1" id="qty" name="qty" class="form-control text-center" value="1">
+                            </div>
+                            <div class="col-xs-6 col-md-6">
+                                <a class="btn btn-sm btn-danger" onclick="myFunction()">ล้างค่า</i> </a>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <input type="hidden" id="product_id" name="product_id" value="">
+                    <input type="hidden" name="segment" value="index">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">&nbsp;&nbsp;<i class="fa fa-close"></i> &nbsp;ปิด &nbsp;&nbsp;</button>&emsp;
+                    <button type='submit' name='submit' value="submit" class="btn btn-success">&nbsp;&nbsp;<i class="fa fa-save"></i> &nbsp;ตกลง &nbsp;&nbsp;</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="<?php echo base_url('assets/js/jquery.min.js'); ?>"></script>
+<script>
+    $(document).ready(function() {
+        $('#my_modal').on('show.bs.modal', function(e) {
+            var rowId = $(e.relatedTarget).data('row-id');
+            var product_id = rowId.product_id;
+            $(e.currentTarget).find('input[name="product_id"]').val(product_id);
+            var product_name = rowId.product_name;
+            document.getElementById("product_name").innerHTML = product_name;
+            var price = rowId.price;
+            document.getElementById("price").innerHTML = " ราคา " + price + " บาท ";
+            var product_img1 = rowId.product_img1;
+            $('#my_image').attr('src', product_img1);
+        });
+    });
+
+    function myFunction() {
+        document.getElementById('qty').value = '1'
+    }
+</script>

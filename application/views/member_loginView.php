@@ -166,10 +166,13 @@ section .section-title {
 					<input type="password" class="form-control " id="confirmpassword" name="confirmpassword" placeholder="ยืนยันรหัสผ่าน (อย่างน้อย 6 ตัว) *" value="" />
 				</div>
 				<div class="form-group">
-					<input type="text" class="form-control form-control " id="member_fname" name="member_fname" placeholder="ชื่อ" value="" />
+					<input type="text" class="form-control form-control " id="member_fname" name="member_fname" placeholder="ชื่อ *" value="" />
 				</div>
 				<div class="form-group">
-					<input type="text" class="form-control form-control " id="member_lname" name="member_lname" placeholder="นามสกุล" value="" />
+					<input type="text" class="form-control form-control " id="member_lname" name="member_lname" placeholder="นามสกุล *" value="" />
+				</div>
+				<div class="form-group">
+					<input type="text" class="form-control form-control " id="member_shop" name="member_shop" placeholder="ชื่อร้าน *" value="" />
 				</div>
 				<div class="form-group">
 					<input type="email" class="form-control form-control " id="member_email_addr" name="member_email_addr" placeholder="E-mail" value="" />

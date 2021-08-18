@@ -2,6 +2,11 @@
 
 <head>
 	<style>
+		@page {
+			margin-top: 0.54cm;
+			margin-bottom: 0.54cm;
+		}
+
 		body {
 			font-family: thsarabun;
 			font-size: 16pt;
@@ -88,34 +93,40 @@
 <body>
 	<div class="container-fluid">
 		<div class="container">
-			<div style="text-align: left; font-weight: bold;font-family: thsarabun; font-size: 22pt; color:#3366cc">
-				YEEYUB.COM | ร้านหยี่จ๊ับ
+			<div>
+				<div style="float: left; width: 50%;text-align: left;">
+					<p style="font-weight: bold;font-family: thsarabun; font-size: 20pt; color:#3366cc">YEEYUB.COM | ร้านหยี่จ๊ับ </p>
+				</div>
+				<div style="float: right; text-align: right; width: 50%;">
+					<img src="<?php echo base_url("/assets/themes/frontend/assets/img/icon/logo_yeejub.png") ?>" width="100" />
+				</div>
 			</div>
 			<div style="text-align: center;">
-				<p><span style="font-weight: bold;font-size: 18pt;">ใบสั่งซื้อสินค้า</span></p>
+				<p><span style="font-weight: bold;font-size: 16pt;">ใบสั่งซื้อสินค้า</span></p>
 			</div>
 			<div>
 				<div style="float: right; width: 50%;text-align: right;">
 					<p style="font-weight: bold;font-size: 14pt;">หมายเลขใบสั่งซื้อ <span style="font-weight: normal;font-size: 14pt;">#<?php echo $order['id']; ?></span></p>
 					<p style="font-weight: bold;font-size: 14pt;">วันที่ส่ังสินค้า <span style="font-weight: normal;font-size: 14pt;"><?php echo setThaiDateFullMonth($order['created']); ?></span></p>
+					<p style="font-weight: bold;font-size: 14pt;">ที่อยู่ออกใบเสร็จ <span style="font-weight: normal;font-size: 14pt;"><?php echo $order['member_same']; ?></span></p>
+					<p style="font-weight: bold;font-size: 14pt;">หมายเหตุ <span style="font-weight: normal;font-size: 14pt;"><?php echo $order['member_note']; ?></span></p>
 				</div>
 				<div style="float: left; width: 50%;">
 					<p style="font-weight: bold;font-size: 14pt;">รหัสสมาชิก <span style="font-weight: normal;font-size: 14pt;"><?php echo $order['member_user_id']; ?></span></p>
 					<p style="font-weight: bold;font-size: 14pt;">ชื่อ-สกุล <span style="font-weight: normal;font-size: 14pt;"><?php echo $order['name']; ?></span></p>
 					<p style="font-weight: bold;font-size: 14pt;">เบอร์โทร <span style="font-weight: normal;font-size: 14pt;"><?php echo $order['phone']; ?></span></p>
 					<p style="font-weight: bold;font-size: 14pt;">สถานที่จัดสินค้า <span style="font-weight: normal;font-size: 14pt;"><?php echo $order['member_addr']; ?></span></p>
-					<p style="font-weight: bold;font-size: 14pt;">ที่อยู่ออกใบเสร็จ <span style="font-weight: normal;font-size: 14pt;"><?php echo $order['member_same']; ?></span></p>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="row">
-	<?php
-			foreach ($order_product as $key => $value) { ?>
-		<div class="column">
-			<img class="img-responsive" style="width:130px; height:130px; object-fit:contain" alt="product" src="<?php echo base_url($value['product_img1']) ?>" /></a>
-			<p style="font-weight: bold;font-size: 14pt;">จํานวน : <?php echo $value['quantity']?> ชิ้น</p>
-		</div>
+		<?php
+		foreach ($order_product as $key => $value) { ?>
+			<div class="column">
+				<img class="img-responsive" style="width:130px; height:130px; object-fit:contain" alt="product" src="<?php echo base_url($value['product_img1']) ?>" /></a>
+				<p style="font-weight: bold;font-size: 10pt;">จํานวน : <?php echo $value['quantity'] ?> ชิ้น</p>
+			</div>
 		<?php } ?>
 	</div>
 	<div class="footer">

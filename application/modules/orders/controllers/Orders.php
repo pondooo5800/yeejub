@@ -47,8 +47,8 @@ class Orders extends CRUD_Controller
 			'image/pjpeg' => 'jpeg',
 			'image/jpeg' => 'jpg'
 		);
-		$this->file_allow_type = array_values($this->file_allow);
-		$this->file_allow_mime = array_keys($this->file_allow);
+		$this->file_allow_type = @array_values($this->file_allow);
+		$this->file_allow_mime = @array_keys($this->file_allow);
 		$this->file_check_name = '';
 		$js_url = 'assets/js_modules/orders/orders.js?ft=' . filemtime('assets/js_modules/orders/orders.js');
 		$this->another_js = '<script src="' . base_url($js_url) . '"></script>';

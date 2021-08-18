@@ -25,6 +25,8 @@ class Index extends CI_Controller
 		// echo('</pre>');
 		// die();
 		$this->load->library('cart');
+		$this->load->model('product_model', 'product');
+
 		$data['base_url'] = base_url();
 		$data['site_url'] = site_url();
 
@@ -77,6 +79,9 @@ class Index extends CI_Controller
 		$this->load->model('common_model');
 		$product = $this->db->query("select * from tb_products_types where fag_allow = 'allow'");
 		$this->data['product_type'] = $product->result_array();
+		$data['cart_value'] = $this->cart->contents();
+		$this->data['cartItems'] = $data['cart_value'];
+
 		$this->render_view('index');
 	}
 	public function member_index($encrypt_id = '')

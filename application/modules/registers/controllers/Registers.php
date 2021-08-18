@@ -22,8 +22,8 @@ class Registers extends CRUD_Controller
 		$this->load->model('registers/Registers_model', 'Registers');
 		$this->load->model('FileUpload_model', 'FileUpload');
 		$this->data['page_url'] = site_url('registers/registers');
-		$this->file_allow_type = array_values($this->file_allow);
-		$this->file_allow_mime = array_keys($this->file_allow);
+		$this->file_allow_type = @array_values($this->file_allow);
+		$this->file_allow_mime = @array_keys($this->file_allow);
 		$this->file_check_name = '';
 		$js_url = 'assets/js_modules/registers/registers.js?ft=' . filemtime('assets/js_modules/registers/registers.js');
 		$this->another_js = '<script src="' . base_url($js_url) . '"></script>';
@@ -206,6 +206,9 @@ class Registers extends CRUD_Controller
 		$frm->set_rules('member_mobile_no', 'เบอร์โทรศัพท์', 'trim|required');
 		$frm->set_rules('cus_passwd', 'รหัสผ่าน', 'trim|required');
 		$frm->set_rules('confirmpassword', 'ยืนยันรหัสผ่าน', 'trim|required');
+		$frm->set_rules('member_fname', 'ชื่อ', 'trim|required');
+		$frm->set_rules('member_lname', 'นามสกุล', 'trim|required');
+		$frm->set_rules('member_shop', 'ชื่อร้าน', 'trim|required');
 
 		$frm->set_message('required', '- กรุณาใส่ข้อมูล %s');
 		$frm->set_message('is_natural', '- %s ต้องระบุตัวเลขจำนวนเต็ม');
@@ -215,6 +218,9 @@ class Registers extends CRUD_Controller
 			$message .= form_error('member_mobile_no');
 			$message .= form_error('cus_passwd');
 			$message .= form_error('confirmpassword');
+			$message .= form_error('member_fname');
+			$message .= form_error('member_lname');
+			$message .= form_error('member_shop');
 			return $message;
 		}
 	}

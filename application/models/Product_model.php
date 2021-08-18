@@ -65,7 +65,7 @@ class Product_model extends CI_Model{
         return !empty($result)?$result:false;
     }
     public function getOrder_PDF($id){
-        $this->db->select('o.*, c.name, c.email, c.phone, c.address, m.member_user_id, m.member_addr, m.member_same');
+        $this->db->select('o.*, c.name, c.email, c.phone, c.address, m.member_user_id, m.member_addr, m.member_same, m.member_note');
         $this->db->from($this->ordTable.' as o');
         $this->db->join($this->custTable.' as c', 'c.id = o.customer_id', 'left');
         $this->db->join('tb_members as m', 'm.member_id = c.member_id', 'left');

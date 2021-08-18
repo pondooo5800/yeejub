@@ -110,6 +110,7 @@ class Member_login extends CRUD_Controller
             'member_email_addr' => '',
             'member_fname' => '',
             'member_lname' => '',
+            'member_shop' => '',
             'encrypt_member_id'=>'',
             'url_encrypt_id'=>'',
 			'login_validated' => FALSE,

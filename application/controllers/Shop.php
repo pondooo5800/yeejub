@@ -80,7 +80,7 @@ class Shop extends CI_Controller
 		$config = array();
         $config["base_url"] = base_url() . "shop/index";
         $config["total_rows"] = $this->Shop_model->record_count();
-        $config["per_page"] = 12;
+        $config["per_page"] = 24;
 		$config["uri_segment"] = 3;
 
 		$config['next_link']        = 'Next';
@@ -131,7 +131,7 @@ class Shop extends CI_Controller
         $config["base_url"] = base_url() . "shop/category/".$product_type_id;
         $config["total_rows"] = $total_rows['total_rows'];
 
-        $config["per_page"] = 12;
+        $config["per_page"] = 24;
 		$config["uri_segment"] = 3;
 
 		$config['next_link']        = 'Next';
@@ -164,24 +164,33 @@ class Shop extends CI_Controller
 
 		$product = rowArray($this->common_model->custom_query("select * from tb_products_types where fag_allow = 'allow' and product_type_id =". $product_type_id));
 		$this->data['product_type'] = $product['product_type_name'];
+		$this->data['product_type_id'] = $product['product_type_id'];
 		$this->render_view('shop');
 	}
-	public function addToCart($proID){
+	public function addToCart(){
+
+		$proID = $this->input->post('product_id');
         $product = $this->product->getRows($proID);
+		$post = $this->input->post(NULL, TRUE);
+
+		// print_r($post);
+		// die();
 		// Add product to the cart
 		$data = array(
             'id'    => $product['product_id'],
-            'qty'    => 1,
+            'qty'    => $post['qty'],
             'price'    => $product['price'],
             'name'    => $product['product_name'],
 			'image' => $product['product_img1'],
         );
-
-
         $this->cart->insert($data);
+		if ($post['segment'] === 'index') {
+			redirect('index');
+		} elseif ($post['segment'] === 'category'){
+			redirect('shop/category/' . $post['product_type']);
+		}
+		redirect('shop');
 
-        // Redirect to the cart page
-        redirect('cart');
 	}
 	public function search()
 	{

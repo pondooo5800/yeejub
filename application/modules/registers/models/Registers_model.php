@@ -47,6 +47,7 @@ class Registers_model extends MY_Model
 			'cus_passwd' => $post['cus_passwd'],
 			'member_fname' => $post['member_fname'],
 			'member_lname' => $post['member_lname'],
+			'member_shop' => $post['member_shop'],
 			'member_email_addr' => $post['member_email_addr'],
 			'member_addr' => '',
 			'member_note' => '',

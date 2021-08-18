@@ -24,8 +24,8 @@ class Settings_admin extends CRUD_Controller
 		$this->load->model('settings_admin/Settings_admin_model', 'Settings_admin');
 		$this->load->model('FileUpload_model', 'FileUpload');
 		$this->data['page_url'] = site_url('settings_admin/settings_admin');
-		$this->file_allow_type = array_values($this->file_allow);
-		$this->file_allow_mime = array_keys($this->file_allow);
+		$this->file_allow_type = @array_values($this->file_allow);
+		$this->file_allow_mime = @array_keys($this->file_allow);
 		$this->file_check_name = '';
 		$js_url = 'assets/js_modules/settings_admin/settings_admin.js?ft=' . filemtime('assets/js_modules/settings_admin/settings_admin.js');
 		$this->another_js = '<script src="' . base_url($js_url) . '"></script>';
