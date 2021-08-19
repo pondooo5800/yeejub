@@ -22,17 +22,17 @@
                 </div>
                 <div class="col-xs-12 col-sm-5" id="contact_form_map" style="padding-left: 50px">
                     <p>
-                        <a href="https://line.me/ti/p/~@yeejub"><img src="{base_url}/assets/themes/frontend/assets/img/icon/line-yeejub.png" alt="generated QR Code"></a><br><br>
+                        <a href="<?php echo $contact['contact_line_link']?>"><img src="{base_url}/assets/themes/frontend/assets/img/icon/line-yeejub.png" alt="generated QR Code"></a><br><br>
                     </p>
                     <br>
                     <ul class="store_info">
                         <i class="fa fa-user"></i>ADMIN <li><i class="fa fa-phone"></i><span>088-025 8888</span></li>
                         <li>
-                            <i class="fa fa-facebook"></i><span><a href="https://web.facebook.com/yeejub20rama2">ร้านหยี่จั๊บ พระราม 2 Thailand.</a></span>
+                        <i class="fa fa-facebook"></i><span><a href="<?php echo $contact['contact_facebook_link']?>"><?php echo $contact['contact_facebook']?></a></span>
                         </li>
 
                         <li>
-                            <i class="fa fa-envelope"></i>Email: <span>yeejub20online@gmail.com</span>
+                        <i class="fa fa-envelope"></i>Email: <span><?php echo $contact['contact_email']?></span>
                         </li>
                     </ul>
                 </div>

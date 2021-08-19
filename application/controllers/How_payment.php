@@ -69,6 +69,9 @@ class How_payment extends CI_Controller
 
 	public function index()
 	{
+		$this->load->model('common_model');
+		$contact = $this->db->query("select * from tb_admin where user_id = 1 AND fag_allow = 'allow'");
+		$this->data['contact'] = $contact->row_array();
 		$this->render_view('how_paymentView');
 	}
 }
