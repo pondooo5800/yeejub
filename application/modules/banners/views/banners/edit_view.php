@@ -22,7 +22,7 @@
 						<div class="container">
 							<div class="form-row justify-content-around">
 								<div class="form-group col-md-4 ">
-									<label class="control-label" for="banner_name">Banner :</label>
+									<label class="control-label" for="banner_name">ชื่อ Banner :</label>
 									<div class="form-group has-info">
 										<input type="text" class="form-control" id="banner_name" name="banner_name" value="{record_banner_name}" />
 									</div>
@@ -52,7 +52,7 @@
 							</div>
 							<div class="form-row justify-content-around">
 								<div class="col-sm-12 col-md-10">
-									<label class="control-label" for="banner_img1">รูปภาพ :</label>
+									<label class="control-label" for="banner_img1">รูปภาพ Banner :</label>
 									<div class="upload-box">
 										<div class="hold input-group">
 											<span class="btn-file"> คลิกเพื่อแนบไฟล์

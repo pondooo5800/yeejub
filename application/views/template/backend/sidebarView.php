@@ -30,6 +30,12 @@
 					<p>ตั้งค่าหมวดหมู่สินค้า</p>
 				</a>
 			</li>
+			<li class="nav-item <?php if ($this->uri->segment(1) == '' || $this->uri->segment(1) == 'products_units') { ?>active<?php } ?>">
+				<a class="nav-link" href="{site_url}products_units/products_units">
+					<i class="material-icons">library_books</i>
+					<p>ตั้งค่าหน่วยสินค้า</p>
+				</a>
+			</li>
 			<li class="nav-item <?php if ($this->uri->segment(1) == '' || $this->uri->segment(1) == 'banners') { ?>active<?php } ?>">
 				<a class="nav-link" href="{site_url}banners/banners">
 					<i class="material-icons">bubble_chart</i>

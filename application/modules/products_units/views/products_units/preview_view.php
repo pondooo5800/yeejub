@@ -17,29 +17,16 @@
 					<div class="card-icon">
 						<i class="material-icons">list</i>
 					</div>
-					<h4 class="card-title">รายละเอียดสินค้า</h4>
+					<h4 class="card-title">รายละเอียดหน่วยสินค้า</h4>
 				</div>
 				<div class="card-body">
 					<div class="table-responsive">
 						<table class="table table-bordered table-hover preview">
 							<tbody>
 								<tr>
-									<td class="text-right fit"><b>รหัสสินค้า :</b></td>
-									<td>{record_product_code}</td>
+									<td class="text-right fit"><b>ชื่อหน่วยสินค้า :</b></td>
+									<td>{record_product_unit_name}</td>
 								</tr>
-								<tr>
-									<td class="text-right fit"><b>ชื่อสินค้า :</b></td>
-									<td>{record_product_name}</td>
-								</tr>
-								<tr>
-									<td class="text-right fit"><b>ประเภทสินค้า :</b></td>
-									<td>{record_product_type_name}</td>
-								</tr>
-								<tr>
-									<td class="text-right fit"><b>ราคา :</b></td>
-									<td>{record_price}</td>
-								</tr>
-
 								<tr>
 									<td class="text-right fit"><b>สถานะ :</b></td>
 									<td>{preview_fag_allow}</td>
@@ -48,10 +35,6 @@
 								<tr>
 									<td class="text-right fit"><b>วันเวลาที่เพิ่ม :</b></td>
 									<td>{record_datetime_add}</td>
-								</tr>
-								<tr>
-									<td class="text-right fit"><b>รูปภาพสินค้า :</b></td>
-									<td>{preview_products_img1}</td>
 								</tr>
 							</tbody>
 						</table>

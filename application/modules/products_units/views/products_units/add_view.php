@@ -1,5 +1,4 @@
 <script>
-	var num = {count_image};
 	var data_id = {data_id};
 	var state = 'add';
 </script>
@@ -17,7 +16,7 @@
 					<div class="card-icon">
 						<i class="material-icons">note_add</i>
 					</div>
-					<h4 class="card-title">เพิ่มรายการ Banner</h4>
+					<h4 class="card-title">เพิ่มหน่วยสินค้า</h4>
 
 				</div>
 				<div class="card-body ">
@@ -25,57 +24,29 @@
 						{csrf_protection_field}
 						<div class="container">
 							<div class="form-row justify-content-around">
-								<div class="form-group col-md-4 ">
-									<label class="control-label" for="banner_name">ชื่อ Banner :</label>
+								<div class="form-group col-md-4">
+									<label class="control-label" for="product_unit_name">ชื่อหน่วยสินค้า :</label>
 									<div class="form-group has-info">
-										<input type="text" class="form-control" id="banner_name" name="banner_name" value="" />
+										<input type="text" class="form-control" id="product_unit_name" name="product_unit_name" value="" />
 									</div>
 								</div>
-								<div class="form-group col-md-4 ">
-									<label class="control-label" for="banner_type">ประเภท Banner :</label>
-									<div class="form-group has-success">
-										<select id="banner_type" name="banner_type" value="">
-											<option value="">- เลือก ประเภท Banner -</option>
-											{banners_types_option_list}
-										</select>
-									</div>
-								</div>
-
-							</div>
-							<div class="form-row justify-content-around">
-								<div class="form-group col-md-4 ">
+								<div class="form-group col-md-4">
 									<label class="control-label" for="fag_allow">สถานะ :</label>
 									<select id="fag_allow" name="fag_allow" value="">
-										<option value="">- เลือก สถานะ -</option>
-										<option value="allow">เผยแพร่</option>
-										<option value="block">ไม่เผยแพร่</option>
+											<option value="">- เลือก สถานะ -</option>
+											<option value="allow">เผยแพร่</option>
+											<option value="block">ไม่เผยแพร่</option>
 									</select>
-								</div>
-								<div class="form-group col-md-4 ">
-								</div>
-							</div>
-							<div class="form-row justify-content-around">
-								<div class="col-sm-12 col-md-10">
-									<label class="control-label" for="banner_img1">รูปภาพ Banner :</label>
-									<div class="upload-box">
-										<div class="hold input-group">
-											<span class="btn-file"> คลิกเพื่อแนบไฟล์
-												<input type="file" id="banner_img1" name="banner_img1" data-elem-preview="banner_img1_preview" data-elem-label="banner_img1_label" />
-											</span><input class="form-control" id="banner_img1_label" name="banner_img1_label" placeholder=" กรุณาเลือกไฟล์ที่ต้องการอัพโหลด" readonly="readonly" value="{record_banner_img1_label}" />
-										</div>
-									</div>
-									{preview_banner_img1}
-									<input type="hidden" id="banner_img1_old_path" name="banner_img1_old_path" value="" />
-									<div style="clear:both"></div>
 								</div>
 							</div>
 						</div>
+						<br>
 						<div class="form-group">
 							<div class="col-sm-12 text-right">
 								<input type="hidden" id="add_encrypt_id" />
 								<a href="{page_url}" class="my-tooltip btn btn-Secondarying btn-md" data-toggle="tooltip">
-									&nbsp;&nbsp;<i class="fa fa-close"></i> &nbsp;ยกเลิก &nbsp;&nbsp;
-								</a>
+							&nbsp;&nbsp;<i class="fa fa-close"></i> &nbsp;ยกเลิก &nbsp;&nbsp;
+						</a>
 
 								<button type="button" id="btnConfirmSave" class="btn btn-success" data-toggle="modal" data-target="#addModal">
 									&nbsp;&nbsp;<i class="fa fa-save"></i> &nbsp;บันทึก &nbsp;&nbsp;
@@ -83,13 +54,13 @@
 							</div>
 						</div>
 					</form>
-				</div>
-				<!--panel-body-->
 			</div>
-			<!--panel-->
+			<!--panel-body-->
 		</div>
-		<!--contrainer-->
+		<!--panel-->
 	</div>
+	<!--contrainer-->
+</div>
 </div>
 
 

@@ -17,7 +17,7 @@
 					<div class="card-icon">
 						<i class="material-icons">list</i>
 					</div>
-					<h4 class="card-title">รายละเอียดสินค้า</h4>
+					<h4 class="card-title">รายละเอียด Banner</h4>
 				</div>
 				<div class="card-body">
 					<div class="table-responsive">
@@ -58,4 +58,5 @@
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
