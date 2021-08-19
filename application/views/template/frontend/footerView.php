@@ -41,9 +41,9 @@
                             <ul id="introduce-company" class="introduce-list">
                                 <li><a href="{site_url}about">เกี่ยวกับเรา</a>
                                 </li>
-                                <li><a href="#">วิธีการสั่งซื้อ</a>
+                                <li><a href="{site_url}how_order">วิธีการสั่งซื้อ</a>
                                 </li>
-                                <li><a href="#">วิธีการชำระเงิน</a>
+                                <li><a href="{site_url}how_payment">วิธีการแจ้งชำระเงิน และการจัดส่ง</a>
                                 </li>
 
                             </ul>
@@ -51,23 +51,29 @@
                         <div class="col-sm-5">
                             <div class="introduce-title">Contact</div>
                             <ul id="introduce-Account" class="introduce-list">
+                            <?php
+                                    $this->load->model('common_model');
+                                    $contact_value = $this->db->query("select * from tb_admin where user_id = 1 AND fag_allow = 'allow'");
+                                    $contact = $contact_value->row_array();
+
+                            ?>
                                 <li>
-                                    <p>บริษัท หยี่จั๊บ จำกัด (สำนักงานใหญ่)</p>
+                                    <p><?php echo $contact['contact_name']?></p>
                                 </li>
                                 <li>
-                                    <p>91/5 ซอยเทียนทะเล 20 ถนนบางขุนเทียน-ชายทะเล แขวงแสมดำ เขตบางขุนเทียน กรุงเทพฯ 10150</p>
+                                <p><?php echo $contact['contact_addr']?></p>
                                 </li>
                                 <li>
-                                    <p>โทร. 088-025 8888</p>
+                                    <p>โทร : <?php echo $contact['contact_tel']?></p>
                                 </li>
                                 <li>
-                                    <p>E-mail: yeejub20online@gmail.com</p>
+                                    <p>E-mail : <?php echo $contact['contact_email']?></p>
                                 </li>
                                 <li>
-                                    <p>Facebook : <a href="https://www.facebook.com/yeejub20rama2">ร้านหยี่จั๊บ พระราม 2 Thailand.</a> </p>
+                                    <p>Facebook : <a href="<?php echo $contact['contact_facebook_link']?>"><?php echo $contact['contact_facebook']?></a> </p>
                                 </li>
                                 <li>
-                                    <p>Line : 0880258888 , @yeejub</p>
+						            <p>Line : <a href="<?php echo $contact['contact_line_link']?>"><?php echo $contact['contact_line']?></a></p>
                                 </li>
                             </ul>
                         </div>

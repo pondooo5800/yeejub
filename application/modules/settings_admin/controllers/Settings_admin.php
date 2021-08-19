@@ -209,6 +209,15 @@ class Settings_admin extends CRUD_Controller
 		$this->data['encrypt_user_id'] = $pk1;
 		$this->data['record_user_id'] = $data['user_id'];
 		$this->data['record_username'] = $data['username'];
+		$this->data['record_password'] = $data['password'];
+		$this->data['record_contact_name'] = $data['contact_name'];
+		$this->data['record_contact_addr'] = $data['contact_addr'];
+		$this->data['record_contact_tel'] = $data['contact_tel'];
+		$this->data['record_contact_email'] = $data['contact_email'];
+		$this->data['record_contact_facebook'] = $data['contact_facebook'];
+		$this->data['record_contact_line'] = $data['contact_line'];
+		$this->data['record_contact_facebook_link'] = $data['contact_facebook_link'];
+		$this->data['record_contact_line_link'] = $data['contact_line_link'];
 		$this->data['record_user_add'] = $data['user_add'];
 		$this->data['record_user_update'] = $data['user_update'];
 		$this->data['record_user_delete'] = $data['user_delete'];

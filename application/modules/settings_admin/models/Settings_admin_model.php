@@ -43,6 +43,14 @@ class Settings_admin_model extends MY_Model
 	{
 		$data = array(
 			'password' => $post['password'],
+			'contact_name' => $post['contact_name'],
+			'contact_addr' => $post['contact_addr'],
+			'contact_tel' => $post['contact_tel'],
+			'contact_email' => $post['contact_email'],
+			'contact_facebook' => $post['contact_facebook'],
+			'contact_line' => $post['contact_line'],
+			'contact_facebook_link' => $post['contact_facebook_link'],
+			'contact_line_link' => $post['contact_line_link'],
 		);
 
 		$user_id = checkEncryptData($post['encrypt_user_id']);

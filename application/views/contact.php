@@ -9,16 +9,10 @@
 
                     <div class="content-text clearfix">
                         <h2><span style="font-size:16px;font-weight: bold;">สนใจสั่งซื้อสินค้า หรือสอบถามข้อมูลเพิ่มเติมได้ที่:</span></h2>
-<br>
-                        <p><span style="font-size:14px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>โทรศัพท์:</b> 088-025 8888</span></p>
-                        <p><span style="font-size:14px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>อีเมล:</b> yeejub20online@gmail.com</span></p>
+                        <br>
+                        <p><span style="font-size:14px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>โทรศัพท์ :</b> <?php echo $contact['contact_tel']?></span></p>
+                        <p><span style="font-size:14px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Email :</b> <?php echo $contact['contact_email']?></span></p>
                         <h2><span style="font-size:16px;font-weight: bold;">แผนที่และการเดินทาง:</span></h2>
-<br>
-
-                        <p><span style="font-size:14px">&nbsp; &nbsp; &nbsp; • มาทาง ถ.สุขสวัสดิ์ ให้เลี้ยวซ้ายไปประมาณ 600 เมตร</span><br>
-                        <p><span style="font-size:14px">&nbsp; &nbsp; &nbsp; • มาทาง ดาวคะนอง ให้เลี้ยวขวาด้านล่าง ห้ามขึ้นสะพาน ตรงมาประมาณ 600 เมตร</span><br>
-                        <p><span style="font-size:14px">&nbsp; &nbsp; &nbsp; • มาทาง ทางด่วนดาวคะนอง ให้ชิดขวากลับรถ ในช่องที่ 2 แล้วเข้าเส้นทางคู่ขนาด ตรงมาประมาณ 600 เมตร</span><br>
-                        <p><span style="font-size:14px">&nbsp; &nbsp; &nbsp; • ร้านของเรา (กำแพงสีขาว) อยู่ติดกับ บริษัท ตั้งไท่ฮั้วเฮง จำกัด (กำแพงสีเขียวอ่อน)</span><br>
                     </div>
                     <div class="card">
                         <div class="card-content">
@@ -51,7 +45,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-5" id="contact_form_map" style="padding-left: 50px">
                     <p>
-                    <a href="https://line.me/ti/p/~@yeejub"><img src="{base_url}/assets/themes/frontend/assets/img/icon/line-yeejub.png" alt="generated QR Code"></a><br><br>
+                    <a href="<?php echo $contact['contact_line_link']?>"><img src="{base_url}/assets/themes/frontend/assets/img/icon/line-yeejub.png" alt="generated QR Code"></a><br><br>
                     </p>
 
 
@@ -59,11 +53,11 @@
                     <ul class="store_info">
                         <i class="fa fa-user"></i>ADMIN <li><i class="fa fa-phone"></i><span>088-025 8888</span></li>
                         <li>
-                            <i class="fa fa-facebook"></i><span><a href="https://web.facebook.com/yeejub20rama2">ร้านหยี่จั๊บ พระราม 2 Thailand.</a></span>
+                            <i class="fa fa-facebook"></i><span><a href="<?php echo $contact['contact_facebook_link']?>"><?php echo $contact['contact_facebook']?></a></span>
                         </li>
 
                         <li>
-                            <i class="fa fa-envelope"></i>Email: <span>yeejub20online@gmail.com</span>
+                            <i class="fa fa-envelope"></i>Email: <span><?php echo $contact['contact_email']?></span>
                         </li>
                     </ul>
                 </div>

@@ -209,17 +209,17 @@ section .section-title {
 			<div class="row text-center text-xs-center text-sm-left text-md-left">
 				<div class="col-xs-12 col-sm-4 col-md-4">
 					<h5>Add Line</h5>
-					<a href="https://line.me/ti/p/~@yeejub"><img src="{base_url}/assets/themes/frontend/assets/img/icon/line-yeejub.png" alt="generated QR Code"></a><br><br>
+					<a href="<?php echo $contact['contact_line_link']?>"><img src="{base_url}/assets/themes/frontend/assets/img/icon/line-yeejub.png" alt="generated QR Code"></a><br><br>
 				</div>
 				<div class="col-xs-12 col-sm-4 col-md-4">
 				<h5>ติดต่อ</h5>
 					<ul class="list-unstyled quick-links" style="color: white;">
-						<p>บริษัท หยี่จั๊บ จำกัด (สำนักงานใหญ่)</p>
-						<p>91/5 ซอยเทียนทะเล 20 ถนนบางขุนเทียน-ชายทะเล แขวงแสมดำ เขตบางขุนเทียน กรุงเทพฯ 10150</p>
-						<p>โทร: 088-025 8888</p>
-						<p>E-mail: yeejub20online@gmail.com  </p>
-						<p>Facebook : <a href="https://www.facebook.com/yeejub20rama2">ร้านหยี่จั๊บ พระราม 2 Thailand.</a> </p>
-						<p>Line : 0880258888 , @yeejub</p>
+						<p><?php echo $contact['contact_name']?></p>
+						<p><?php echo $contact['contact_addr']?></p>
+						<p>โทร: <?php echo $contact['contact_tel']?></p>
+						<p>E-mail: <?php echo $contact['contact_email']?></p>
+						<p>Facebook : <a href="<?php echo $contact['contact_facebook_link']?>"><?php echo $contact['contact_facebook']?></a> </p>
+						<p>Line : <a href="<?php echo $contact['contact_line_link']?>"><?php echo $contact['contact_line']?></a></p>
 					</ul>
 
 				</div>

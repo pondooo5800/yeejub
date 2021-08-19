@@ -34,9 +34,9 @@ class Member_login extends CRUD_Controller
 	}
 
     public function index($msg = NULL){
-		$this->breadcrumb_data['breadcrumb'] = array(
-						array('title' => 'เข้าสู่ระบบ', 'class' => 'active', 'url' => '#'),
-		);
+        $this->load->model('common_model');
+		$contact = $this->db->query("select * from tb_admin where user_id = 1 AND fag_allow = 'allow'");
+		$this->data['contact'] = $contact->row_array();
 		$this->render_view('member_loginView');
     }
 
@@ -53,8 +53,6 @@ class Member_login extends CRUD_Controller
         	'action'=>'login',
         	'path'=>(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"
         );
-        // print_r("1234");
-        // die();
 
         if ($frm->run() == FALSE) {
             $message  = '';

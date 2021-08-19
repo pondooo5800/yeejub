@@ -11,7 +11,7 @@
 					<div class="card-icon">
 						<i class="material-icons">edit</i>
 					</div>
-					<h4 class="card-title">แก้ไขรหัสผ่าน</h4>
+					<h4 class="card-title">แก้ไขข้อมูลเว็บไซต์</h4>
 				</div>
 				<div class="card-body">
 					<form class='form-horizontal' id='formEdit' accept-charset='utf-8'>
@@ -29,34 +29,96 @@
 								<div class="form-group col-md-4">
 									<label class="control-label" for="password">รหัสผ่านใหม่ :</label>
 									<div class="form-group has-info">
-										<input type="password" class="form-control form-control-lg" name="password" id="password" placeholder="Password" required>
+										<input type="password" class="form-control form-control-lg" name="password" id="password" value="{record_password}" placeholder="Password" required>
+									</div>
+								</div>
+							</div>
+							<br>
+							<div class="card-header card-header-success card-header-text">
+								<p class="card-title" style="font-weight: bold;">ข้อมูลที่อยู่เว็บไซต์</p>
+							</div>
+							<br>
+							<br>
+							<div class="form-row justify-content-around">
+								<div class="form-group col-md-4">
+									<label class="control-label" for="contact_name">ชื่อ :</label>
+									<div class="form-group has-info">
+										<input type="text" class="form-control form-control-lg" name="contact_name" id="contact_name" value="{record_contact_name}">
+									</div>
+								</div>
+								<div class="form-group col-md-4">
+									<label class="control-label" for="contact_addr">ที่อยู่ :</label>
+									<div class="form-group has-info">
+										<textarea class="form-control" id="contact_addr" name="contact_addr" rows="3">{record_contact_addr}</textarea>
+									</div>
+								</div>
+							</div>
+							<div class="form-row justify-content-around">
+								<div class="form-group col-md-4">
+									<label class="control-label" for="contact_tel">เบอร์โทรศัพท์ :</label>
+									<div class="form-group has-info">
+										<input type="text" class="form-control form-control-lg" name="contact_tel" id="contact_tel" value="{record_contact_tel}">
+									</div>
+								</div>
+								<div class="form-group col-md-4">
+									<label class="control-label" for="contact_email">E-mail :</label>
+									<div class="form-group has-info">
+										<input type="text" class="form-control form-control-lg" name="contact_email" id="contact_email" value="{record_contact_email}">
+									</div>
+								</div>
+							</div>
+							<div class="form-row justify-content-around">
+								<div class="form-group col-md-4">
+									<label class="control-label" for="contact_facebook">FaceBook :</label>
+									<div class="form-group has-info">
+										<input type="text" class="form-control form-control-lg" name="contact_facebook" id="contact_facebook" value="{record_contact_facebook}">
+									</div>
+								</div>
+								<div class="form-group col-md-4">
+									<label class="control-label" for="contact_line">Line :</label>
+									<div class="form-group has-info">
+										<input type="text" class="form-control form-control-lg" name="contact_line" id="contact_line" value="{record_contact_line}">
+									</div>
+								</div>
+							</div>
+							<div class="form-row justify-content-around">
+								<div class="form-group col-md-4">
+									<label class="control-label" for="contact_facebook_link">Link FaceBook :</label>
+									<div class="form-group has-info">
+										<input type="text" class="form-control form-control-lg" name="contact_facebook_link" id="contact_facebook_link" value="{record_contact_facebook_link}">
+									</div>
+								</div>
+								<div class="form-group col-md-4">
+									<label class="control-label" for="contact_line_link">Link Line :</label>
+									<div class="form-group has-info">
+										<input type="text" class="form-control form-control-lg" name="contact_line_link" id="contact_line_link" value="{record_contact_line_link}">
 									</div>
 								</div>
 							</div>
 						</div>
 						<br>
 
-				<div class="form-group">
-					<div class="col-sm-12 text-right">
-						<input type="hidden" id="add_encrypt_id" />
-						<a href="{page_url}" class="my-tooltip btn btn-Secondarying btn-md" data-toggle="tooltip">
-							&nbsp;&nbsp;<i class="fa fa-close"></i> &nbsp;ยกเลิก &nbsp;&nbsp;
-						</a>
-						<button type="button" id="btnConfirmSave" class="btn btn-success" data-toggle="modal" data-target="#editModal">
-							&nbsp;&nbsp;<i class="fa fa-save"></i> &nbsp;บันทึก &nbsp;&nbsp;
-						</button>
-					</div>
+						<div class="form-group">
+							<div class="col-sm-12 text-right">
+								<input type="hidden" id="add_encrypt_id" />
+								<a href="{page_url}" class="my-tooltip btn btn-Secondarying btn-md" data-toggle="tooltip">
+									&nbsp;&nbsp;<i class="fa fa-close"></i> &nbsp;ยกเลิก &nbsp;&nbsp;
+								</a>
+								<button type="button" id="btnConfirmSave" class="btn btn-success" data-toggle="modal" data-target="#editModal">
+									&nbsp;&nbsp;<i class="fa fa-save"></i> &nbsp;บันทึก &nbsp;&nbsp;
+								</button>
+							</div>
+						</div>
+						<input type="hidden" name="encrypt_user_id" value="{encrypt_user_id}" />
+
+
+					</form>
 				</div>
-				<input type="hidden" name="encrypt_user_id" value="{encrypt_user_id}" />
-
-
-				</form>
+				<!--card-body-->
 			</div>
-			<!--card-body-->
+			<!--card-->
 		</div>
-		<!--card-->
 	</div>
-</div>
 </div>
 <!-- Modal -->
 <div class='modal fade' id='editModal' tabindex='-1' role='dialog' aria-labelledby='editModalLabel' aria-hidden='true'>

@@ -39,7 +39,7 @@
 			<li class="nav-item <?php if ($this->uri->segment(1) == '' || $this->uri->segment(1) == 'settings_admin') { ?>active<?php } ?>">
 				<a class="nav-link" href="{site_url}settings_admin/settings_admin/edit/<?php echo $this->session->userdata('encrypt_user_id'); ?>">
 					<i class="material-icons">settings</i>
-					<p>เปลี่ยนรหัสผ่าน</p>
+					<p>แก้ไขข้อมูลเว็บไซต์</p>
 				</a>
 			</li>
 			<li class="nav-item ">
