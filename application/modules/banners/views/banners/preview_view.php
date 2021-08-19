@@ -17,19 +17,15 @@
 					<div class="card-icon">
 						<i class="material-icons">list</i>
 					</div>
-					<h4 class="card-title">รายละเอียด Banner</h4>
+					<h4 class="card-title">รายละเอียด แบรนด์สินค้า</h4>
 				</div>
 				<div class="card-body">
 					<div class="table-responsive">
 						<table class="table table-bordered table-hover preview">
 							<tbody>
 								<tr>
-									<td class="text-right fit"><b>ชื่อ Banner :</b></td>
+									<td class="text-right fit"><b>ชื่อ แบรนด์สินค้า :</b></td>
 									<td>{record_banner_name}</td>
-								</tr>
-								<tr>
-									<td class="text-right fit"><b>ประเภท Banner :</b></td>
-									<td>{record_banner_type_name}</td>
 								</tr>
 								<tr>
 									<td class="text-right fit"><b>สถานะ :</b></td>
@@ -41,7 +37,7 @@
 									<td>{record_datetime_add}</td>
 								</tr>
 								<tr>
-									<td class="text-right fit"><b>รูปภาพ Banner :</b></td>
+									<td class="text-right fit"><b>รูปภาพ แบรนด์สินค้า :</b></td>
 									<td>{preview_banners_img1}</td>
 								</tr>
 							</tbody>

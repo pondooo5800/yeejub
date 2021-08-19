@@ -217,7 +217,6 @@ class Banners extends CRUD_Controller
 	{
 		$this->data['count_image'] = 1;
 		$this->data['data_id'] = 0;
-		$this->data['banners_types_option_list'] = $this->Banners->returnOptionList("tb_banners_types", "banner_type_id", "banner_type_name");
 		$this->data['preview_banner_img1'] = '<div id="div_preview_banner_img1" class="py-3 div_file_preview" style="clear:both"><img id="banner_img1_preview" style="object-fit:contain ; width: 100%; height: 320px;"/></div>';
 		$this->data['record_banner_img1_label'] = '';
 
@@ -247,8 +246,6 @@ class Banners extends CRUD_Controller
 		}
 
 		$frm->set_rules('banner_name', 'ชื่อ Banner', 'trim|required');
-		$frm->set_rules('banner_type', 'ประเภท Banner', 'trim|required');
-		$frm->set_rules('price', 'ราคา', 'trim|required|is_natural');
 		$frm->set_rules('fag_allow', 'สถานะ', 'trim|required');
 
 		$frm->set_message('required', '- กรุณาใส่ข้อมูล %s');
@@ -257,7 +254,6 @@ class Banners extends CRUD_Controller
 		if ($frm->run() == FALSE) {
 			$message  = '';
 			$message .= form_error('banner_name');
-			$message .= form_error('banner_type');
 			$message .= form_error('fag_allow');
 			$message .= form_error('banner_img1');
 			return $message;
@@ -286,7 +282,6 @@ class Banners extends CRUD_Controller
 		}
 
 		$frm->set_rules('banner_name', 'ชื่อ Banner', 'trim|required');
-		$frm->set_rules('banner_type', 'ประเภท Banner', 'trim|required');
 		$frm->set_rules('fag_allow', 'สถานะ', 'trim|required');
 
 		$frm->set_message('required', '- กรุณาใส่ข้อมูล %s');
@@ -295,7 +290,6 @@ class Banners extends CRUD_Controller
 		if ($frm->run() == FALSE) {
 			$message  = '';
 			$message .= form_error('banner_name');
-			$message .= form_error('banner_type');
 			$message .= form_error('fag_allow');
 			$message .= form_error('banner_img1');
 			return $message;
@@ -350,6 +344,19 @@ class Banners extends CRUD_Controller
 			$orig_name = $this->upload->orig_name;
 			$this->FileUpload->create($encrypt_name, $orig_name);
 			$file_path = $path . '/' . $encrypt_name; //ไม่ต้องใช้ Path เต็ม
+			// $thumb_width = 400;
+            // $thumb_height = 300;
+			// // Image resize config
+			// $config['image_library']    = 'gd2';
+			// $config['source_image']     = $file_path;
+			// $config['new_image']         = $path;
+			// $config['maintain_ratio']     = FALSE;
+			// $config['width']            = $thumb_width;
+			// $config['height']           = $thumb_height;
+			// // Load and initialize image_lib library
+			// $this->load->library('image_lib', $config);
+			// // Resize image and create thumbnail
+			// $this->image_lib->resize();
 			$data = array(
 				'result' => TRUE,
 				'file_path' => $file_path,
@@ -442,8 +449,6 @@ class Banners extends CRUD_Controller
 				$this->data['csrf_field'] = insert_csrf_field(true);
 				$this->setPreviewFormat($results);
 				$this->data['data_id'] = $id;
-				$this->data['banners_types_option_list'] = $this->Banners->returnOptionList("tb_banners_types", "banner_type_id", "banner_type_name");
-
 				$this->render_view('banners/banners/edit_view');
 			}
 		}
@@ -635,15 +640,11 @@ class Banners extends CRUD_Controller
 		$this->data['record_banner_img1_label'] = $filename;
 		$this->data['preview_banner_img1'] = setAttachPreview('banner_img1', $data['banner_img1'], $filename);
 
-		$rows = rowArray($this->common_model->custom_query("select tb_banners_types.banner_type_name FROM tb_banners LEFT JOIN tb_banners_types ON tb_banners.banner_type = tb_banners_types.banner_type_id WHERE tb_banners.fag_allow != 'delete' and tb_banners.banner_id =" .$data['banner_id']));
-		$this->data['record_banner_type_name'] = $rows['banner_type_name'];
-
 		// print_r();
 		// die();
 
 
 		$this->data['record_banner_name'] = $data['banner_name'];
-		$this->data['record_banner_type'] = $data['banner_type'];
 		$this->data['record_user_delete'] = $data['user_delete'];
 		$this->data['record_datetime_delete'] = $data['datetime_delete'];
 		$this->data['record_user_add'] = $data['user_add'];

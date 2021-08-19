@@ -44,7 +44,6 @@ class Banners_model extends MY_Model
 	{
 		$data = array(
 			'banner_name' => $post['banner_name'],
-			'banner_type' => $post['banner_type'],
 			'banner_img1' => $post['banner_img1'],
 			'fag_allow' => $post['fag_allow'],
 		);
@@ -77,11 +76,6 @@ class Banners_model extends MY_Model
 			if ($search_field == 'banner_name') {
 				$search_method_value = "LIKE '%$value%'";
 			}
-			if ($search_field == 'banner_type') {
-				$search_method_field = "tb_banners_types.banner_type_name";
-				$search_method_value = "LIKE '%$value%'";
-			}
-
 			// if ($search_field == 'email_addr') {
 			// 	$search_method_value = "LIKE '%$value%'";
 			// }
@@ -100,8 +94,6 @@ class Banners_model extends MY_Model
 		$total_row = $this->count_record();
 		$search_row = $total_row;
 		if ($where != '') {
-			$this->db->join('tb_banners_types', "$this->my_table.banner_type = tb_banners_types.banner_type_id", 'left');
-
 			// $this->db->join('category AS category_1', "$this->my_table.cate_id = category_1.cate_id", 'left');
 			// $this->db->join('users AS users_2', "$this->my_table.shop_user = users_2.user_id", 'left');
 			// $this->db->join('users AS users_3', "$this->my_table.user_delete = users_3.user_id", 'left');
@@ -116,8 +108,7 @@ class Banners_model extends MY_Model
 		$this->set_order_by($order_by);
 		$this->set_offset($offset);
 		$this->set_limit($limit);
-		$this->db->select("$this->my_table.*,tb_banners_types.banner_type_name");
-		$this->db->join('tb_banners_types', "$this->my_table.banner_type = tb_banners_types.banner_type_id", 'left');
+		$this->db->select("$this->my_table.*");
 		// $this->db->join('users AS users_2', "$this->my_table.shop_user = users_2.user_id", 'left');
 		// $this->db->join('users AS users_3', "$this->my_table.user_delete = users_3.user_id", 'left');
 		// $this->db->join('users AS users_4', "$this->my_table.user_add = users_4.user_id", 'left');
@@ -139,7 +130,6 @@ class Banners_model extends MY_Model
 	{
 		$data = array(
 			'banner_name' => $post['banner_name'],
-			'banner_type' => $post['banner_type'],
 			'fag_allow' => $post['fag_allow'],
 		);
 

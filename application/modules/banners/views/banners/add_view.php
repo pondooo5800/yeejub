@@ -17,7 +17,7 @@
 					<div class="card-icon">
 						<i class="material-icons">note_add</i>
 					</div>
-					<h4 class="card-title">เพิ่มรายการ Banner</h4>
+					<h4 class="card-title">เพิ่มรายการ แบรนด์สินค้า</h4>
 
 				</div>
 				<div class="card-body ">
@@ -26,23 +26,11 @@
 						<div class="container">
 							<div class="form-row justify-content-around">
 								<div class="form-group col-md-4 ">
-									<label class="control-label" for="banner_name">ชื่อ Banner :</label>
+									<label class="control-label" for="banner_name">ชื่อ แบรนด์สินค้า :</label>
 									<div class="form-group has-info">
 										<input type="text" class="form-control" id="banner_name" name="banner_name" value="" />
 									</div>
 								</div>
-								<div class="form-group col-md-4 ">
-									<label class="control-label" for="banner_type">ประเภท Banner :</label>
-									<div class="form-group has-success">
-										<select id="banner_type" name="banner_type" value="">
-											<option value="">- เลือก ประเภท Banner -</option>
-											{banners_types_option_list}
-										</select>
-									</div>
-								</div>
-
-							</div>
-							<div class="form-row justify-content-around">
 								<div class="form-group col-md-4 ">
 									<label class="control-label" for="fag_allow">สถานะ :</label>
 									<select id="fag_allow" name="fag_allow" value="">
@@ -51,12 +39,10 @@
 										<option value="block">ไม่เผยแพร่</option>
 									</select>
 								</div>
-								<div class="form-group col-md-4 ">
-								</div>
 							</div>
 							<div class="form-row justify-content-around">
 								<div class="col-sm-12 col-md-10">
-									<label class="control-label" for="banner_img1">รูปภาพ Banner :</label>
+									<label class="control-label" for="banner_img1">รูปภาพ แบรนด์สินค้า :</label>
 									<div class="upload-box">
 										<div class="hold input-group">
 											<span class="btn-file"> คลิกเพื่อแนบไฟล์

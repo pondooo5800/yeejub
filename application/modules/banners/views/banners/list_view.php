@@ -6,7 +6,7 @@
 					<div class="card-icon">
 						<i class="material-icons">bubble_chart</i>
 					</div>
-					<h4 class="card-title">ตั้งค่า Banner</h4>
+					<h4 class="card-title">ตั้งค่า แบรนด์สินค้า</h4>
 				</div>
 				<div class="card-body">
 					<form class="form-horizontal" name="formSearch" method="post" action="{page_url}/search">
@@ -22,8 +22,7 @@
 									<div class="col-md-2">
 										<div class="form-group has-warning bmd-form-group" id="search">
 											<select class="select2-search" name="search_field" class="span2">
-												<option value="banner_name">ชื่อ Banner</option>
-												<option value="banner_type">ประเภท Banner</option>
+												<option value="banner_name">ชื่อ แบรนด์สินค้า</option>
 											</select>
 										</div>
 									</div>
@@ -66,8 +65,7 @@
 							<thead>
 								<tr>
 									<th class="text-center">#</th>
-									<th class="text-center">ชื่อ Banner</th>
-									<th class="text-center">ประเภท Banner</th>
+									<th class="text-center">ชื่อ แบรนด์สินค้า</th>
 									<th class="text-center">สถานะ</th>
 									<th class="text-center" style="width:200px">เครื่องมือ</th>
 								</tr>
@@ -76,7 +74,6 @@
 								<tr parser-repeat="[data_list]" id="row_{record_number}">
 									<td style="text-align:center;">{record_number}</td>
 									<td style="text-align:left;">{banner_name}</td>
-									<td style="text-align:left;">{banner_type_name}</td>
 									<td style="text-align:center;">{preview_fag_allow}</td>
 									<td class="td-actions text-center">
 										<a href="{page_url}/preview/{url_encrypt_id}" class="my-tooltip btn btn-info btn-md" data-toggle="tooltip" title="แสดงข้อมูลรายละเอียด">
