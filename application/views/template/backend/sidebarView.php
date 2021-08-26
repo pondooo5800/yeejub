@@ -39,7 +39,7 @@
 			<li class="nav-item <?php if ($this->uri->segment(1) == '' || $this->uri->segment(1) == 'banners') { ?>active<?php } ?>">
 				<a class="nav-link" href="{site_url}banners/banners">
 					<i class="material-icons">bubble_chart</i>
-					<p>ตั้งค่า Banner</p>
+					<p>ตั้งค่าแบรนด์สินค้า</p>
 				</a>
 			</li>
 			<li class="nav-item <?php if ($this->uri->segment(1) == '' || $this->uri->segment(1) == 'settings_admin') { ?>active<?php } ?>">

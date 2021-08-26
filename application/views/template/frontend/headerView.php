@@ -38,34 +38,15 @@
                     <button type="submit" class="pull-right btn-search"></button>
                 </form>
             </div>
-
             <div id="cart-block" class="col-xs-5 col-sm-2 col-md-3 shopping-cart-box">
-                <div id="view_cart_mini">
                     <a class="cart-link" href="{site_url}cart">
-                        <span class="title">Shopping cart</span>
-                        <span class="total">รวมราคาทั้งหมด <b><span><?php echo $this->cart->total() . ' ' . 'บาท'; ?></span></b></span>
-                        <?php
+                        <span class="title">ตะกร้าสินค้าของคุณ</span>
+                        <span class="total">ราคาทั้งหมด <span><?php echo $this->cart->total() . ' ' . 'บาท'; ?></span></span>
+                        <!-- <?php
                         if ($this->cart->total_items() > 0) { ?>
                             <span class="notify notify-left"><?php echo $this->cart->total_items(); ?></span>
-                        <?php } ?>
+                        <?php } ?> -->
                     </a>
-                    <!-- <div class="cart-block">
-                        <div class="cart-block-content">
-                            <h5 class="cart-title"> Items in my cart</h5>
-                            <div class="cart-block-list">
-                                <ul>
-                                </ul>
-                            </div>
-                            <div class="toal-cart">
-                                <span>Total</span>
-                                <span class="toal-price pull-right">0</span>
-                            </div>
-                            <div class="cart-buttons">
-                                <a href="{site_url}cart" class="btn-check-out">View Cart</a>
-                            </div>
-                        </div>
-                    </div> -->
-                </div>
             </div>
         </div>
 
