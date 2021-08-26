@@ -105,23 +105,16 @@ class Shop extends CI_Controller
 		$this->pagination->initialize($config);
 
         $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-		// print_r($page);
-		// die();
-
         $this->data['products'] = $this->Shop_model->
             fetch_product($config["per_page"], $page);
 		$this->data['links'] = $this->pagination->create_links();
-		// $this->load->model('common_model');
-		// $product_type_id = $this->common_model->custom_query("select * from tb_products_types where product_type_id =".$id);
 
-		// $this->data['product_type_id'] = $product_type_id;
 		$this->load->model('common_model');
 		$product = $this->db->query("select * from tb_products_types where fag_allow = 'allow'");
+		$brand = $this->db->query("select * from tb_banners where fag_allow = 'allow'");
 		$this->data['product_type'] = $product->result_array();
+		$this->data['brand'] = $brand->result_array();
 		$this->render_view('shop');
-		// die(print_r($this->data['data_list_shops']));
-		// print_r($this->db->last_query());
-		// die();
 	}
 	public function category($product_type_id = NULL )
 	{
@@ -168,9 +161,11 @@ class Shop extends CI_Controller
 		$product = rowArray($this->common_model->custom_query("select * from tb_products_types where fag_allow = 'allow' and product_type_id =". $product_type_id));
 		$this->data['product_type_name'] = $product['product_type_name'];
 		$this->data['product_type_id'] = $product['product_type_id'];
-		$this->load->model('common_model');
 		$product = $this->db->query("select * from tb_products_types where fag_allow = 'allow'");
+		$brand = $this->db->query("select * from tb_banners where fag_allow = 'allow'");
 		$this->data['product_type'] = $product->result_array();
+		$this->data['brand'] = $brand->result_array();
+
 		$this->render_view('shop');
 	}
 
@@ -214,10 +209,10 @@ class Shop extends CI_Controller
 		$banner = rowArray($this->common_model->custom_query("select * from tb_banners where fag_allow = 'allow' and banner_id =". $banner_id));
 		$this->data['banner_name'] = $banner['banner_name'];
 		$this->data['banner_id'] = $banner['banner_id'];
-		$this->load->model('common_model');
+
 		$product = $this->db->query("select * from tb_products_types where fag_allow = 'allow'");
-		$this->data['product_type'] = $product->result_array();
 		$brand = $this->db->query("select * from tb_banners where fag_allow = 'allow'");
+		$this->data['product_type'] = $product->result_array();
 		$this->data['brand'] = $brand->result_array();
 
 		$this->render_view('shop');
@@ -248,7 +243,10 @@ class Shop extends CI_Controller
 	{
 		$this->load->model('common_model');
 		$product = $this->db->query("select * from tb_products_types where fag_allow = 'allow'");
+		$brand = $this->db->query("select * from tb_banners where fag_allow = 'allow'");
 		$this->data['product_type'] = $product->result_array();
+		$this->data['brand'] = $brand->result_array();
+
 		$key = $this->input->post('search');
 		$this->data['txt_search']	= $key;
 		$this->data['products'] = $this->Shop_model->search($key);

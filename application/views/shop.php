@@ -66,7 +66,6 @@
                 </div>
             </a>
         <?php } ?>
-
     </div>
 </div>
 <div class="columns-container">
