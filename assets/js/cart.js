@@ -66,11 +66,12 @@ $(document).ready(function() {
                 data: {
                     product_id: product_id,
                     segment: segment,
-                    // product_price: product_price,
                     qty: quantity
                 },
                 success: function(data) {
-                    $(".cartcount").text(data);
+                    cart = JSON && JSON.parse(data) || $.parseJSON(data);
+                    $(".cartcount").html(cart.num_of_items);
+                    $(".total").html("ราคาทั้งหมด " + cart.total_price + " บาท");
                     $(".qty").val("1");
                 }
             });

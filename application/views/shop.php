@@ -135,7 +135,8 @@
                         <ul class="row product-list style2 grid">
                             <p id="oneflashsale" style="display:none">EXPIRED</p>
                             <?php
-                            foreach ($banners as $value) { ?>
+                            if (is_array($banners)) {
+                                foreach ($banners as $value) { ?>
                                 <li class="col-sx-12 col-sm-4">
                                     <div class="product-container">
                                         <div class="left-block">
@@ -171,6 +172,8 @@
                                 </li>
 
                             <? } ?>
+                            <? } ?>
+
                         </ul>
                         <!-- ./PRODUCT LIST -->
                     </div>

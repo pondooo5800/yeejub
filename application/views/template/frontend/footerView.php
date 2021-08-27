@@ -6,24 +6,19 @@
             <!-- /#trademark-box -->
             <div id="trademark-box" class="row" align="center" style="padding-top: 15px">
                 <div class="col-sm-12">
-
                     <ul class="owl-intab owl-carousel" data-loop="true" data-items="6" data-autoplay="true" data-dots="false" data-nav="true">
-                        <li style="margin: 5px">
-                            <img src="https://via.placeholder.com/120x90" alt="" />
-                        </li>
-                        <li style="margin: 5px">
-                            <img src="https://via.placeholder.com/120x90" alt="" />
-                        </li>
-                        <li style="margin: 5px">
-                            <img src="https://via.placeholder.com/120x90" alt="" />
-                        </li>
-                        <li style="margin: 5px">
-                            <img src="https://via.placeholder.com/120x90" alt="" />
-                        </li>
-                        <li style="margin: 5px">
-                           <img src="https://via.placeholder.com/120x90" alt="" />
-                        </li>
-                    </ul>
+                <?php
+                	$this->load->model('common_model');
+                    $brand =  $this->common_model->custom_query("select * from tb_banners where fag_allow = 'allow'");
+                    foreach ($brand as $row) { ?>
+                            <li style="margin: 5px">
+                                <a href="<?php echo base_url('shop/brand/') . $row['banner_id']; ?>">
+                                    <img src="<?php echo base_url($row['banner_img1']); ?>" alt="" />
+                                </a>
+                            </li>
+                <?php } ?>
+                        </ul>
+
                 </div>
             </div>
             <!-- introduce-box -->

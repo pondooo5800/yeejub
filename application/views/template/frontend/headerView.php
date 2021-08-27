@@ -41,7 +41,7 @@
             <div id="cart-block" class="col-xs-5 col-sm-2 col-md-3 shopping-cart-box">
                     <a class="cart-link" href="{site_url}cart">
                         <span class="title">ตะกร้าสินค้าของคุณ</span>
-                        <span class="total">ราคาทั้งหมด <span><?php echo $this->cart->total() . ' ' . 'บาท'; ?></span></span>
+                        <span class="total">ราคาทั้งหมด <span><?php echo number_format($this->cart->total()) . ' ' . 'บาท'; ?></span></span>
                         <!-- <?php
                         if ($this->cart->total_items() > 0) { ?>
                             <span class="notify notify-left"><?php echo $this->cart->total_items(); ?></span>

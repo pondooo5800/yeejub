@@ -202,6 +202,9 @@ class Shop extends CI_Controller
         $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
         $this->data['banners'] = $this->Shop_model->
 		fetch_banner($config["per_page"], $page ,$banner_id);
+				// print_r($this->db->last_query());
+		// die();
+
 		// print_r($page);
 		// die();
 		$this->data['links'] = $this->pagination->create_links();
@@ -230,7 +233,11 @@ class Shop extends CI_Controller
         );
         $this->cart->insert($data);
 		if ($post['segment'] === 'ajax') {
-			echo ($this->cart->total_items());
+			$cart = array(
+				'num_of_items' => $this->cart->total_items(),
+				'total_price' => number_format($this->cart->total())
+				);
+				echo json_encode($cart);
 		} elseif ($post['segment'] === 'index'){
 			redirect('index');
 		} elseif ($post['segment'] === 'category'){

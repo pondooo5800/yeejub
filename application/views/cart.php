@@ -5,6 +5,7 @@
 		<!-- ../page heading-->
 		<div class="page-content page-order">
 			<div class="order-detail-content" id="view_cart">
+			<div class="table-responsive">
 				<table class="table table-bordered table-responsive cart_summary">
 					<thead>
 						<tr>
@@ -28,7 +29,7 @@
 									</td>
 									<td class="price" style="text-align: center; vertical-align: middle;">
 										<span>
-											<?php echo $item["price"] ?>
+											<?php echo number_format($item["price"]) ?>
 										</span>
 									</td>
 
@@ -41,7 +42,7 @@
 										<a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#my_modal" data-row-id="<?php echo $item["rowid"] ?>"><i class="fa fa-trash"></i> </a>
 									</td>
 									<td class="price">
-										<span class="subtotal-amount"><?php echo $item["subtotal"]; ?></span>
+										<span class="subtotal-amount"><?php echo number_format($item["subtotal"]) ?></span>
 									</td>
 								</tr>
 							<?php }
@@ -56,7 +57,7 @@
 						<tr>
 							<td colspan="3" rowspan="4"></td>
 							<td colspan="2">รวมเป็น :</td>
-							<td colspan="2"><?php echo $this->cart->total(); ?></td>
+							<td colspan="2"><?php echo number_format($this->cart->total()); ?></td>
 						</tr>
 						<tr>
 						</tr>
@@ -70,13 +71,15 @@
 							<td colspan="3">
 							</td>
 							<td colspan="2"><strong>รวมทั้งสิ้น :</strong></td>
-							<td colspan="2"><strong><label id="dc_price_total"><?php echo $this->cart->total() . ' ' . 'บาท' ?></label></strong></td>
+							<td colspan="2"><strong><label id="dc_price_total"><?php echo number_format($this->cart->total()) . ' ' . 'บาท' ?></label></strong></td>
 						</tr>
 					</tfoot>
 				<?php } ?>
 
 				</tbody>
 				</table>
+				</div>
+
 				<div class="cart_navigation">
 					<a class="prev-btn" href="{base_url}shop" style="background-color: #3366cc; color: #FFFFFF"> เลือกสินค้าอื่น เพิ่มเติม</a>
 				</div>
@@ -84,26 +87,35 @@
 				<br><br>
 				<?php if ($this->cart->total_items() > 0) { ?>
 					<h4 class="page-heading"><span class="page-heading-title2" style="font-weight: bold;color: red;font-size:20px">เงื่อนไขการสั่งซื้อสินค้า</span></h4>
-				<div class="box-border">
-					<div style="padding-left: 25px;padding-right: 25px;text-align: center;">
-						<br><b><label style="font-size: 18px;">กรุณาสั่งซื้อสินค้าขั้นต่ำ 5,000 บาทขึ้นไป</label></b>
-						<br>
-						<br><b><label class="required"> Yeejub ขอขอบคุณทุกท่านที่ให้ความสนใจซื้อสินค้าของเรา
-								สำหรับการสั่งซื้อสินค้าทางเราได้กำหนดยอดสั่งซื้อขั้นต่ำ 5,000 บาท
-								โดยจะมีค่าขนส่ง 300 บาทสำหรับยอดสั่งซื้อไม่ถึง 10,000 บาท
-								และฟรีค่าจัดส่งเมื่อสั่งซื้อสินค้าตั้งแต่ 10,000 บาทขึ้นไป</label></b>
-						<br>
-						<br>
-						<label class="required"><input type="checkbox" id="checkboxDetermine">
-							ยอมรับเงื่อนไข</label>
+					<div class="box-border">
+						<div style="padding-left: 10%;padding-right: 10%;text-align: center;">
+							<br><b><label style="font-size: 18px;">ร้านหยี่จั๊บ ขอขอบคุณทุกท่านที่ให้ความสนใจซื้อสินค้าของเรา</label></b>
+							<br>
+							<br>
+							<div class="text-left" style="font-size: 15px;">
+								<label class="required">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;สำหรับการสั่งซื้อสินค้า ทางเราได้กำหนดยอดสั่งซื้อขั้นต่ำ 5,000 บาท โดยจะมีค่าขนส่ง 300 บาทสำหรับยอดสั่งซื้อไม่ถึง 10,000 บาท
+									และฟรีค่าจัดส่งเมื่อสั่งซื้อสินค้าตั้งแต่ 10,000 บาทขึ้นไป โดยแจ้งทางร้านหากท่านต้องการให้จัดส่ง
+									<br>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- ลูกค้าต่างจังหวัด ยอดสั่งสินค้า10,000 บาทขึ้นไป ทางร้านจะจัดส่งให้ท่าน ผ่านบริษัทขนส่งแถวพุทธมณฑล
+									<br>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- ลูกค้าในกรุงเทพฯ ยอดสั่งสินค้า10,000 บาทขึ้นไป ทางร้านจัดส่งให้ท่านถึงหน้าร้าน
+								</label>
+
+							</div>
+							<br>
+							<div class="text-center" style="font-size: 15px;">
+								<label class="required"><input type="checkbox" id="checkboxDetermine">
+									ยอมรับเงื่อนไข</label>
+							</div>
+						</div>
+						<hr>
+						<div class="cart_navigation text-center">
+							<button type="submit" id="checkboxConditioned" class="btn btn-success" onclick="cart_submit()">
+								&nbsp;&nbsp;<i class="fa fa-shopping-cart"></i> &nbsp;สั่งซื้อสินค้า &nbsp;&nbsp;
+							</button>
+						</div>
 					</div>
-					<hr>
-					<div class="cart_navigation text-center">
-						<button type="submit" id="checkboxConditioned" class="btn btn-success" onclick="cart_submit()">
-							&nbsp;&nbsp;<i class="fa fa-shopping-cart"></i> &nbsp;สั่งซื้อสินค้า &nbsp;&nbsp;
-						</button>
-					</div>
-				</div>
 
 				<?php } ?>
 			</div>
@@ -146,14 +158,15 @@
 			}
 		});
 	}
+
 	function removeCartItem() {
 		var fdata = $('#formDelete').serialize();
 		var str = fdata.substring(6);
-		window.location.replace('cart/removeItem/'+str);
+		window.location.replace('cart/removeItem/' + str);
 	}
-	function cart_submit()
-	{
-		setTimeout(function(){
+
+	function cart_submit() {
+		setTimeout(function() {
 			window.location.replace('cart/checkout');
 		}, 1000);
 
