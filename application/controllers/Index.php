@@ -41,9 +41,12 @@ class Index extends CI_Controller
 		$this->data = $data;
 		$this->breadcrumb_data = $data;
 		$this->left_sidebar_data = $data;
-		$js_url = 'assets/js_modules/members/members.js?ft=' . filemtime('assets/js_modules/members/members.js');
-		$js_url = 'assets/js/cart.js?ft=' . filemtime('assets/js/cart.js');
-		$this->another_js = '<script src="' . base_url($js_url) . '"></script>';
+		$this->another_js .= '<script src="' . base_url('assets/js_modules/members/members.js?ft=' . filemtime('assets/js_modules/members/members.js')) . '"></script>';
+		$this->another_js .= '<script src="' . base_url('assets/js/cart.js?ft=' . filemtime('assets/js/cart.js')) . '"></script>';
+
+		// $js_url = 'assets/js_modules/members/members.js?ft=' . filemtime('assets/js_modules/members/members.js');
+		// $js_url = 'assets/js/cart.js?ft=' . filemtime('assets/js/cart.js');
+		// $this->another_js = '<script src="' . base_url($js_url) . '"></script>';
 	}
 
 	// ------------------------------------------------------------------------
@@ -80,8 +83,10 @@ class Index extends CI_Controller
 		$this->load->model('common_model');
 		$product = $this->db->query("select * from tb_products_types where fag_allow = 'allow'");
 		$brand = $this->db->query("select * from tb_banners where fag_allow = 'allow'");
+		$promotion = $this->db->query("select * from tb_promotions where fag_allow = 'allow'");
 		$this->data['product_type'] = $product->result_array();
 		$this->data['brand'] = $brand->result_array();
+		$this->data['promotion'] = $promotion->result_array();
 		$data['cart_value'] = $this->cart->contents();
 		$this->data['cartItems'] = $data['cart_value'];
 
@@ -98,6 +103,10 @@ class Index extends CI_Controller
 		}elseif ($rows['same'] == 0){
 			$this->data['record_same'] = '';
 		}
+		$this->data['record_member_fname'] = $rows['member_fname'];
+		$this->data['record_member_lname'] = $rows['member_lname'];
+		$this->data['record_member_shop'] = $rows['member_shop'];
+		$this->data['record_member_email_addr'] = $rows['member_email_addr'];
 		$this->data['record_member_addr'] = $rows['member_addr'];
 		$this->data['record_member_same'] = $rows['member_same'];
 		$this->data['record_member_note'] = $rows['member_note'];

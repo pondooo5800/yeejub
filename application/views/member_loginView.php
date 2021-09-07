@@ -209,7 +209,7 @@ section .section-title {
 			<div class="row text-center text-xs-center text-sm-left text-md-left">
 				<div class="col-xs-12 col-sm-4 col-md-4">
 					<h5>Add Line</h5>
-					<a href="<?php echo $contact['contact_line_link']?>"><img src="{base_url}/assets/themes/frontend/assets/img/icon/line-yeejub.png" alt="generated QR Code"></a><br><br>
+					<a href="<?php echo $contact['contact_line_link']?>" target="_blank"><img src="{base_url}/assets/themes/frontend/assets/img/icon/line-yeejub.png" alt="generated QR Code"></a><br><br>
 				</div>
 				<div class="col-xs-12 col-sm-4 col-md-4">
 				<h5>ติดต่อ</h5>
@@ -218,8 +218,8 @@ section .section-title {
 						<p><?php echo $contact['contact_addr']?></p>
 						<p>โทร: <?php echo $contact['contact_tel']?></p>
 						<p>E-mail: <?php echo $contact['contact_email']?></p>
-						<p>Facebook : <a href="<?php echo $contact['contact_facebook_link']?>"><?php echo $contact['contact_facebook']?></a> </p>
-						<p>Line : <a href="<?php echo $contact['contact_line_link']?>"><?php echo $contact['contact_line']?></a></p>
+						<p>Facebook : <a href="<?php echo $contact['contact_facebook_link']?>" target="_blank"><?php echo $contact['contact_facebook']?></a> </p>
+						<p>Line : <a href="<?php echo $contact['contact_line_link']?>" target="_blank"><?php echo $contact['contact_line']?></a></p>
 					</ul>
 
 				</div>

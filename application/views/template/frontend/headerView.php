@@ -3,10 +3,10 @@
     <div class="top-header">
         <div class="container">
             <div class="currency ">
-                YEEJUB.COM : ร้านหยี่จั๊บทุกอย่าง 20 บาท
+                YEEJUB.NET : ร้านหยี่จั๊บทุกอย่าง 20 บาท
             </div>
             <div id="user-line-top" class="user-info pull-right">
-                <a href="https://line.me/ti/p/~@yeejub"><img height="20" border="0" alt="kgg.co.th" src="https://scdn.line-apps.com/n/line_add_friends/btn/en.png"></a>
+                <a href="https://line.me/ti/p/~@yeejub" target="_blank"><img height="20" border="0" alt="kgg.co.th" src="https://scdn.line-apps.com/n/line_add_friends/btn/en.png"></a>
             </div>
             <div id="user-info-top" class="user-info pull-right">
                 <div class="dropdown">
@@ -33,7 +33,7 @@
                     <div class="form-group form-category">
                     </div>
                     <div class="form-group input-serach">
-                        <input type="text" name="search" placeholder="ค้าหาสินค้า" value="<?php echo ($this->uri->segment(2) == "search" ? "{txt_search}" : "") ?>">
+                        <input type="text" name="search" placeholder="ค้นหาสินค้า" value="<?php echo ($this->uri->segment(2) == "search" ? "{txt_search}" : "") ?>">
                     </div>
                     <button type="submit" class="pull-right btn-search"></button>
                 </form>

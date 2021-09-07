@@ -531,6 +531,7 @@ class Members extends CRUD_Controller
 		$this->data['record_member_lname'] =$data['member_lname'];
 		$this->data['record_member_email_addr'] = $data['member_email_addr'];
 		$this->data['record_member_mobile_no'] = $data['member_mobile_no'];
+		$this->data['record_member_shop'] = $data['member_shop'];
 		$this->data['record_member_addr'] = $data['member_addr'];
 		$this->data['record_member_note'] = $data['member_note'];
 		if ($data['fag_allow'] == 'allow') {

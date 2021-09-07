@@ -42,6 +42,12 @@
 					<p>ตั้งค่าแบรนด์สินค้า</p>
 				</a>
 			</li>
+			<li class="nav-item <?php if ($this->uri->segment(1) == '' || $this->uri->segment(1) == 'promotions') { ?>active<?php } ?>">
+				<a class="nav-link" href="{site_url}promotions/promotions">
+					<i class="material-icons">event</i>
+					<p>ตั้งค่าโปรโมชั่นสินค้า</p>
+				</a>
+			</li>
 			<li class="nav-item <?php if ($this->uri->segment(1) == '' || $this->uri->segment(1) == 'settings_admin') { ?>active<?php } ?>">
 				<a class="nav-link" href="{site_url}settings_admin/settings_admin/edit/<?php echo $this->session->userdata('encrypt_user_id'); ?>">
 					<i class="material-icons">settings</i>

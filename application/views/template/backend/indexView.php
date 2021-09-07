@@ -156,7 +156,7 @@
 						Copyright © <script>
 							document.write(new Date().getFullYear());
 						</script>
-						<a style="color: #7caff8;" href="http://yeejub.com/" target="_blank">YeeJub.com</a>. All rights reserved.
+						<a style="color: #7caff8;" href="http://YEEJUB.NET/" target="_blank">YEEJUB.NET</a>. All rights reserved.
 					</div>
 				</div>
 			</footer>

@@ -38,15 +38,32 @@ $('.add-cart').on('click', function () {
     }
 });
 $(document).ready(function() {
+    $('#myPromotion').on('show.bs.modal', function(e) {
+        var rowId = $(e.relatedTarget).data('row-id');
+        var promotion_id = rowId.promotion_id;
+        $(e.currentTarget).find('input[name="promotion_id"]').val(promotion_id);
+        var promotion_name = rowId.promotion_name;
+        var promotion_detail = rowId.promotion_detail;
+        var promotion_img1 = rowId.promotion_img1;
+        console.log(promotion_img1);
+        document.getElementById("promotion_detail_text").innerHTML = promotion_detail;
+
+        $('#my_image_promotion').attr('src', promotion_img1);
+
+    });
     $('#my_modal').on('show.bs.modal', function(e) {
         var rowId = $(e.relatedTarget).data('row-id');
+        console.log(rowId);
         var product_id = rowId.product_id;
         $(e.currentTarget).find('input[name="product_id"]').val(product_id);
         var product_name = rowId.product_name;
         var price = rowId.price;
         var product_unit_name = rowId.product_unit_name;
         var product_text = product_name + "\u00A0\u00A0ราคา " + price + " บาท / " + product_unit_name;
-        document.getElementById("product_text").innerHTML = product_text;
+        var unit_text = "\u00A0\u00A0ราคา " + price + " บาท / " + product_unit_name;
+        // document.getElementById("product_text").innerHTML = product_text;
+        document.getElementById("unit_text").innerHTML = unit_text;
+        document.getElementById("product_name").innerHTML = product_name;
         var product_img1 = rowId.product_img1;
         $('#my_image').attr('src', product_img1);
 

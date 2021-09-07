@@ -151,9 +151,19 @@ class Products extends CRUD_Controller
 			$this->Products->order_sort = $sort;
 		}
 		$results = $this->Products->read($start_row, $per_page);
+		// $this->setPreviewFormat($results);
+
+		// 		print_r($this->db->last_query());
+		// die();
+
 		$total_row = $results['total_row'];
 		$search_row = $results['search_row'];
 		$list_data = $this->setDataListFormat($results['list_data'], $start_row);
+
+// 		echo '<pre>';
+// 		print_r($list_data);
+// echo '</pre>';
+// 		exit;
 
 
 		$page_url = site_url('products/products');
@@ -179,7 +189,10 @@ class Products extends CRUD_Controller
 		$this->data['page_url']	= $page_url;
 		$this->data['pagination_link']	= $pagination;
 		$this->data['csrf_protection_field']	= insert_csrf_field(true);
-
+		$this->data['products_types_option_list'] = $this->Products->returnOptionList("tb_products_types", "product_type_id", "product_type_name");
+		$this->data['product_unit_id_option_list'] = $this->Products->returnOptionList("tb_products_units", "product_unit_id", "product_unit_name");
+		$this->data['product_pro_id_option_list'] = $this->Products->returnOptionList("tb_promotions", "promotion_id", "promotion_name");
+		$this->data['banner_type_option_list'] = $this->Products->returnOptionList("tb_banners", "banner_id", "banner_name");
 		$this->render_view('products/products/list_view');
 	}
 
@@ -218,6 +231,9 @@ class Products extends CRUD_Controller
 		$this->data['count_image'] = 1;
 		$this->data['data_id'] = 0;
 		$this->data['products_types_option_list'] = $this->Products->returnOptionList("tb_products_types", "product_type_id", "product_type_name");
+		$this->data['product_unit_id_option_list'] = $this->Products->returnOptionList("tb_products_units", "product_unit_id", "product_unit_name");
+		$this->data['product_pro_id_option_list'] = $this->Products->returnOptionList("tb_promotions", "promotion_id", "promotion_name");
+		$this->data['banner_type_option_list'] = $this->Products->returnOptionList("tb_banners", "banner_id", "banner_name");
 		$this->data['preview_product_img1'] = '<div id="div_preview_product_img1" class="py-3 div_file_preview" style="clear:both"><img id="product_img1_preview" style="object-fit:contain ; width: 100%; height: 320px;"/></div>';
 		$this->data['record_product_img1_label'] = '';
 
@@ -391,7 +407,7 @@ class Products extends CRUD_Controller
 		} else {
 
 			$post = $this->input->post(NULL, TRUE);
-
+			// die(print_r($post));
 			$upload_error = 0;
 			$upload_error_msg = '';
 			$arr = $this->uploadFile('product_img1');
@@ -423,6 +439,47 @@ class Products extends CRUD_Controller
 			echo $json;
 		}
 	}
+	public function upload($dir = '')
+	{
+		sleep(3);
+		if ($dir != '' && substr($dir, 0, 1) != '/') {
+			$dir = '/' . $dir;
+		}
+		$path = $this->upload_store_path . $dir;
+
+		if ($_FILES["files"]["name"] != '') {
+			$output = '';
+			$config['upload_path']          = $path;
+			$config['allowed_types']        = $this->file_allow_type;
+			$config['encrypt_name']		= TRUE;
+
+			$this->load->library('upload', $config);
+			$this->upload->initialize($config);
+			for ($count = 0; $count < count($_FILES["files"]["name"]); $count++) {
+				$_FILES["file"]["name"] = $_FILES["files"]["name"][$count];
+				$_FILES["file"]["type"] = $_FILES["files"]["type"][$count];
+				$_FILES["file"]["tmp_name"] = $_FILES["files"]["tmp_name"][$count];
+				$_FILES["file"]["error"] = $_FILES["files"]["error"][$count];
+				$_FILES["file"]["size"] = $_FILES["files"]["size"][$count];
+				if ($this->upload->do_upload('file')) {
+					$encrypt_name = $this->upload->file_name;
+					$orig_name = $this->upload->orig_name;
+					$this->FileUpload->create($encrypt_name, $orig_name);
+					$file_path = $path . '/' . $encrypt_name; //ไม่ต้องใช้ Path เต็ม
+					$this->Products->create_file_img($file_path);
+					$data = $this->upload->data();
+	// 				$output .= '
+    //  <div class="col-md-3">
+	//  <p style="text-align: center;">
+	// 	Upload File Success
+	// </p>
+	//  </div>
+    //  ';
+				}
+			}
+			echo $output;
+		}
+	}
 
 	// ------------------------------------------------------------------------
 
@@ -447,6 +504,9 @@ class Products extends CRUD_Controller
 				$this->setPreviewFormat($results);
 				$this->data['data_id'] = $id;
 				$this->data['products_types_option_list'] = $this->Products->returnOptionList("tb_products_types", "product_type_id", "product_type_name");
+				$this->data['product_unit_id_option_list'] = $this->Products->returnOptionList("tb_products_units", "product_unit_id", "product_unit_name");
+				$this->data['product_pro_id_option_list'] = $this->Products->returnOptionList("tb_promotions", "promotion_id", "promotion_name");
+				$this->data['banner_type_option_list'] = $this->Products->returnOptionList("tb_banners", "banner_id", "banner_name");
 
 				$this->render_view('products/products/edit_view');
 			}
@@ -467,6 +527,24 @@ class Products extends CRUD_Controller
 	/**
 	 * Update Record
 	 */
+	public function updateAjax() {
+		$message = '';
+		$post = $this->input->post(NULL, TRUE);
+		// die(print_r($post));
+		$result = $this->Products->updateAjax($post);
+		if ($result == false) {
+			$message = $this->Products->error_message;
+			$ok = FALSE;
+		} else {
+			$message = '<strong>บันทึกข้อมูลเรียบร้อย</strong>' . $this->Products->error_message;
+			$ok = TRUE;
+		}
+			$json = json_encode(array(
+				'is_successful' => $ok,
+				'message' => $message
+			));
+			echo $json;
+	}
 	public function update()
 	{
 		$message = '';
@@ -583,7 +661,16 @@ class Products extends CRUD_Controller
 				$pk1 = encrypt($pk1);
 			}
 			$data[$i]['encrypt_product_id'] = $pk1;
+			$data[$i]['record_product_id'] = $data[$i]['product_id'];
+			$data[$i]['record_product_type'] = $data[$i]['product_type'];
+			$data[$i]['record_banner_type'] = $data[$i]['banner_type'];
+			$data[$i]['record_product_unit_id'] = $data[$i]['product_unit_id'];
+			$data[$i]['record_product_pro_id'] = $data[$i]['product_pro_id'];
 			$data[$i]['product_type_name'] = $data[$i]['product_type_name'];
+			$data[$i]['record_banner_type'] = $data[$i]['banner_type'];
+			$data[$i]['record_product_unit_name'] = $data[$i]['product_unit_name'];
+			$data[$i]['record_promotion_name'] = $data[$i]['promotion_name'];
+			$data[$i]['record_banner_name'] = $data[$i]['banner_name'];
 			$data[$i]['preview_fag_allow'] = $this->setFagAllowSubject($data[$i]['fag_allow']);
 			$data[$i]['datetime_add'] = setThaiDate($data[$i]['datetime_add']);
 			$data[$i]['datetime_update'] = setThaiDate($data[$i]['datetime_update']);
@@ -647,6 +734,10 @@ class Products extends CRUD_Controller
 		$rows = rowArray($this->common_model->custom_query("select tb_products_types.product_type_name FROM tb_products LEFT JOIN tb_products_types ON tb_products.product_type = tb_products_types.product_type_id WHERE tb_products.fag_allow != 'delete' and tb_products.product_id =" .$data['product_id']));
 		$this->data['record_product_type_name'] = $rows['product_type_name'];
 		$this->data['record_product_type'] = $data['product_type'];
+		$this->data['record_banner_type'] = $data['banner_type'];
+		$this->data['record_product_unit_id'] = $data['product_unit_id'];
+		$this->data['record_product_pro_id'] = $data['product_pro_id'];
+
 		$this->data['record_price'] = $data['price'];
 		$this->data['record_user_delete'] = $data['user_delete'];
 		$this->data['record_datetime_delete'] = $data['datetime_delete'];

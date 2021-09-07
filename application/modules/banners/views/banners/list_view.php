@@ -43,8 +43,8 @@
 										<div class="form-group bmd-form-group">
 											<select class="select2-search" id="set_order_by" class="span2" value="{order_by}">
 												<option value="">- จัดเรียงตาม -</option>
-												<option value="banner_name|asc">ชื่อสินค้า ก - ฮ</option>
-												<option value="banner_name|desc">ชื่อสินค้า ฮ - ก</option>
+												<option value="banner_name|asc">แบรนด์สินค้า ก - ฮ</option>
+												<option value="banner_name|desc">แบรนด์สินค้า ฮ - ก</option>
 											</select>
 										</div>
 									</div>

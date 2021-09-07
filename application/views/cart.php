@@ -5,79 +5,86 @@
 		<!-- ../page heading-->
 		<div class="page-content page-order">
 			<div class="order-detail-content" id="view_cart">
-			<div class="table-responsive">
-				<table class="table table-bordered table-responsive cart_summary">
-					<thead>
-						<tr>
-							<th class="cart_product" style="font-weight: bold;text-align: center; vertical-align: middle;">รูปสินค้า</th>
-							<th style="font-weight: bold;text-align: center; vertical-align: middle;">ชื่อสินค้า</th>
-							<th style="font-weight: bold;text-align: center; vertical-align: middle;width: 10%">ราคา</th>
-							<th style="font-weight: bold;text-align: center; vertical-align: middle; width: 10%;">จำนวน</th>
-							<th style="font-weight: bold;text-align: center; vertical-align: middle;"></th>
-							<th style="font-weight: bold;text-align: right; vertical-align: middle;">รวมเป็น</th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php if ($this->cart->total_items() > 0) {
-							foreach ($cartItems as $item) {    ?>
-								<tr>
-									<td class="cart_product" style="text-align: center; vertical-align: middle;">
-										<img src="<?php echo $item["image"] ?>" alt="Image" />
-									</td>
-									<td class="cart_description">
-										<p class="product-name"><?php echo $item["name"] ?></p>
-									</td>
-									<td class="price" style="text-align: center; vertical-align: middle;">
-										<span>
-											<?php echo number_format($item["price"]) ?>
-										</span>
-									</td>
-
-									<td class="product-quantity" style="text-align: center; vertical-align: middle;">
-										<div class="input-counter">
-											<input type="number" min="1" id="qty" class="form-control text-center" value="<?php echo $item["qty"]; ?>" onchange="updateCartItem(this, '<?php echo $item["rowid"]; ?>')">
-										</div>
-									</td>
-									<td class="product-subtotal" style="text-align: center; vertical-align: middle;">
-										<a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#my_modal" data-row-id="<?php echo $item["rowid"] ?>"><i class="fa fa-trash"></i> </a>
-									</td>
-									<td class="price">
-										<span class="subtotal-amount"><?php echo number_format($item["subtotal"]) ?></span>
-									</td>
-								</tr>
-							<?php }
-						} else { ?>
+				<div class="table-responsive">
+					<table class="table table-bordered table-responsive cart_summary">
+						<thead>
 							<tr>
-								<td colspan="6">
-									<p style="text-align: center;">รถเข็นของคุณว่างเปล่า .....</p>
-								</td>
-							<?php } ?>
-							<?php if ($this->cart->total_items() > 0) { ?>
-					<tfoot>
-						<tr>
-							<td colspan="3" rowspan="4"></td>
-							<td colspan="2">รวมเป็น :</td>
-							<td colspan="2"><?php echo number_format($this->cart->total()); ?></td>
-						</tr>
-						<tr>
-						</tr>
-						<tr>
-						</tr>
-						<tr>
-							<td colspan="2">ค่าจัดส่ง :</td>
-							<td colspan="2"> 0 </td>
-						</tr>
-						<tr>
-							<td colspan="3">
-							</td>
-							<td colspan="2"><strong>รวมทั้งสิ้น :</strong></td>
-							<td colspan="2"><strong><label id="dc_price_total"><?php echo number_format($this->cart->total()) . ' ' . 'บาท' ?></label></strong></td>
-						</tr>
-					</tfoot>
-				<?php } ?>
+								<th class="cart_product" style="font-weight: bold;text-align: center; vertical-align: middle;">รูปสินค้า</th>
+								<th style="font-weight: bold;text-align: center; vertical-align: middle;">ชื่อสินค้า</th>
+								<th style="font-weight: bold;text-align: center; vertical-align: middle;width: 10%">ราคา</th>
+								<th style="font-weight: bold;text-align: center; vertical-align: middle; width: 10%;">จำนวน</th>
+								<th style="font-weight: bold;text-align: center; vertical-align: middle;"></th>
+								<th style="font-weight: bold;text-align: right; vertical-align: middle;">รวมเป็น</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php if ($this->cart->total_items() > 0) {
+								foreach ($cartItems as $item) {    ?>
+									<tr>
+										<td class="cart_product" style="text-align: center; vertical-align: middle;">
+											<img src="<?php echo $item["image"] ?>" alt="Image" />
+										</td>
+										<td class="cart_description">
+											<p class="product-name"><?php echo $item["name"] ?></p>
+										</td>
+										<td class="price" style="text-align: center; vertical-align: middle;">
+											<span>
+												<?php echo number_format($item["price"]) ?>
+											</span>
+										</td>
 
-				</tbody>
-				</table>
+										<td class="product-quantity" style="text-align: center; vertical-align: middle;">
+											<div class="button-container" style="align-items: center;justify-content: space-around;">
+												<button class="cart-qty-minus" type="button" value="-">-</button>
+												<input type="text" min="1" id="qty" name="qty" class="qty form-control" value="<?php echo $item["qty"]; ?>" />
+												<input type="hidden" class="rowid form-control" value="<?php echo $item["rowid"]; ?>" />
+												<button class="cart-qty-plus" type="button" value="+">+</button>
+											</div>
+											<!-- <input type="number" min="1" id="qty" class="form-control text-center" value="<?php echo $item["qty"]; ?>" onchange="updateCartItem(this, '<?php echo $item["rowid"]; ?>')"> -->
+
+											<!-- <div class="input-counter">
+										</div> -->
+										</td>
+										<td class="product-subtotal" style="text-align: center; vertical-align: middle;">
+											<a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#my_modal" data-row-id="<?php echo $item["rowid"] ?>"><i class="fa fa-trash"></i> </a>
+										</td>
+										<td class="price">
+											<span class="subtotal-amount"><?php echo number_format($item["subtotal"]) ?></span>
+										</td>
+									</tr>
+								<?php }
+							} else { ?>
+								<tr>
+									<td colspan="6">
+										<p style="text-align: center;">รถเข็นของคุณว่างเปล่า .....</p>
+									</td>
+								<?php } ?>
+								<?php if ($this->cart->total_items() > 0) { ?>
+						<tfoot>
+							<tr>
+								<td colspan="3" rowspan="4"></td>
+								<td colspan="2">รวมเป็น :</td>
+								<td colspan="2"><?php echo number_format($this->cart->total()); ?></td>
+							</tr>
+							<tr>
+							</tr>
+							<tr>
+							</tr>
+							<tr>
+								<td colspan="2">ค่าจัดส่ง :</td>
+								<td colspan="2"> 0 </td>
+							</tr>
+							<tr>
+								<td colspan="3">
+								</td>
+								<td colspan="2"><strong>รวมทั้งสิ้น :</strong></td>
+								<td colspan="2"><strong><label id="dc_price_total"><?php echo number_format($this->cart->total()) . ' ' . 'บาท' ?></label></strong></td>
+							</tr>
+						</tfoot>
+					<?php } ?>
+
+					</tbody>
+					</table>
 				</div>
 
 				<div class="cart_navigation">
@@ -144,19 +151,50 @@
 </div>
 <script src="<?php echo base_url('assets/js/jquery.min.js'); ?>"></script>
 <script>
+	var incrementQty;
+	var decrementQty;
+	var plusBtn = $(".cart-qty-plus");
+	var minusBtn = $(".cart-qty-minus");
+	var incrementQty = plusBtn.click(function() {
+		var $n = $(this)
+			.parent(".button-container")
+			.find(".qty");
+		$n.val(Number($n.val()) + 1);
+		updateCartItem();
+	});
+
+	var decrementQty = minusBtn.click(function() {
+		var $n = $(this)
+			.parent(".button-container")
+			.find(".qty");
+		var QtyVal = Number($n.val());
+		if (QtyVal > 1) {
+			$n.val(QtyVal - 1);
+		}
+		updateCartItem();
+	});
+
 	// Update item quantity
-	function updateCartItem(obj, rowid) {
-		$.get("<?php echo base_url('cart/updateItemQty/'); ?>", {
-			rowid: rowid,
-			qty: obj.value
-		}, function(resp) {
-			if (resp == 'ok') {
-				location.reload();
-			} else {
-				alert('โปรดกรอกจำนวนมากกว่า 1 ชิ้น');
-				document.getElementById('qty').value = '1'
-			}
-		});
+	function updateCartItem() {
+		$('.qty').each(function() {
+			var qty = $(this).parent(".button-container").find('.qty').val();
+			var rowid = $(this).parent(".button-container").find('.rowid').val();
+			// console.log(qty);
+			// console.log(rowid);
+			$.get("<?php echo base_url('cart/updateItemQty/'); ?>", {
+				rowid: rowid,
+				qty: qty
+			}, function(resp) {
+				if (resp == 'ok') {
+					location.reload();
+				} else {
+					alert('โปรดกรอกจำนวนมากกว่า 1 ชิ้น');
+					document.getElementById('qty').value = '1'
+				}
+			});
+
+		})
+		// alert("1");
 	}
 
 	function removeCartItem() {

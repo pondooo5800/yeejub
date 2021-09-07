@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>YeeJub.com | ร้านหยี่จั๊บทุกอย่าง 20 บาท</title>
+    <title>YEEJUB.NET | ร้านหยี่จั๊บทุกอย่าง 20 บาท</title>
 
 	<link rel="shortcut icon" href="{base_url}assets/themes/fontend/assets/img/54256097_2270922642964177_7327005510220120064_n.png" />
 	<link rel="icon" href="{base_url}assets/themes/fontend/assets/img/54256097_2270922642964177_7327005510220120064_n.png" type="image/png" sizes="16x16">

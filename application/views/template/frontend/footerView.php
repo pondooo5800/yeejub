@@ -6,7 +6,7 @@
             <!-- /#trademark-box -->
             <div id="trademark-box" class="row" align="center" style="padding-top: 15px">
                 <div class="col-sm-12">
-                    <ul class="owl-intab owl-carousel" data-loop="true" data-items="6" data-autoplay="true" data-dots="false" data-nav="true">
+                    <ul class="owl-intab owl-carousel" data-loop="true" data-responsive='{"0":{"items":2},"600":{"items":4},"1000":{"items":6}}' data-autoplay="true" data-dots="false" data-nav="true">
                 <?php
                 	$this->load->model('common_model');
                     $brand =  $this->common_model->custom_query("select * from tb_banners where fag_allow = 'allow'");
@@ -65,10 +65,10 @@
                                     <p>E-mail : <?php echo $contact['contact_email']?></p>
                                 </li>
                                 <li>
-                                    <p>Facebook : <a href="<?php echo $contact['contact_facebook_link']?>"><?php echo $contact['contact_facebook']?></a> </p>
+                                    <p>Facebook : <a href="<?php echo $contact['contact_facebook_link']?>" target="_blank"><?php echo $contact['contact_facebook']?></a> </p>
                                 </li>
                                 <li>
-						            <p>Line : <a href="<?php echo $contact['contact_line_link']?>"><?php echo $contact['contact_line']?></a></p>
+						            <p>Line : <a href="<?php echo $contact['contact_line_link']?>" target="_blank"><?php echo $contact['contact_line']?></a></p>
                                 </li>
                             </ul>
                         </div>

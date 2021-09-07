@@ -60,16 +60,16 @@
                                     <br>
 
                                     <label for="member_fname" class="required">ชื่อ <spen style="color: red;">*</spen> </label>
-                                    <input type="text" class="input form-control" name="member_fname" id="member_fname" value="<?php echo ($this->session->userdata('member_fname'))?>">
+                                    <input type="text" class="input form-control" name="member_fname" id="member_fname" value="{record_member_fname}">
                                     <br>
                                     <label for="member_lname" class="required">นามสกุล <spen style="color: red;">*</spen> </label>
-                                    <input type="text" class="input form-control" name="member_lname" id="member_lname" value="<?php echo ($this->session->userdata('member_lname'))?>">
+                                    <input type="text" class="input form-control" name="member_lname" id="member_lname" value="{record_member_lname}">
                                     <br>
                                     <label for="member_shop" class="required">ชื่อร้าน <spen style="color: red;">*</spen> </label>
-                                    <input type="text" class="input form-control" name="member_shop" id="member_shop" value="<?php echo ($this->session->userdata('member_shop'))?>">
+                                    <input type="text" class="input form-control" name="member_shop" id="member_shop" value="{record_member_shop}">
                                     <br>
                                     <label for="member_email_addr">Email Address </label>
-                                    <input type="text" name="member_email_addr" class="input form-control" id="member_email_addr" value="<?php echo ($this->session->userdata('member_email_addr'))?>">
+                                    <input type="text" name="member_email_addr" class="input form-control" id="member_email_addr" value="{record_member_email_addr}">
                                     <br>
                                     <label for="member_addr">ที่อยู่ในการจัดส่งสินค้า  <spen style="color: red;">*</spen></label>
                                     <textarea class="input form-control" id="member_addr" name="member_addr" rows="3">{record_member_addr}</textarea>

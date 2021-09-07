@@ -44,16 +44,17 @@
 									<td>{record_member_email_addr}</td>
 								</tr>
 								<tr>
+									<td class="text-right fit"><b>ชื่อร้าน :</b></td>
+									<td>{record_member_shop}</td>
+								</tr>
+
+								<tr>
 									<td class="text-right fit"><b>ที่อยู่ในการจัดส่งสินค้า :</b></td>
 									<td>{record_member_addr}</td>
 								</tr>
 								<tr>
 									<td class="text-right fit"><b>หมายเหตุ (ถ้ามี) :</b></td>
 									<td>{record_member_note}</td>
-								</tr>
-								<tr>
-									<td class="text-right fit"><b>จำนวนใบสั่งซื้อ :</b></td>
-									<td>{0}</td>
 								</tr>
 								<tr>
 									<td class="text-right fit"><b>สถานะ :</b></td>

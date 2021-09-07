@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>YeeJub.com | ร้านหยี่จั๊บทุกอย่าง 20 บาท</title>
+    <title>YEEJUB.NET | ร้านหยี่จั๊บทุกอย่าง 20 บาท</title>
     <meta name="keywords" content="YeeJub, ร้านหยี่จั๊บทุกอย่าง 20 บาท" />
     <link rel="shortcut icon" type="image/png" href="{base_url}assets/themes/frontend/assets/img/favicon_io/favicon.png" />
 	<!--     Fonts and icons     -->

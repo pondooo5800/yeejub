@@ -112,16 +112,16 @@ class Shop extends CI_Controller
 		$this->load->model('common_model');
 		$product = $this->db->query("select * from tb_products_types where fag_allow = 'allow'");
 		$brand = $this->db->query("select * from tb_banners where fag_allow = 'allow'");
+		$promotion = $this->db->query("select * from tb_promotions where fag_allow = 'allow'");
 		$this->data['product_type'] = $product->result_array();
 		$this->data['brand'] = $brand->result_array();
+		$this->data['promotion'] = $promotion->result_array();
 		$this->render_view('shop');
 	}
 	public function category($product_type_id = NULL )
 	{
 		$this->load->model('common_model');
 		$total_rows = rowArray($this->common_model->custom_query("select COUNT(*) as total_rows from tb_products where product_type = ".$product_type_id."	and fag_allow = 'allow'"));
-		// print_r($this->db->last_query());
-		// die();
 
 		$config = array();
         $config["base_url"] = base_url() . "shop/category/".$product_type_id;
@@ -163,8 +163,10 @@ class Shop extends CI_Controller
 		$this->data['product_type_id'] = $product['product_type_id'];
 		$product = $this->db->query("select * from tb_products_types where fag_allow = 'allow'");
 		$brand = $this->db->query("select * from tb_banners where fag_allow = 'allow'");
+		$promotion = $this->db->query("select * from tb_promotions where fag_allow = 'allow'");
 		$this->data['product_type'] = $product->result_array();
 		$this->data['brand'] = $brand->result_array();
+		$this->data['promotion'] = $promotion->result_array();
 
 		$this->render_view('shop');
 	}
@@ -215,8 +217,63 @@ class Shop extends CI_Controller
 
 		$product = $this->db->query("select * from tb_products_types where fag_allow = 'allow'");
 		$brand = $this->db->query("select * from tb_banners where fag_allow = 'allow'");
+		$promotion = $this->db->query("select * from tb_promotions where fag_allow = 'allow'");
 		$this->data['product_type'] = $product->result_array();
 		$this->data['brand'] = $brand->result_array();
+		$this->data['promotion'] = $promotion->result_array();
+
+		$this->render_view('shop');
+	}
+	public function promotion($promotion_id = NULL )
+	{
+		$this->load->model('common_model');
+		$total_rows = rowArray($this->common_model->custom_query("select COUNT(*) as total_rows from tb_promotions where promotion_id = ".$promotion_id."	and fag_allow = 'allow'"));
+		$config = array();
+        $config["base_url"] = base_url() . "shop/promotion/".$promotion_id;
+        $config["total_rows"] = $total_rows['total_rows'];
+        $config["per_page"] = 24;
+		$config["uri_segment"] = 3;
+		$config['next_link']        = 'Next';
+		$config['prev_link']        = 'Prev';
+		$config['first_link']       = false;
+		$config['last_link']        = false;
+		$config['full_tag_open']    = '<ul class="pagination justify-content-center">';
+		$config['full_tag_close']   = '</ul>';
+		$config['attributes']       = ['class' => 'page-link'];
+		$config['first_tag_open']   = '<li class="page-item">';
+		$config['first_tag_close']  = '</li>';
+		$config['prev_tag_open']    = '<li class="page-item">';
+		$config['prev_tag_close']   = '</li>';
+		$config['next_tag_open']    = '<li class="page-item">';
+		$config['next_tag_close']   = '</li>';
+		$config['last_tag_open']    = '<li class="page-item">';
+		$config['last_tag_close']   = '</li>';
+		$config['cur_tag_open']     = '<li class="page-item active"><a class="page-link">';
+		$config['cur_tag_close']    = '<span class="sr-only">(current)</span></a></li>';
+		$config['num_tag_open']     = '<li class="page-item">';
+		$config['num_tag_close']    = '</li>';
+		$this->pagination->initialize($config);
+
+        $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+        $this->data['promotions'] = $this->Shop_model->
+		fetch_promotion($config["per_page"], $page ,$promotion_id);
+		// print_r($this->db->last_query());
+		// die();
+
+		// print_r($page);
+		// die();
+		$this->data['links'] = $this->pagination->create_links();
+
+		$promotion = rowArray($this->common_model->custom_query("select * from tb_promotions where fag_allow = 'allow' and promotion_id =". $promotion_id));
+		$this->data['promotion_name'] = $promotion['promotion_name'];
+		$this->data['promotion_id'] = $promotion['promotion_id'];
+
+		$product = $this->db->query("select * from tb_products_types where fag_allow = 'allow'");
+		$brand = $this->db->query("select * from tb_banners where fag_allow = 'allow'");
+		$promotion = $this->db->query("select * from tb_promotions where fag_allow = 'allow'");
+		$this->data['product_type'] = $product->result_array();
+		$this->data['brand'] = $brand->result_array();
+		$this->data['promotion'] = $promotion->result_array();
 
 		$this->render_view('shop');
 	}
@@ -251,12 +308,15 @@ class Shop extends CI_Controller
 		$this->load->model('common_model');
 		$product = $this->db->query("select * from tb_products_types where fag_allow = 'allow'");
 		$brand = $this->db->query("select * from tb_banners where fag_allow = 'allow'");
+		$promotion = $this->db->query("select * from tb_promotions where fag_allow = 'allow'");
 		$this->data['product_type'] = $product->result_array();
 		$this->data['brand'] = $brand->result_array();
+		$this->data['promotion'] = $promotion->result_array();
 
 		$key = $this->input->post('search');
 		$this->data['txt_search']	= $key;
 		$this->data['products'] = $this->Shop_model->search($key);
+
 		$this->render_view('shop');
   	}
 

@@ -6,26 +6,47 @@
     </div>
 
     <div class="row fix_menu" id="my_menu1_des" style="margin:  2px;">
-        <!-- <a href="http://www.kgg.co.th/products.html&amp;bid=35">
-            <div class="col-sm-2 ads_brand"><img src="http://www.kgg.co.th/files/brand/Razer-logo.png"></div>
-        </a> -->
+        <?php
+        foreach ($promotion as $row) { ?>
+        <?php
+        if ($row['promotion_type'] == 1) { ?>
+            <a href="<?php echo base_url('shop/promotion/') . $row['promotion_id']; ?>">
+                <div class="col-sm-4 ads_brand">
+                    <img style="margin: 10px" src="<?php echo base_url($row['promotion_img1']); ?>">
+                </div>
+            </a>
+       <?php } else if ($row['promotion_type'] == 0) { ?>
+        <a href="#" data-toggle="modal" data-target="#myPromotion"
+            data-row-id='{
+                "promotion_id":"<?php echo ($row['promotion_id']); ?>"
+                ,"promotion_name":"<?php echo ($row['promotion_name']); ?>"
+                ,"promotion_detail":"<?php echo ($row['promotion_detail']); ?>"
+                ,"promotion_img1":"<?php echo base_url($row['promotion_img1']); ?>"
+            }'>
+                <div class="col-sm-4 ads_brand">
+                    <img style="margin: 10px" src="<?php echo base_url($row['promotion_img1']); ?>">
+                </div>
+            </a>
+        <?php }?>
+        <?php } ?>
     </div>
+
     <div class="row fix_menu" id="my_menu2_des" style="margin:  2px;">
-    <?php
+        <?php
         foreach ($product_type as $row) { ?>
-        <a href="<?php echo base_url('shop/category/') . $row['product_type_id']; ?>">
-            <div class="col-sm-2 ads_brand">
-                <p style="text-align: center;max-width: 100%;font-weight: bold;font-size: 16px;">
-                    <?php echo $row['product_type_name']; ?>
-                </p>
-            </div>
-        </a>
+            <a href="<?php echo base_url('shop/category/') . $row['product_type_id']; ?>">
+                <div class="col-sm-2 ads_brand">
+                    <p style="text-align: center;max-width: 100%;font-weight: bold;font-size: 16px;">
+                        <?php echo $row['product_type_name']; ?>
+                    </p>
+                </div>
+            </a>
         <?php } ?>
     </div>
     <div class="row fix_menu" id="my_menu3_des" style="margin:  2px;">
         <?php
-            foreach ($brand as $row) { ?>
-        <a href="<?php echo base_url('shop/brand/') . $row['banner_id']; ?>">
+        foreach ($brand as $row) { ?>
+            <a href="<?php echo base_url('shop/brand/') . $row['banner_id']; ?>">
                 <div class="col-sm-2 ads_brand">
                     <img style="margin: 10px" src="<?php echo base_url($row['banner_img1']); ?>">
                 </div>
@@ -56,7 +77,7 @@
                                 <ul class="product-list owl-carousel" data-dots="false" data-loop="true" data-nav="true" data-margin="0" data-autoplayTimeout="1000" data-autoplayHoverPause="true" data-responsive='{"0":{"items":1},"600":{"items":3},"1000":{"items":4}}'>
                                     <?php
                                     $this->load->model('common_model');
-                                    $product = $this->common_model->custom_query("select * from tb_products where fag_allow = 'allow' and product_type =" . $row['product_type_id']);
+                                    $product = $this->common_model->custom_query("select tb_products.*,tb_products_units.product_unit_name from tb_products LEFT JOIN tb_products_units ON tb_products.product_unit_id = tb_products_units.product_unit_id where tb_products.fag_allow = 'allow' and tb_products.product_type ='" . $row['product_type_id'] . "'ORDER BY tb_products.product_id DESC");
                                     foreach ($product as $value) { ?>
                                         <li>
                                             <div class="left-block">
@@ -76,9 +97,9 @@
                                                 <div class="row">
                                                     <div class="button-container" style="align-items: center;justify-content: space-around;">
                                                         <div class="button-container">
-                                                            <button class="cart-qty-plus" type="button" value="+">+</button>
-                                                            <input type="text" min="1" name="qty" id="<?php echo $value['product_id'] ?>" class="qty form-control" value="1" OnKeyPress="return chkNumber(this)" />
                                                             <button class="cart-qty-minus" type="button" value="-">-</button>
+                                                            <input type="text" min="1" name="qty" id="<?php echo $value['product_id'] ?>" class="qty form-control" value="1" OnKeyPress="return chkNumber(this)" />
+                                                            <button class="cart-qty-plus" type="button" value="+">+</button>
                                                         </div>
                                                         <span>
                                                             <button style="width: 100px;" type="button" name="add_cart" class="btn btn-success add_cart add-cart" data-segment="ajax" data-productname="<?php echo $value['product_name'] ?>" data-price="<?php echo $value['price'] ?>" data-productid="<?php echo $value['product_id'] ?>" />สั่งซื้อ</button>
@@ -116,9 +137,14 @@
             <div class='modal-footer text-left'>
                 <form method='post' action='<?php echo base_url('shop/addToCart/'); ?>'>
                     <div class="row vertical-align">
-                        <div class="col-sm-12 col-md-7">
-                            <div class="button-container" style="align-items: center;justify-content: center;padding-bottom: 5px;">
-                                <p style="font-size:14px;text-align: center;" id="product_text"></p>
+                        <div class="col-sm-12 col-md-5">
+                            <div class="button-container" style="align-items: center;justify-content: center;">
+                                <p style="font-size:14px;text-align: center;" id="product_name"></p>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-3">
+                            <div class="button-container" style="align-items: center;justify-content: center;">
+                                <p style="color: #f30; font-weight: bold;font-size:14px;text-align: center;" id="unit_text"></p>
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-5">
@@ -126,9 +152,9 @@
                                 <span>
                                     จำนวน
                                 </span>
-                                <button class="cart-qty-plus" type="button" value="+">+</button>
-                                <input type="text" min="1" id="qty" name="qty" class="qty form-control" value="1" OnKeyPress="return chkNumber(this)" />
                                 <button class="cart-qty-minus" type="button" value="-">-</button>
+                                <input type="text" min="1" id="qty" name="qty" class="qty form-control" value="1" OnKeyPress="return chkNumber(this)" />
+                                <button class="cart-qty-plus" type="button" value="+">+</button>
                                 <span>
                                     <button style="width: 100px;" type='submit' name='submit' value="submit" class="btn btn-success">สั่งซื้อ</button>
                                 </span>
@@ -138,6 +164,29 @@
                     <input type="hidden" id="product_id" name="product_id" value="">
                     <input type="hidden" name="segment" value="index">
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class='modal fade' id='myPromotion' tabindex='-1' role='dialog' aria-labelledby='delModalLabel' aria-hidden='true'>
+    <div class='modal-dialog modal-lg' role='document'>
+        <div class='modal-content'>
+            <div class="modal-header" style="border-bottom: 0px;">
+                <button type="button" style="font-size: 25px;" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class='modal-body' style="text-align: center;">
+                <div class="modal-body">
+                    <img style="width:400px; height:400px; object-fit:contain" id="my_image_promotion" /></a>
+                </div>
+            </div>
+            <div class='modal-footer text-left'>
+                    <div class="row vertical-align">
+                        <div class="col-sm-12 col-md-12">
+                            <div class="button-container" style="align-items: center;justify-content: center;padding-bottom: 5px;">
+                            <p style="font-size:14px;text-align: center;" id="promotion_detail_text"></p>
+                            </div>
+                        </div>
+                    </div>
             </div>
         </div>
     </div>

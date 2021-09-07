@@ -48,13 +48,6 @@
 											</select>
 										</div>
 									</div>
-									<!-- <div class="col-md-2">
-										<div class="form-group bmd-form-group">
-											<a href="{page_url}/add" class="btn btn-success" data-toggle="tooltip" title="เพิ่มข้อมูลใหม่" id="btn-search">
-												<i class="fa fa-plus-square"></i></span>&nbsp;&nbsp;เพิ่มรายการ
-											</a>
-										</div>
-									</div> -->
 								</div>
 							</div>
 						</div>
@@ -85,9 +78,18 @@
 										<a href="{site_url}cart/orderPDF/{id}" target="_blank" class="my-tooltip btn btn-info btn-md" data-toggle="tooltip" title="แสดงข้อมูลรายละเอียด">
 											<i class="material-icons">picture_as_pdf</i>
 										</a>
-										<!-- <a href="{page_url}/edit/{url_encrypt_id}" class="my-tooltip btn btn-warning " data-toggle="tooltip" title="แก้ไขข้อมูล">
-											<i class="material-icons">edit</i>
-										</a> -->
+										<a href="#" data-toggle="modal" data-target="#p_b_u" class="my-tooltip btn btn-secondarying btn-md" data-toggle="tooltip" title="ประเภท โปรโมชั่น แบรนด์ หน่วย" data-row-id='{
+											"id":"{id}"
+											,"encrypt_id":"{encrypt_id}"
+											,"record_order":"{record_number}"
+											,"customer_id":"{member_user_id}"
+											,"grand_total":"{grand_total}"
+											,"status":"{status}"
+										}'>
+											<i class="material-icons">tune</i>
+										</a>
+
+
 										<a href="javascript:void(0);" class="btn-delete-row my-tooltip btn btn-danger" data-toggle="tooltip" title="ลบรายการนี้" data-id="{encrypt_id}" data-row-number="{record_number}">
 											<i class="material-icons">delete_forever</i>
 										</a>
@@ -133,6 +135,54 @@
 			</div>
 		</div>
 	</div>
+</div>
+
+<div class="modal fade" id='p_b_u' tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">Close</span>
+				</button>
+				<h4 class="modal-title" id="text_order_code">
+				</h4>
+			</div>
+
+			<!-- Modal Body -->
+			<div class="modal-body">
+
+				<form class="form-horizontal" role="form">
+					<p style="font-size: 16px; text-align: center;">
+						แก้ไข <span id="text_customer_id"></span>
+					</p>
+
+					<div class="container"">
+					<div class=" form-row justify-content-around">
+						<div class="form-group col-md-10 ">
+						<label style=" font-weight: bold;" class="control-label" for="status" id="text_status"></label>
+						<select id="status" class="status" name="status" value="">
+							<option value="">- เลือก สถานะ -</option>
+							<option value="1">รอชำระเงิน</option>
+							<option value="2">อยู่ระหว่างจัดส่ง</option>
+							<option value="3">ดำเนินการเรียบร้อย</option>
+						</select>
+						</div>
+					</div>
+			</div>
+			</form>
+
+		</div>
+
+		<!-- Modal Footer -->
+		<div class="modal-footer" style="justify-content: center;">
+			<button onClick="window.location.reload();" type="button" class="btn btn-success  " data-dismiss="modal">
+				ตกลง
+			</button>
+		</div>
+	</div>
+</div>
 </div>
 
 <script>

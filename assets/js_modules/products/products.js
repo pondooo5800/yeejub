@@ -207,7 +207,6 @@ var Products = {
 }
 
 $(document).ready(function() {
-
 	$(document).on('change','#set_order_by',function(){
 		$('input[name="order_by"]').val($(this).val());
 		$('button[name="submit"]').click();
@@ -225,6 +224,48 @@ $(document).ready(function() {
 		}
 		$('#' + elem_label).val(msg);
 	});
+    $('#files').change(function() {
+		var files = $('#files')[0].files;
+		var error = '';
+		var form_data = new FormData();
+		for (var count = 0; count < files.length; count++) {
+		  var name = files[count].name;
+		  var extension = name.split('.').pop().toLowerCase();
+		  if (jQuery.inArray(extension, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+			error += "Invalid " + count + " Image File"
+		  } else {
+			form_data.append("files[]", files[count]);
+		  }
+		}
+		if (error == '') {
+			var frm_action = site_url("products/products/upload");
+		  $.ajax({
+			url: frm_action, //base_url() return http://localhost/tutorial/codeigniter/
+			method: "POST",
+			data: form_data,
+			contentType: false,
+			cache: false,
+			processData: false,
+			beforeSend: function() {
+			  $('#uploaded_images').html("<label style='text-center' class='text-warning'>Uploading</label>");
+			},
+			success: function(data) {
+				$('#uploaded_images').html("<label style='text-center' class='text-success'>Success</label>");
+
+				notify(
+					"แจ้งเตือน",
+					"บันทึกข้อมูลเรียบร้อย",
+					"success",
+					"right",
+					"bottom"
+				);
+			  $('#files').val('');
+			}
+		  })
+		} else {
+		  alert(error);
+		}
+	  });
 
 	$('#btnSave').click(function() {
 		$('#addModal').modal('hide');
@@ -263,6 +304,9 @@ $(document).ready(function() {
 	setDropdownList('#user_update');
 	setDropdownList('#fag_allow');
 	setDropdownList('#product_type');
+	setDropdownList('#product_unit_id');
+	setDropdownList('#banner_type');
+	setDropdownList('#product_pro_id');
 
 	//Set default value
 	var order_by = $('#set_order_by').attr('value');
@@ -274,6 +318,121 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
+
+	$('#p_b_u').on('show.bs.modal', function(e) {
+		var rowId = $(e.relatedTarget).data('row-id');
+        console.log(rowId);
+        var product_code = 'รหัสสินค้า ' + rowId.product_code;
+        var promotion_name = rowId.promotion_name;
+        var banner_type = rowId.banner_name;
+        var product_unit_id = rowId.product_unit_name;
+        var product_type = rowId.product_type_name;
+
+        var record_product_id = rowId.record_product_id;
+		document.getElementById("text_product_code").innerHTML = product_code;
+		document.getElementById("text_promotion_name").innerHTML = promotion_name;
+		document.getElementById("text_banner_type").innerHTML = banner_type;
+		document.getElementById("text_product_unit_id").innerHTML = product_unit_id;
+		document.getElementById("text_product_type").innerHTML = product_type;
+		$(".product_pro_id").on("change", function () {
+			var frm_action = site_url("products/products/updateAjax");
+			var id = record_product_id;
+			var item = this.value;
+			$.ajax({
+				type: "POST",
+				url: frm_action,
+				dataType: "json",
+				data: {
+					id: id,
+					product_pro_id: item,
+					type: "promotion",
+				},
+				success: function (data) {
+					notify(
+						"แจ้งเตือน",
+						"บันทึกข้อมูลเรียบร้อย",
+						"success",
+						"right",
+						"bottom"
+					);
+				},
+			});
+		});
+		$(".product_unit_id").on("change", function () {
+			var frm_action = site_url("products/products/updateAjax");
+			var id = record_product_id;
+			var item = this.value;
+			$.ajax({
+				type: "POST",
+				url: frm_action,
+				dataType: "json",
+				data: {
+					id: id,
+					product_unit_id: item,
+					type: "unit",
+				},
+				success: function (data) {
+					notify(
+						"แจ้งเตือน",
+						"บันทึกข้อมูลเรียบร้อย",
+						"success",
+						"right",
+						"bottom"
+					);
+				},
+			});
+		});
+		$(".banner_type").on("change", function () {
+			var frm_action = site_url("products/products/updateAjax");
+			var id = record_product_id;
+			var item = this.value;
+			$.ajax({
+				type: "POST",
+				url: frm_action,
+				dataType: "json",
+				data: {
+					id: id,
+					banner_type: item,
+					type: "banner",
+				},
+				success: function (data) {
+					notify(
+						"แจ้งเตือน",
+						"บันทึกข้อมูลเรียบร้อย",
+						"success",
+						"right",
+						"bottom"
+					);
+				},
+			});
+		});
+		$(".product_type").on("change", function () {
+			var frm_action = site_url("products/products/updateAjax");
+			var id = record_product_id;
+			var item = this.value;
+			$.ajax({
+				type: "POST",
+				url: frm_action,
+				dataType: "json",
+				data: {
+					id: id,
+					product_type: item,
+					type: "product",
+				},
+				success: function (data) {
+					notify(
+						"แจ้งเตือน",
+						"บันทึกข้อมูลเรียบร้อย",
+						"success",
+						"right",
+						"bottom"
+					);
+				},
+			});
+		});
+    });
+
+
     $( ".preview-images-zone" ).sortable();
 
     $(document).on('click', '.image-cancel', function() {

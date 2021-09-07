@@ -45,9 +45,21 @@ class Products_model extends MY_Model
 			'product_code' => getAutoNumber('tb_products','product_code','',5),
 			'product_name' => $post['product_name'],
 			'product_type' => $post['product_type'],
+			'banner_type' => $post['banner_type'],
+			'product_unit_id' => $post['product_unit_id'],
+			'product_pro_id' => $post['product_pro_id'],
 			'price' => $post['price'],
 			'product_img1' => ($post['product_img1'] != '' ? $post['product_img1'] : ''),
 			'fag_allow' => ($post['fag_allow'] != '' ? $post['fag_allow'] : 'allow'),
+		);
+		return $this->add_record($data);
+	}
+	public function create_file_img($file_path)
+	{
+		$data = array(
+			'product_code' => getAutoNumber('tb_products','product_code','',5),
+			'product_img1' => ($file_path),
+			'fag_allow' => 'allow',
 		);
 		return $this->add_record($data);
 	}
@@ -118,14 +130,11 @@ class Products_model extends MY_Model
 		$this->set_order_by($order_by);
 		$this->set_offset($offset);
 		$this->set_limit($limit);
-		$this->db->select("$this->my_table.*,tb_products_types.product_type_name");
+		$this->db->select("$this->my_table.*,tb_products_types.product_type_name,tb_promotions.promotion_name,tb_banners.banner_name,tb_products_units.product_unit_name");
 		$this->db->join('tb_products_types', "$this->my_table.product_type = tb_products_types.product_type_id", 'left');
-		// $this->db->join('category AS category_1', "$this->my_table.cate_id = category_1.cate_id", 'left');
-		// $this->db->join('users AS users_2', "$this->my_table.shop_user = users_2.user_id", 'left');
-		// $this->db->join('users AS users_3', "$this->my_table.user_delete = users_3.user_id", 'left');
-		// $this->db->join('users AS users_4', "$this->my_table.user_add = users_4.user_id", 'left');
-		// $this->db->join('users AS users_5', "$this->my_table.user_update = users_5.user_id", 'left');
-
+		$this->db->join('tb_promotions', "$this->my_table.product_pro_id = tb_promotions.promotion_id", 'left');
+		$this->db->join('tb_banners', "$this->my_table.banner_type = tb_banners.banner_id", 'left');
+		$this->db->join('tb_products_units', "$this->my_table.product_unit_id = tb_products_units.product_unit_id", 'left');
 		$list_record = $this->list_record();
 		// print_r($this->db->last_query());
 		// die();
@@ -144,6 +153,9 @@ class Products_model extends MY_Model
 			'product_code' => $post['product_code'],
 			'product_name' => $post['product_name'],
 			'product_type' => $post['product_type'],
+			'banner_type' => $post['banner_type'],
+			'product_unit_id' => $post['product_unit_id'],
+			'product_pro_id' => $post['product_pro_id'],
 			'price' => $post['price'],
 			'fag_allow' => $post['fag_allow'],
 		);
@@ -154,6 +166,29 @@ class Products_model extends MY_Model
 
 
 		$product_id = checkEncryptData($post['encrypt_product_id']);
+		$this->set_where("$this->my_table.product_id = $product_id");
+		return $this->update_record($data);
+	}
+	public function updateAjax($post)
+	{
+		if ($post['type'] == "promotion") {
+			$data = array(
+				'product_pro_id' => $post['product_pro_id']
+			);
+		} else if ($post['type'] == "unit") {
+			$data = array(
+				'product_unit_id' => $post['product_unit_id']
+			);
+		} else if ($post['type'] == "banner") {
+			$data = array(
+				'banner_type' => $post['banner_type']
+			);
+		} else if ($post['type'] == "product") {
+			$data = array(
+				'product_type' => $post['product_type']
+			);
+		}
+		$product_id = $post['id'];
 		$this->set_where("$this->my_table.product_id = $product_id");
 		return $this->update_record($data);
 	}

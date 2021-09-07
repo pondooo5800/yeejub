@@ -559,6 +559,25 @@ class Orders extends CRUD_Controller
 		}
 	}
 
+	public function updateAjax() {
+		$message = '';
+		$post = $this->input->post(NULL, TRUE);
+		// print_r($post);
+		// die();
+		$result = $this->Orders->updateAjax($post);
+		if ($result == false) {
+			$message = $this->Orders->error_message;
+			$ok = FALSE;
+		} else {
+			$message = '<strong>บันทึกข้อมูลเรียบร้อย</strong>' . $this->Orders->error_message;
+			$ok = TRUE;
+		}
+			$json = json_encode(array(
+				'is_successful' => $ok,
+				'message' => $message
+			));
+			echo $json;
+	}
 
 	/**
 	 * SET array data list
@@ -595,8 +614,8 @@ class Orders extends CRUD_Controller
 			case '2':
 				$subject = 'อยู่ระหว่างจัดส่ง';
 				break;
-			case 'ดำเนินการเรียบร้อย':
-				$subject = 'ลบ';
+			case '3':
+				$subject = 'ดำเนินการเรียบร้อย';
 				break;
 		}
 		return $subject;

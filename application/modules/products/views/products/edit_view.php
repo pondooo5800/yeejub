@@ -53,14 +53,36 @@
 							</div>
 							<div class="form-row justify-content-around">
 								<div class="form-group col-md-4 ">
+									<label class="control-label" for="product_unit_id">หน่วยสินค้า :</label>
+									<select id="product_unit_id" name="product_unit_id" value="{record_product_unit_id}">
+										<option value="">- เลือก หน่วยสินค้า -</option>
+										{product_unit_id_option_list}
+									</select>
+								</div>
+								<div class="form-group col-md-4 ">
+									<label class="control-label" for="banner_type">แบรนด์สินค้า :</label>
+									<select id="banner_type" name="banner_type" value="{record_banner_type}">
+										<option value="">- เลือก แบรนด์สินค้า -</option>
+										{banner_type_option_list}
+									</select>
+								</div>
+							</div>
+
+							<div class="form-row justify-content-around">
+							<div class="form-group col-md-4 ">
+									<label class="control-label" for="product_pro_id">โปรโมชั่นสินค้า :</label>
+									<select id="product_pro_id" name="product_pro_id" value="{record_product_pro_id}">
+										<option value="">- เลือก โปรโมชั่นสินค้า -</option>
+										{product_pro_id_option_list}
+									</select>
+								</div>
+								<div class="form-group col-md-4 ">
 									<label class="control-label" for="fag_allow">สถานะ :</label>
 									<select id="fag_allow" name="fag_allow" value="{record_fag_allow}">
 										<option value="">- เลือก สถานะ -</option>
 										<option value="allow">เผยแพร่</option>
 										<option value="block">ไม่เผยแพร่</option>
 									</select>
-								</div>
-								<div class="form-group col-md-4 ">
 								</div>
 							</div>
 							<div class="form-row justify-content-around">

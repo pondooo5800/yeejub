@@ -1,7 +1,7 @@
 <div class="columns-container">
     <div class="container" id="columns" style="padding-bottom: 0px;">
         <div class="alert alert-success" style="text-align: center;">
-        <span style="font-weight: bold;font-size:16px">สั่งซื้อสินค้าสำเร็จ</span>
+            <span style="font-weight: bold;font-size:16px">สั่งซื้อสินค้าสำเร็จ</span>
         </div>
         <div class="page-content page-order">
             <div class="order-detail-content" id="view_cart">
@@ -39,23 +39,40 @@
 
                     </table>
                 </div>
-                <div class="cart_navigation">
-                    <button onClick="window.open('{base_url}cart/orderPDF/<?php echo $order['id']; ?>')" style="background-color: #5a6268; color: #FFFFFF" class="btn btn-info">พิมพ์ใบสั่งซื้อสินค้า</button>
+                <div class="content-text clearfix">
+                <div class="container">
+                <form class="form-inline" method='post' action='<?php echo base_url('cart/order_sendMail/' . $order['id']); ?>'>
+                        <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-6">
+                                <div class="form-group">
+                                    <span style="font-size:16px;font-weight: bold;">ส่งใบสั่งซื้อ</span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" id="member_email_order" name="member_email_order" placeholder="ระบุ Email ที่ต้องการส่งใบสั่งซื้อสินค้า" value="<?php echo ($this->session->userdata('member_email_addr')) ?>">
+                                    <input type="hidden" class="form-control" id="member_email_type" name="member_email_type" value="type_order">
+                                </div>
+                                <button type="submit" class="btn btn-primary" style="width: 110px;">ส่ง E-mail</button>
+                        </div>
+                        </form>
+
+                        <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                            <button onClick="window.open('{base_url}cart/orderPDF/<?php echo $order['id']; ?>')" style="background-color: #5a6268; color: #FFFFFF" class="btn btn-info">พิมพ์ใบสั่งซื้อสินค้า</button>
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                            <button type="button" onclick="window.location.href='{base_url}'"class="btn btn-primary">กลับหน้าแรก</button>
+                        </div>
                 </div>
-                <br>
-                <br>
-                <br>
+                </div>
                 <hr>
                 <?php
                 if ($this->session->flashdata("message")) {
-                                        echo "
+                    echo "
                     <div class='alert alert-success' style='text-align: center;'>
                         <span style='font-weight: bold;font-size:16px'>" . $this->session->flashdata("message") . "</span>
                     </div>
                     ";
                 }
                 ?>
-                <div class="content-text clearfix">
+                <!-- <div class="content-text clearfix">
                     <h2><span style="font-size:16px;font-weight: bold;">ส่งใบสั่งซื้อไปยัง E-mail</span></h2>
                     <br>
                     <form class="form-horizontal" method='post' action='<?php echo base_url('cart/order_sendMail/' . $order['id']); ?>'>
@@ -69,7 +86,7 @@
                             </div>
                         </div>
                     </form>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

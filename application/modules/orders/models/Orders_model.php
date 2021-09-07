@@ -129,6 +129,17 @@ class Orders_model extends MY_Model
 		$this->set_where("$this->my_table.id = $order_id");
 		return $this->update_record($data);
 	}
+	public function updateAjax($post)
+	{
+				// die(print_r($post));
+
+			$data = array(
+				'status' => $post['status']
+			);
+			$order_id = checkEncryptData($post['encrypt_id']);
+			$this->set_where("$this->my_table.id = $order_id");
+		return $this->update_record($data);
+	}
 
 
 	public function delete($post)

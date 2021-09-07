@@ -207,6 +207,44 @@ var Orders = {
 }
 
 $(document).ready(function() {
+	$('#p_b_u').on('show.bs.modal', function(e) {
+		var rowId = $(e.relatedTarget).data('row-id');
+        console.log(rowId);
+        var order_code = 'เลขที่ใบสั่งซื้อ ' + rowId.id;
+        var customer_id = 'รหัสสมาชิก ' + rowId.customer_id;
+        var status = 'สถานนะ : ' + rowId.status;
+        var record_id = rowId.id;
+        var record_order = rowId.encrypt_id;
+		document.getElementById("text_order_code").innerHTML = order_code;
+		document.getElementById("text_customer_id").innerHTML = customer_id;
+		document.getElementById("text_status").innerHTML = status;
+		$(".status").on("change", function () {
+			var frm_action = site_url("orders/orders/updateAjax");
+			var encrypt_id = record_order;
+			var id = record_id;
+			// console.log(encrypt_id);
+			var item = this.value;
+			$.ajax({
+				type: "POST",
+				url: frm_action,
+				dataType: "json",
+				data: {
+					id: id,
+					encrypt_id: encrypt_id,
+					status: item,
+				},
+				success: function (data) {
+					notify(
+						"แจ้งเตือน",
+						"บันทึกข้อมูลเรียบร้อย",
+						"success",
+						"right",
+						"bottom"
+					);
+				},
+			});
+		});
+    });
 
 	$(document).on('change','#set_order_by',function(){
 		$('input[name="order_by"]').val($(this).val());
@@ -262,6 +300,7 @@ $(document).ready(function() {
 	setDropdownList('#user_add');
 	setDropdownList('#user_update');
 	setDropdownList('#fag_allow');
+	setDropdownList('#status');
 
 	//Set default value
 	var order_by = $('#set_order_by').attr('value');

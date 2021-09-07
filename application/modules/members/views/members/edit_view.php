@@ -50,16 +50,26 @@
 
 							<div class="form-row justify-content-around">
 								<div class="form-group col-md-4 ">
+									<label class="control-label" for="member_shop">ชื่อร้าน :</label>
+									<div class="form-group has-success">
+										<input type="text" class="form-control" id="member_shop" name="member_shop" value="{record_member_shop}" />
+									</div>
+								</div>
+								<div class="form-group col-md-4 ">
 									<label class="control-label" for="member_mobile_no">เบอร์โทรศัพท์ :</label>
 									<div class="form-group has-success">
 										<input type="text" class="form-control" id="member_mobile_no" name="member_mobile_no" value="{record_member_mobile_no}" />
 									</div>
 								</div>
+							</div>
+							<div class="form-row justify-content-around">
 								<div class="form-group col-md-4 ">
 									<label class="control-label" for="member_email_addr">อีเมล :</label>
 									<div class="form-group has-success">
 										<input type="text" class="form-control" id="member_email_addr" name="member_email_addr" value="{record_member_email_addr}" />
 									</div>
+								</div>
+								<div class="form-group col-md-4 ">
 								</div>
 							</div>
 							<div class="form-row justify-content-around">
@@ -70,13 +80,20 @@
 									</div>
 								</div>
 								<div class="form-group col-md-4 ">
+									<label class="control-label" for="member_addr">ที่อยู่สำหรับออกใบเสร็จรับเงิน :</label>
+									<div class="form-group has-success">
+										<textarea class="form-control" id="member_addr" name="member_addr" rows="3">{record_member_addr}</textarea>
+									</div>
+								</div>
+							</div>
+							<div class="form-row justify-content-around">
+								<div class="form-group col-md-4 ">
 									<label class="control-label" for="member_note">หมายเหตุ (ถ้ามี) :</label>
 									<div class="form-group has-success">
 										<textarea class="form-control" id="member_note" name="member_note" rows="3">{record_member_note}</textarea>
 									</div>
 								</div>
-							</div>
-							<div class="form-row justify-content-around">
+
 								<div class="form-group col-md-4">
 									<label class="control-label" for="fag_allow">สถานะ :</label>
 									<select id="fag_allow" name="fag_allow" value="{record_fag_allow}">
@@ -84,7 +101,6 @@
 										<option value="block">ระงับการใช้งาน</option>
 									</select>
 								</div>
-								<div class="form-group col-md-4"/>
 							</div>
 						</div>
 						<br>
