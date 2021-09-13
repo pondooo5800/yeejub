@@ -318,6 +318,13 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
+	$(".product a").mouseover(function () {
+		$(".product a img").css("display", "none"); // hide all product images
+		$(this).find("img").css("display", "inline-block"); // show current hover image
+	})
+	$(".product a").mouseout(function () {
+		$(".product a img").css("display", "none"); // hide all product images
+	})
 
 	$('#p_b_u').on('show.bs.modal', function(e) {
 		var rowId = $(e.relatedTarget).data('row-id');
