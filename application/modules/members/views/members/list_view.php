@@ -69,6 +69,7 @@
 									<th class="text-center">รหัสสมาชิก</th>
 									<th class="text-center">ชื่อ สกุล</th>
 									<th class="text-center">เบอร์โทรศัพท์</th>
+									<th class="text-center">ชื่อร้าน</th>
 									<th class="text-center">สถานะ</th>
 									<th class="text-center" style="width:200px">เครื่องมือ</th>
 								</tr>
@@ -79,6 +80,7 @@
 									<td style="text-align:left;">{record_member_user_id}</td>
 									<td style="text-align:left;">{record_fullname}</td>
 									<td style="text-align:left;">{record_member_mobile_no}</td>
+									<td style="text-align:left;">{record_member_shop}</td>
 									<td style="text-align:center; {preview_status_color}">{preview_status}</td>
 									<td class="td-actions text-center">
 										<a href="{page_url}/preview/{url_encrypt_id}" class="my-tooltip btn btn-info btn-md" data-toggle="tooltip" title="แสดงข้อมูลรายละเอียด">

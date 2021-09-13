@@ -1,3 +1,19 @@
+<style>
+	td.product a img {
+    display: none;
+    position: absolute;
+    left: -80px;
+    top: -80px;
+	z-index:999;
+}
+td.product a {
+    display: inline-block;
+    position: relative;
+}
+td.product {
+    margin-left: 100px;
+}
+</style>
 
 <div class="container-fluid">
 	<div class="row">
@@ -93,8 +109,12 @@
 							<tbody>
 								<tr parser-repeat="[data_list]" id="row_{record_number}">
 									<td style="text-align:center;">{record_number}</td>
-									<td>{product_code}</td>
-									<td style="text-align:left;">{product_name}</td>
+									<td class="product" style="text-align:left;">
+										<a><img class="img-responsive" style="width:350px; height:350px; object-fit:contain" alt="product" src="{base_url}{product_img1}">{product_code}</a>
+									</td>
+									<td class="product" style="text-align:left;">
+										<a><img class="img-responsive" style="width:350px; height:350px; object-fit:contain" alt="product" src="{base_url}{product_img1}">{product_name}</a>
+									</td>
 									<td style="text-align:center;">
 										{record_promotion_name}
 									</td>
@@ -190,22 +210,23 @@
 			<!-- Modal Body -->
 			<div class="modal-body">
 				<br>
-			<div class="container"">
+				<div class="container"">
 						<div class=" form-row justify-content-center">
-						<input type="file" name="files" id="files" multiple />
-			<div id="uploaded_images"></div>
+					<input type="file" name="files" id="files" multiple />
+					<div id="uploaded_images"></div>
 
-					</div>
+				</div>
 			</div>
-<br>			</div>
-			<div class="modal-footer" style="justify-content: center;">
+			<br>
+		</div>
+		<div class="modal-footer" style="justify-content: center;">
 			<button onClick="window.location.reload();" type="button" class="btn btn-success  " data-dismiss="modal">
 				ตกลง
 			</button>
 		</div>
 
-		</div>
 	</div>
+</div>
 </div>
 
 <!-- Modal -->
@@ -297,4 +318,20 @@
 <script>
 	var param_search_field = '{search_field}';
 	var param_current_page = '{current_page_offset}';
+</script>
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+
+<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script>
+	$(document).ready(function () {
+    $(".product a").mouseover(function () {
+        $(".product a img").css("display", "none"); // hide all product images
+        $(this).find("img").css("display", "inline-block"); // show current hover image
+    })
+    $(".product a").mouseout(function () {
+        $(".product a img").css("display", "none"); // hide all product images
+    })
+});
 </script>

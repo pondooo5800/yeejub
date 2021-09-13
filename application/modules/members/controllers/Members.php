@@ -461,6 +461,8 @@ class Members extends CRUD_Controller
 			$data[$i]['record_fullname'] = $data[$i]['member_fname'] .' '. $data[$i]['member_lname'];
 			$data[$i]['record_member_email_addr'] = $data[$i]['member_email_addr'];
 			$data[$i]['record_member_mobile_no'] = $data[$i]['member_mobile_no'];
+			$data[$i]['record_member_shop'] = $data[$i]['member_shop'];
+
 			if ($data[$i]['fag_allow'] == 'allow') {
 				$data[$i]['preview_status_color'] = 'color:#4caf50';
 			} else if ($data[$i]['block'] == 'block') {
@@ -533,6 +535,7 @@ class Members extends CRUD_Controller
 		$this->data['record_member_mobile_no'] = $data['member_mobile_no'];
 		$this->data['record_member_shop'] = $data['member_shop'];
 		$this->data['record_member_addr'] = $data['member_addr'];
+		$this->data['record_member_same'] = $data['member_same'];
 		$this->data['record_member_note'] = $data['member_note'];
 		if ($data['fag_allow'] == 'allow') {
 			$this->data['preview_status_color'] = 'color:#4caf50';

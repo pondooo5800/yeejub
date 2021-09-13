@@ -545,6 +545,12 @@ class Products extends CRUD_Controller
 			));
 			echo $json;
 	}
+	public function upjax() {
+		$output = '';
+		  $output .= '
+		  <p align="center">da</p>';
+		echo $output;
+	}
 	public function update()
 	{
 		$message = '';
@@ -678,7 +684,15 @@ class Products extends CRUD_Controller
 			$arr = explode('/', $data[$i]['product_img1']);
 			$encrypt_file_name = end($arr);
 			$filename = $this->Products->getValueOf('tb_uploads_filename', 'filename', "encrypt_name = '$encrypt_file_name'", $this->db);
+			$data[$i]['product_img1'] = $data[$i]['product_img1'];
 			$data[$i]['preview_product_img1'] = setAttachLink('product_img1', $data[$i]['product_img1'], $filename);
+			$data[$i]['preview_products_img1'] = setAttachProductPreview('product_img1', $data[$i]['product_img1'], $filename);
+			// 		echo '<pre>';
+// 		print_r($list_data);
+// echo '</pre>';
+// 		exit;
+
+
 		}
 		return $data;
 	}

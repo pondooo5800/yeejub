@@ -99,26 +99,30 @@
 							<br><b><label style="font-size: 18px;">ร้านหยี่จั๊บ ขอขอบคุณทุกท่านที่ให้ความสนใจซื้อสินค้าของเรา</label></b>
 							<br>
 							<br>
-							<div class="text-left" style="font-size: 15px;">
+							<div class="text-center" style="font-size: 15px;">
 								<label class="required">
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;สำหรับการสั่งซื้อสินค้า ทางเราได้กำหนดยอดสั่งซื้อขั้นต่ำ 5,000 บาท โดยจะมีค่าขนส่ง 300 บาทสำหรับยอดสั่งซื้อไม่ถึง 10,000 บาท
+									สำหรับการสั่งซื้อสินค้า ทางเราได้กำหนดยอดสั่งซื้อขั้นต่ำ 5,000 บาท
+									<br>
+									โดยจะมีค่าขนส่ง 300 บาทสำหรับยอดสั่งซื้อไม่ถึง 10,000 บาท
+
+									<br>
 									และฟรีค่าจัดส่งเมื่อสั่งซื้อสินค้าตั้งแต่ 10,000 บาทขึ้นไป โดยแจ้งทางร้านหากท่านต้องการให้จัดส่ง
 									<br>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- ลูกค้าต่างจังหวัด ยอดสั่งสินค้า10,000 บาทขึ้นไป ทางร้านจะจัดส่งให้ท่าน ผ่านบริษัทขนส่งแถวพุทธมณฑล
+									- ลูกค้าต่างจังหวัด ยอดสั่งสินค้า10,000 บาทขึ้นไป ทางร้านจะจัดส่งให้ท่าน ผ่านบริษัทขนส่งแถวพุทธมณฑล
 									<br>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- ลูกค้าในกรุงเทพฯ ยอดสั่งสินค้า10,000 บาทขึ้นไป ทางร้านจัดส่งให้ท่านถึงหน้าร้าน
+									- ลูกค้าในกรุงเทพฯ ยอดสั่งสินค้า10,000 บาทขึ้นไป ทางร้านจัดส่งให้ท่านถึงหน้าร้าน
 								</label>
 
 							</div>
 							<br>
-							<div class="text-center" style="font-size: 15px;">
+							<!-- <div class="text-center" style="font-size: 15px;">
 								<label class="required"><input type="checkbox" id="checkboxDetermine">
 									ยอมรับเงื่อนไข</label>
-							</div>
+							</div> -->
 						</div>
 						<hr>
 						<div class="cart_navigation text-center">
-							<button type="submit" id="checkboxConditioned" class="btn btn-success" onclick="cart_submit()">
+							<button type="submit" class="btn btn-success" onclick="cart_submit()">
 								&nbsp;&nbsp;<i class="fa fa-shopping-cart"></i> &nbsp;สั่งซื้อสินค้า &nbsp;&nbsp;
 							</button>
 						</div>
@@ -206,7 +210,7 @@
 	function cart_submit() {
 		setTimeout(function() {
 			window.location.replace('cart/checkout');
-		}, 1000);
+		}, 300);
 
 	}
 </script>

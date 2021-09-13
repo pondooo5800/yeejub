@@ -5,6 +5,7 @@
             <div class="currency ">
                 YEEJUB.NET : ร้านหยี่จั๊บทุกอย่าง 20 บาท
             </div>
+
             <div id="user-line-top" class="user-info pull-right">
                 <a href="https://line.me/ti/p/~@yeejub" target="_blank"><img height="20" border="0" alt="kgg.co.th" src="https://scdn.line-apps.com/n/line_add_friends/btn/en.png"></a>
             </div>
@@ -13,7 +14,7 @@
                     <a class="current-open" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
                         <span>Hi <?php echo ($this->session->userdata('member_fname')) ?></span>
                     </a>
-                    <ul class="dropdown-menu mega_dropdown" role="menu">
+                    <ul class="dropdown-menu" role="menu">
                         <li><a href="{site_url}index/member_index/<?php echo ($this->session->userdata('url_encrypt_id')) ?>">ข้อมูลบัญชี</a></li>
                         <li><a href="{site_url}member_login/destroy">ออกจากระบบ</a></li>
                     </ul>
@@ -97,7 +98,6 @@
             <div id="shopping-cart-box-ontop">
                 <a class="cart-link" href="{site_url}cart">
                 <i class="fa fa-shopping-cart"></i>
-
                 </a>
                 <div class="shopping-cart-box-ontop-content"></div>
             </div>

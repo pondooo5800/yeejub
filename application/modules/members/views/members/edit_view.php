@@ -80,9 +80,9 @@
 									</div>
 								</div>
 								<div class="form-group col-md-4 ">
-									<label class="control-label" for="member_addr">ที่อยู่สำหรับออกใบเสร็จรับเงิน :</label>
+									<label class="control-label" for="member_same">ที่อยู่สำหรับออกใบเสร็จรับเงิน :</label>
 									<div class="form-group has-success">
-										<textarea class="form-control" id="member_addr" name="member_addr" rows="3">{record_member_addr}</textarea>
+										<textarea class="form-control" id="member_same" name="member_same" rows="3">{record_member_same}</textarea>
 									</div>
 								</div>
 							</div>
