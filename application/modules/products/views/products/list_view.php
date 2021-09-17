@@ -319,3 +319,19 @@ td.product {
 	var param_search_field = '{search_field}';
 	var param_current_page = '{current_page_offset}';
 </script>
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+
+<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script>
+	$(document).ready(function () {
+    $(".product a").mouseover(function () {
+        $(".product a img").css("display", "none"); // hide all product images
+        $(this).find("img").css("display", "inline-block"); // show current hover image
+    })
+    $(".product a").mouseout(function () {
+        $(".product a img").css("display", "none"); // hide all product images
+    })
+});
+</script>
