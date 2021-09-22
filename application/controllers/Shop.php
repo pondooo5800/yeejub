@@ -122,13 +122,14 @@ class Shop extends CI_Controller
 	{
 		$this->load->model('common_model');
 		$total_rows = rowArray($this->common_model->custom_query("select COUNT(*) as total_rows from tb_products where product_type = ".$product_type_id."	and fag_allow = 'allow'"));
-
+// 		print_r($this->db->last_query());
+// die();
 		$config = array();
         $config["base_url"] = base_url() . "shop/category/".$product_type_id;
         $config["total_rows"] = $total_rows['total_rows'];
 
         $config["per_page"] = 24;
-		$config["uri_segment"] = 3;
+		$config["uri_segment"] = 4;
 
 		$config['next_link']        = 'Next';
 		$config['prev_link']        = 'Prev';
@@ -174,12 +175,19 @@ class Shop extends CI_Controller
 	public function brand($banner_id = NULL )
 	{
 		$this->load->model('common_model');
-		$total_rows = rowArray($this->common_model->custom_query("select COUNT(*) as total_rows from tb_banners where banner_id = ".$banner_id."	and fag_allow = 'allow'"));
+
+		$total_rows = rowArray($this->common_model->custom_query("select COUNT(*) as total_rows from tb_products where banner_type = ".$banner_id."	and fag_allow = 'allow'"));
+						// print_r($this->db->last_query());
+		// die();
+
+		// print_r($total_rows);
+		// die();
+
 		$config = array();
         $config["base_url"] = base_url() . "shop/brand/".$banner_id;
         $config["total_rows"] = $total_rows['total_rows'];
         $config["per_page"] = 24;
-		$config["uri_segment"] = 3;
+		$config["uri_segment"] = 4;
 		$config['next_link']        = 'Next';
 		$config['prev_link']        = 'Prev';
 		$config['first_link']       = false;
@@ -204,7 +212,7 @@ class Shop extends CI_Controller
         $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
         $this->data['banners'] = $this->Shop_model->
 		fetch_banner($config["per_page"], $page ,$banner_id);
-				// print_r($this->db->last_query());
+		// 		print_r($this->db->last_query());
 		// die();
 
 		// print_r($page);
@@ -227,12 +235,12 @@ class Shop extends CI_Controller
 	public function promotion($promotion_id = NULL )
 	{
 		$this->load->model('common_model');
-		$total_rows = rowArray($this->common_model->custom_query("select COUNT(*) as total_rows from tb_promotions where promotion_id = ".$promotion_id."	and fag_allow = 'allow'"));
+		$total_rows = rowArray($this->common_model->custom_query("select COUNT(*) as total_rows from tb_products where product_pro_id = ".$promotion_id."	and fag_allow = 'allow'"));
 		$config = array();
         $config["base_url"] = base_url() . "shop/promotion/".$promotion_id;
         $config["total_rows"] = $total_rows['total_rows'];
         $config["per_page"] = 24;
-		$config["uri_segment"] = 3;
+		$config["uri_segment"] = 4;
 		$config['next_link']        = 'Next';
 		$config['prev_link']        = 'Prev';
 		$config['first_link']       = false;

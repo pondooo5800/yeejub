@@ -13,11 +13,11 @@
                         <div style="padding: 0px 50px;">
                             <img src="{base_url}assets/images/kbank.jpg" style="width: 75%; height: auto;" alt="">
                         </div>
-                        <p><span style="font-size:14px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>ธนาคาร:</b>	ธนาคารกสิกรไทย</span></p>
+                        <!-- <p><span style="font-size:14px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>ธนาคาร:</b>	ธนาคารกสิกรไทย</span></p>
                         <p><span style="font-size:14px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>สาขา:</b>	บางมด</span></p>
                         <p><span style="font-size:14px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>เลขที่บัญชี:</b>	09-02-633-677</span></p>
                         <p><span style="font-size:14px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>ชื่อบัญชี:</b>	นิพนธ์ คุปตะนุรักษ์</span></p>
-                        <p><span style="font-size:14px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>ประเภทบัญชี:</b>	ออมทรัพย์</span></p>
+                        <p><span style="font-size:14px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>ประเภทบัญชี:</b>	ออมทรัพย์</span></p> -->
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-5" id="contact_form_map" style="padding-left: 50px">
