@@ -276,11 +276,45 @@ class Cart extends CI_Controller
     return $mpdf;
   }
 
+  /**
+   * โฟลเดอร์เก็บ cache ไฟล์ PDF ของใบสั่งซื้อ (ถูก gitignore อยู่แล้ว)
+   */
+  private function orderPdfCacheDir()
+  {
+    $dir = APPPATH . 'cache/order_pdf/';
+    if (!is_dir($dir)) {
+      @mkdir($dir, 0775, true);
+    }
+    return $dir;
+  }
+
+  /**
+   * คืนเนื้อหา PDF ของใบสั่งซื้อ (binary string) โดยใช้ cache บนดิสก์
+   * ใบสั่งซื้อไม่เปลี่ยนหลังสั่งซื้อ จึง render ด้วย mPDF ครั้งเดียวแล้วใช้ซ้ำได้
+   * ครั้งถัดไปจึงโหลดทันที ใช้ร่วมกันทั้งหน้าดาวน์โหลดและการส่งอีเมล
+   * (ลบไฟล์ใน application/cache/order_pdf/ เพื่อบังคับสร้างใหม่)
+   */
+  private function getOrderPdfContent($ordID)
+  {
+    $cacheFile = $this->orderPdfCacheDir() . 'order_' . (int) $ordID . '.pdf';
+    if (is_file($cacheFile) && filesize($cacheFile) > 0) {
+      return file_get_contents($cacheFile); // cache hit: ข้ามการ render ของ mPDF
+    }
+    $mpdf = $this->buildOrderPDF($ordID);
+    $content = $mpdf->Output('', 'S');
+    @file_put_contents($cacheFile, $content, LOCK_EX);
+    return $content;
+  }
+
   public function orderPDF($ordID)
   {
-    $mpdf = $this->buildOrderPDF($ordID);
+    $content = $this->getOrderPdfContent($ordID);
     $file_name = 'ใบสั่งซื้อสินค้า.pdf';
-    $mpdf->Output($file_name, 'I');
+    // เสิร์ฟ PDF แบบ inline (แสดงในเบราว์เซอร์) พร้อมรองรับชื่อไฟล์ภาษาไทย
+    header('Content-Type: application/pdf');
+    header("Content-Disposition: inline; filename=\"order_{$ordID}.pdf\"; filename*=UTF-8''" . rawurlencode($file_name));
+    header('Content-Length: ' . strlen($content));
+    echo $content;
   }
   public function order_sendMail($ordID)
   {
@@ -292,8 +326,7 @@ class Cart extends CI_Controller
 
     if (@$post['member_email_order'] != '') {
       $to = @$post['member_email_order'];
-      $mpdf = $this->buildOrderPDF($ordID);
-      $content = $mpdf->Output('', 'S');
+      $content = $this->getOrderPdfContent($ordID);
       $filename = "order.pdf";
       $fromMail = "admin@yeejub.net";
       $fromName = "YeeJub | Order";
@@ -314,8 +347,7 @@ class Cart extends CI_Controller
         redirect($this->controller . '/orderSuccess/' . $ordID);
       }
     } else {
-      $mpdf = $this->buildOrderPDF($ordID);
-      $content = $mpdf->Output('', 'S');
+      $content = $this->getOrderPdfContent($ordID);
       $filename = "order.pdf";
       $fromMail = "admin@yeejub.net";
       $fromName = "YeeJub | Order";
