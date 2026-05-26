@@ -65,12 +65,20 @@ class Common_model extends CI_Model
 		return $result;
 	}
 
-    public function get_with_limit($table,$order_by='',$order_type='',$limit,$offset)
-    {
-		$this->db->from($table)->limit($limit,$offset)->order_by($order_by, $order_type);
+	public function get_with_limit($table, $limit, $offset, $order_by = '', $order_type = '')
+	{
+		$this->db->from($table)
+			->limit($limit, $offset)
+			->order_by($order_by, $order_type);
 		$query = $this->db->get()->result_array();
 		return $query;
-    }
+	}
+    // public function get_with_limit($table, $order_by='',$order_type='',$limit,$offset)
+    // {
+	// 	$this->db->from($table)->limit($limit,$offset)->order_by($order_by, $order_type);
+	// 	$query = $this->db->get()->result_array();
+	// 	return $query;
+    // }
 
 	public function get_where_with_limit($table, $col, $value, $limit, $offset, $order_by,$ordertype) {
 		$this->db->where($col, $value);

@@ -1,7 +1,4 @@
 <?php
-date_default_timezone_set('Asia/Bangkok');
-
-$localhost = array('https://www.ocean-bluewave.com/');
 /**
  * CodeIgniter
  *
@@ -56,15 +53,8 @@ $localhost = array('https://www.ocean-bluewave.com/');
  *
  * NOTE: If you change these, also change the error_reporting() code below
  */
-if(isset($_SERVER['CI_ENV'])){
-	define('ENVIRONMENT', $_SERVER['CI_ENV']);
-}else{
-	if(!in_array($_SERVER['SERVER_NAME'], $localhost)){
-		define('ENVIRONMENT', 'production');
-	}else{
-		define('ENVIRONMENT', 'development');
-	}
-}
+	$is_production = (!isset($_SERVER['HTTP_HOST']) || (strpos($_SERVER['HTTP_HOST'], 'localhost') === false && strpos($_SERVER['HTTP_HOST'], '127.0.0.1') === false));
+	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : ($is_production ? 'production' : 'development'));
 
 /*
  *---------------------------------------------------------------
@@ -77,7 +67,7 @@ if(isset($_SERVER['CI_ENV'])){
 switch (ENVIRONMENT)
 {
 	case 'development':
-		error_reporting(-1);
+		error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
 		ini_set('display_errors', 1);
 	break;
 

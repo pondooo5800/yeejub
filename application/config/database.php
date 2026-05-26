@@ -73,18 +73,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = TRUE;
 
-// IN Localhost
-if(in_array($_SERVER['HTTP_HOST'], array('localhost:80', 'localhost:8086')))
-{
-	$mysql_port = 3308;//multi port
-}else{
-	$mysql_port = 3306;
+// IN Localhost - ตรวจสอบว่าเป็น localhost หรือไม่
+$is_localhost = (
+    isset($_SERVER['HTTP_HOST']) &&
+    (strpos($_SERVER['HTTP_HOST'], 'localhost') !== false ||
+     strpos($_SERVER['HTTP_HOST'], '127.0.0.1') !== false)
+);
+
+if($is_localhost) {
+    // Local Development (MAMP) - กำหนด socket path
+    ini_set('mysqli.default_socket', '/Applications/MAMP/tmp/mysql/mysql.sock');
+    $mysql_port = 8889;
+    $db_host = 'localhost';
+    $db_name = 'yeejub';
+    $db_user = 'root';
+    $db_pass = 'root';
+} else {
+    // Production
+    $mysql_port = 3306;
+    $db_host = 'localhost';
+    $db_name = 'zzekpsz1_yeejub';
+    $db_user = 'zzekpsz1';
+    $db_pass = '3e*:bnLC685UeU';
 }
-$db_host = 'localhost';
-// $db_name = 'shopping';
-$db_name = 'yeejub';
-$db_user = 'root';
-$db_pass = '';
 
 
 $db['default'] = array(
@@ -97,7 +108,7 @@ $db['default'] = array(
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
-	'db_debug' => (ENVIRONMENT !== 'production'),
+	'db_debug' => FALSE,
 	'cache_on' => FALSE,
 	'cachedir' => '',
 	'char_set' => 'utf8',

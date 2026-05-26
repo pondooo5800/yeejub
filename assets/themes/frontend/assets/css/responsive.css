@@ -337,10 +337,14 @@
 	.main-header .logo{
 		text-align: center;
 	}
+	.img-logo{
+		max-height: 150px;
+	}
 	.main-header .header-search-box{
 		width: 100%;
 		padding-left: 15px;
 		padding-right: 15px;
+		margin-top: 15px;
 	}
 	.main-header .header-search-box .form-inline .form-category{
 		display: none;
@@ -354,6 +358,7 @@
 		padding-right: 15px;
 		margin-left:0;
 		width: 100%;
+		margin-top: 10px;
 	}
 	#box-vertical-megamenus{
 		width: 50%;
@@ -705,6 +710,9 @@
 	.main-header .logo{
 		text-align: center;
 		margin-top: 10px;
+	}
+	.img-logo{
+		max-height: 150px;
 	}
 	.main-header .header-search-box{
 		width: 100%;

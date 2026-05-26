@@ -22,10 +22,12 @@ class Index extends CI_Controller
 		chkMemberPerm();
 		// echo('<pre>');
 		// print_r($this->session->userdata());
+		// print_r(base_url());
 		// echo('</pre>');
 		// die();
 		$this->load->library('cart');
 		$this->load->model('product_model', 'product');
+		$this->load->model('common_model');
 
 		$data['base_url'] = base_url();
 		$data['site_url'] = site_url();
@@ -81,9 +83,11 @@ class Index extends CI_Controller
 	public function index()
 	{
 		$this->load->model('common_model');
+		$product_type_dis = $this->db->query("select * from tb_products_types WHERE page_fag_allow = 'allow' AND fag_allow = 'allow'ORDER BY product_type_sort ASC");
 		$product = $this->db->query("select * from tb_products_types where fag_allow = 'allow'");
 		$brand = $this->db->query("select * from tb_banners where fag_allow = 'allow'");
 		$promotion = $this->db->query("select * from tb_promotions where fag_allow = 'allow'");
+		$this->data['product_type_dis'] = $product_type_dis->result_array();
 		$this->data['product_type'] = $product->result_array();
 		$this->data['brand'] = $brand->result_array();
 		$this->data['promotion'] = $promotion->result_array();
@@ -92,6 +96,7 @@ class Index extends CI_Controller
 
 		$this->render_view('index');
 	}
+
 	public function member_index($encrypt_id = '')
 	{
 		$encrypt_id = urldecode($encrypt_id);
@@ -112,6 +117,39 @@ class Index extends CI_Controller
 		$this->data['record_member_note'] = $rows['member_note'];
 		$this->render_view('member_index');
 	}
+	public function member_branch()
+	{
+		$this->load->model('common_model');
+		$branch = $this->db->query("select * FROM tb_members_branch WHERE member_id = ".$this->session->userdata('member_id')." AND fag_allow = 'allow'");
+		$this->data['branch'] = $branch->result_array();
+		$this->render_view('member_branch');
+	}
+	public function member_order()
+	{
+		$this->load->model('common_model');
+		$history_order = $this->db->query("select * FROM orders WHERE member_id = ".$this->session->userdata('member_id')." AND fag_allow = 'allow'");
+		$this->data['history_order'] = $history_order->result_array();
+		$this->render_view('member_order');
+	}
+	public function member_addr_branch()
+	{
+		$this->render_view('member_addr_branch');
+	}
+	public function member_edit_branch($id = '')
+	{
+		$this->load->model('common_model');
+		$rows = rowArray($this->common_model->custom_query("select * FROM tb_members_branch WHERE member_branch_id = ".$id." AND fag_allow = 'allow'"));
+		$pk1 = $rows['member_branch_id'];
+		$this->data['url_encrypt_id'] = urlencode(encrypt($pk1));
+		if ($pk1 != '') {
+			$pk1 = encrypt($pk1);
+		}
+		$this->data['encrypt_member_branch_id'] = $pk1;
+		$this->data['record_member_shop'] = $rows['member_shop'];
+		$this->data['record_member_addr'] = $rows['member_addr'];
+		$this->render_view('member_edit_branch');
+	}
+
 	public function shops_page()
 	{
 		$start_row = $this->uri->segment($this->uri_segment, '0');

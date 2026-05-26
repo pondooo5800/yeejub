@@ -20,80 +20,87 @@
 						<input type="hidden" name="data_id" value="{data_id}" />
 						<div class="container">
 							<div class="form-row justify-content-around">
-								<div class="form-group col-md-4 ">
+								<div class="form-group col-md-3 ">
 									<label class="control-label" for="member_user_id">รหัสสมาชิก :</label>
 									<div class="form-group has-success">
 										<input type="text" class="form-control" id="member_user_id" name="member_user_id" value="{record_member_user_id}" readonly />
 									</div>
 								</div>
-								<div class="form-group col-md-4 ">
-									<label class="control-label" for="cus_passwd">รหัสผ่าน (อย่างน้อย 6 ตัว) :</label>
-									<div class="form-group has-success">
-										<input type="password" class="form-control " id="cus_passwd" name="cus_passwd" value="{record_cus_passwd}" />
-									</div>
+								<div class="form-group col-md-3">
+									<label class="control-label" for="fag_allow">สถานะ :</label>
+									<select id="fag_allow" name="fag_allow" value="{record_fag_allow}">
+										<option value="allow">ปกติ</option>
+										<option value="block">ระงับการใช้งาน</option>
+									</select>
+								</div>
+								<div class="form-group col-md-3 ">
+								<label class="control-label">&nbsp;</label>
 								</div>
 							</div>
 							<div class="form-row justify-content-around">
-								<div class="form-group col-md-4 ">
+								<div class="form-group col-md-3 ">
 									<label class="control-label" for="member_fname">ชื่อ :</label>
 									<div class="form-group has-success">
 										<input type="text" class="form-control" id="member_fname" name="member_fname" value="{record_member_fname}" />
 									</div>
 								</div>
-								<div class="form-group col-md-4 ">
+								<div class="form-group col-md-3 ">
 									<label class="control-label" for="member_lname">นามสกุล :</label>
 									<div class="form-group has-success">
 										<input type="text" class="form-control " id="member_lname" name="member_lname" value="{record_member_lname}" />
 									</div>
 								</div>
+								<div class="form-group col-md-3 ">
+									<label class="control-label" for="cus_passwd">รหัสผ่าน (อย่างน้อย 6 ตัว) :</label>
+									<div class="form-group has-success">
+										<input type="password" class="form-control " id="cus_passwd" name="cus_passwd" value="{record_cus_passwd}" />
+									</div>
+								</div>
+
 							</div>
 
 							<div class="form-row justify-content-around">
-								<div class="form-group col-md-4 ">
+								<div class="form-group col-md-3 ">
 									<label class="control-label" for="member_shop">ชื่อร้าน :</label>
 									<div class="form-group has-success">
 										<input type="text" class="form-control" id="member_shop" name="member_shop" value="{record_member_shop}" />
 									</div>
 								</div>
-								<div class="form-group col-md-4 ">
+								<div class="form-group col-md-3 ">
 									<label class="control-label" for="member_mobile_no">เบอร์โทรศัพท์ :</label>
 									<div class="form-group has-success">
 										<input type="text" class="form-control" id="member_mobile_no" name="member_mobile_no" value="{record_member_mobile_no}" />
 									</div>
 								</div>
-							</div>
-							<div class="form-row justify-content-around">
-								<div class="form-group col-md-4 ">
+								<div class="form-group col-md-3 ">
 									<label class="control-label" for="member_email_addr">อีเมล :</label>
 									<div class="form-group has-success">
 										<input type="text" class="form-control" id="member_email_addr" name="member_email_addr" value="{record_member_email_addr}" />
 									</div>
 								</div>
-								<div class="form-group col-md-4 ">
-								</div>
+
 							</div>
 							<div class="form-row justify-content-around">
-								<div class="form-group col-md-4 ">
+								<div class="form-group col-md-3 ">
 									<label class="control-label" for="member_addr">ที่อยู่ในการจัดส่งสินค้า :</label>
 									<div class="form-group has-success">
 										<textarea class="form-control" id="member_addr" name="member_addr" rows="3">{record_member_addr}</textarea>
 									</div>
 								</div>
-								<div class="form-group col-md-4 ">
+								<div class="form-group col-md-3 ">
 									<label class="control-label" for="member_same">ที่อยู่สำหรับออกใบเสร็จรับเงิน :</label>
 									<div class="form-group has-success">
 										<textarea class="form-control" id="member_same" name="member_same" rows="3">{record_member_same}</textarea>
 									</div>
 								</div>
-							</div>
-							<div class="form-row justify-content-around">
-								<div class="form-group col-md-4 ">
+								<div class="form-group col-md-3 ">
 									<label class="control-label" for="member_note">หมายเหตุ (ถ้ามี) :</label>
 									<div class="form-group has-success">
 										<textarea class="form-control" id="member_note" name="member_note" rows="3">{record_member_note}</textarea>
 									</div>
 								</div>
-
+							</div>
+							<!-- <div class="form-row justify-content-around">
 								<div class="form-group col-md-4">
 									<label class="control-label" for="fag_allow">สถานะ :</label>
 									<select id="fag_allow" name="fag_allow" value="{record_fag_allow}">
@@ -101,7 +108,55 @@
 										<option value="block">ระงับการใช้งาน</option>
 									</select>
 								</div>
+							</div> -->
+							<br><hr><br>
+							<div class="row">
+							<div class="col-sm-12">
+								<div class="row align-items-center" style="justify-content: space-around;">
+									<div class="col-md-2">
+									<h4 style="font-weight: bold;">ที่อยู่สาขา</h4>
+									</div>
+									<div class="col-md-2">
+										<div class="form-group bmd-form-group">
+											<a href="{page_url}/add_branch_view/<?php echo $check_member_id ?>" class="btn btn-success" data-toggle="tooltip" title="เพิ่มข้อมูลใหม่" id="btn-search">
+												<i class="fa fa-plus-square"></i></span>&nbsp;&nbsp;เพิ่มสาขา
+											</a>
+										</div>
+									</div>
+								</div>
 							</div>
+						</div>
+
+							<div class="table-responsive">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th class="text-center"style="width:30%">สาขา</th>
+									<th class="text-center"style="width:50%">ที่อยู่</th>
+									<th class="text-center" style="width:200px">เครื่องมือ</th>
+								</tr>
+							</thead>
+							<tbody>
+							<?php
+                                    foreach ($branch as $key => $value) { ?>
+								<tr>
+									<td style="text-align:center;"><?php echo $value['member_shop'] ?></td>
+									<td style="text-align:center;"><?php echo $value['member_addr'] ?></td>
+									<td class="td-actions text-center">
+										<a href="{page_url}/edit_branch_view/<?php echo $value['member_branch_id'] ?>" class="my-tooltip btn btn-warning " data-toggle="tooltip" title="แก้ไขข้อมูล">
+											<i class="material-icons">edit</i>
+										</a>
+										<a href="javascript:void(0);" class="btn-delete-branch btn btn-danger btn-sm" data-member_branch_id="<?php echo $value['member_branch_id'] ?>" data-row-number="<?php echo $key ?>">
+											<i class="material-icons">delete_forever</i>
+										</a>
+									</td>
+								</tr>
+								<?php } ?>
+
+							</tbody>
+						</table>
+					</div>
+
 						</div>
 						<br>
 
@@ -148,4 +203,26 @@
 			</div>
 		</div>
 	</div>
+</div>
+<!-- Modal Delete -->
+
+<div class="modal fade" id="confirmDelModalBranch" tabindex="-1" role="dialog" aria-labelledby="confirmDelModalBranchLabel" aria-hidden="true">
+    <div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="confirmDelModalLabel">ยืนยันการลบข้อมูล !</h4>
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			</div>
+			<div class="modal-body">
+				<h4 style="font-weight: bold" class="text-center">* ท่านต้องการลบข้อมูลใช่หรือไม่ *</h4>
+				<form id="formDelete">
+				<input type="hidden" name="encrypt_member_branch_id" />
+				</form>
+			</div>
+			<div class="modal-footer" style="justify-content: center;">
+				<button type="button" class="btn btn-Secondary" data-dismiss="modal">&nbsp;ยกเลิก&nbsp;</button>&emsp;
+				<button type="button" class="btn btn-danger" id="btn_confirm_delete_ฺbranch">&nbsp;ยืนยัน&nbsp;</button>
+			</div>
+		</div>
+    </div>
 </div>

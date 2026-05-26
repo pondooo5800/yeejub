@@ -44,7 +44,7 @@ class Registers_model extends MY_Model
 		$data = array(
 			'member_mobile_no' => $post['member_mobile_no'],
 			'member_user_id' => getAutoNumber('tb_members','member_user_id','C',5),
-			'cus_passwd' => $post['cus_passwd'],
+			// 'cus_passwd' => $post['cus_passwd'],
 			'member_fname' => $post['member_fname'],
 			'member_lname' => $post['member_lname'],
 			'member_shop' => $post['member_shop'],

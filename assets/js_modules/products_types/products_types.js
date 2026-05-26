@@ -23,6 +23,40 @@ var Products_types = {
 		return false;
 	},
 
+	saveFormDataDis: function () {
+		var frm_action = site_url('products_types/products_types/updateDis');
+		var obj = $("#btnConfirmSaveDis");
+		if (loading_on(obj) == true) {
+			var fdata = $("#formAdd").serialize();
+			console.log(fdata);
+
+			fdata += "&" + csrf_token_name + "=" + $.cookie(csrf_cookie_name);
+
+			// $.ajax({
+			// 	method: "POST",
+			// 	url: frm_action,
+			// 	dataType: "json",
+			// 	data: fdata,
+			// 	success: function (results) {
+			// 		if (results.is_successful) {
+			// 			alert_type = "success";
+			// 			setTimeout(function(){
+			// 				$(window.location).attr('href', site_url('products_types/products_types'));
+			// 			}, 1500);
+			// 		} else {
+			// 			alert_type = "danger";
+			// 		}
+			// 		notify("เพิ่มข้อมูล", results.message, alert_type, "center");
+			// 		loading_on_remove(obj);
+			// 	},
+			// 	error: function (jqXHR, exception) {
+			// 		ajaxErrorMessage(jqXHR, exception);
+			// 		loading_on_remove(obj);
+			// 	},
+			// });
+		}
+		return false;
+	},
 	saveFormData: function () {
 		var frm_action = site_url('products_types/products_types/save');
 		var obj = $("#btnConfirmSave");
@@ -155,6 +189,11 @@ $(document).ready(function() {
 		$('button[name="submit"]').click();
 	});
 
+	$('#btnSaveDis').click(function() {
+		$('#addModal').modal('hide');
+		Products_types.saveFormDataDis();
+		return false;
+	});//click
 	$('#btnSave').click(function() {
 		$('#addModal').modal('hide');
 		Products_types.saveFormData();
@@ -191,6 +230,7 @@ $(document).ready(function() {
 	setDropdownList('#user_add');
 	setDropdownList('#user_update');
 	setDropdownList('#fag_allow');
+	setDropdownList('#page_fag_allow');
 
 	//Set default value
 	var order_by = $('#set_order_by').attr('value');

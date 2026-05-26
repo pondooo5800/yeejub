@@ -93,16 +93,20 @@
 <body>
 	<div class="container-fluid">
 		<div class="container">
-			<div>
-				<div style="float: left; width: 50%;text-align: left;">
-					<p style="font-weight: bold;font-family: thsarabun; font-size: 20pt; color:#3366cc">YEEYUB.COM | ร้านหยี่จ๊ับ </p>
-				</div>
-				<div style="float: right; text-align: right; width: 50%;">
-					<img src="<?php echo base_url("/assets/themes/frontend/assets/img/icon/logo_yeejub.png") ?>" width="100" />
-				</div>
-			</div>
+			<table style="width: 70%;" cellpadding="0" cellspacing="0">
+				<tr>
+					<td style="width: 110px; vertical-align: middle;">
+						<img src="<?php echo base_url("/assets/themes/frontend/assets/img/icon/logo_yeejub.png") ?>" width="100" />
+					</td>
+					<td style="vertical-align: middle; text-align: left;">
+						<p style="font-weight: bold;font-size: 14pt;">โกดังเจ้แขก พระราม 2</p>
+						<p style="font-size: 12pt;">91/5 ซอยเทียนทะเล 20 แขวงแสมดำ เขตบางขุนเทียน กรุงเทพ 10150</p>
+						<p style="font-size: 12pt;">Tel : 0880258888</p>
+					</td>
+				</tr>
+			</table>
 			<div style="text-align: center;">
-				<p><span style="font-weight: bold;font-size: 16pt;">ใบสั่งซื้อสินค้า</span></p>
+				<p><span style="font-weight: bold;font-size: 18pt;">ใบสั่งซื้อสินค้า</span></p>
 			</div>
 			<div>
 				<div style="float: right; width: 50%;text-align: right;">
@@ -113,9 +117,10 @@
 				</div>
 				<div style="float: left; width: 50%;">
 					<p style="font-weight: bold;font-size: 14pt;">รหัสสมาชิก <span style="font-weight: normal;font-size: 14pt;"><?php echo $order['member_user_id']; ?></span></p>
+					<p style="font-weight: bold;font-size: 14pt;">ชื่อร้าน <span style="font-weight: normal;font-size: 14pt;"><?php echo $order['member_shop']; ?></span></p>
 					<p style="font-weight: bold;font-size: 14pt;">ชื่อ-สกุล <span style="font-weight: normal;font-size: 14pt;"><?php echo $order['name']; ?></span></p>
 					<p style="font-weight: bold;font-size: 14pt;">เบอร์โทร <span style="font-weight: normal;font-size: 14pt;"><?php echo $order['phone']; ?></span></p>
-					<p style="font-weight: bold;font-size: 14pt;">สถานที่จัดสินค้า <span style="font-weight: normal;font-size: 14pt;"><?php echo $order['member_addr']; ?></span></p>
+					<p style="font-weight: bold;font-size: 14pt;">สถานที่จัดสินค้า <span style="font-weight: normal;font-size: 14pt;"><?php echo $order['address']; ?></span></p>
 				</div>
 			</div>
 		</div>
@@ -124,8 +129,8 @@
 		<?php
 		foreach ($order_product as $key => $value) { ?>
 			<div class="column">
-				<img class="img-responsive" style="width:130px; height:130px; object-fit:contain" alt="product" src="<?php echo base_url($value['product_img1']) ?>" /></a>
-				<p style="font-weight: bold;font-size: 10pt;">จํานวน : <?php echo $value['quantity'] ?> ชิ้น</p>
+				<img class="img-responsive" style="width:128px; height:128px; object-fit:contain" alt="product" src="<?php echo base_url($value['product_img1']) ?>" /></a>
+				<p style="font-weight: bold;font-size: 14pt;">จํานวน : <?php echo $value['quantity'] ?> <?php echo $value['product_unit_name'] ?></p>
 			</div>
 		<?php } ?>
 	</div>

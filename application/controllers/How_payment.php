@@ -18,6 +18,7 @@ class How_payment extends CI_Controller
 	{
 		parent::__construct();
 		chkMemberPerm();
+		$this->load->model('common_model');
 
 		$data['base_url'] = base_url();
 		$data['site_url'] = site_url();

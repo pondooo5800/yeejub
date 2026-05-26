@@ -1,7 +1,7 @@
 <div class="sidebar" data-color="azure" data-background-color="white" data-image="{base_url}assets/themes/material/assets/img/sidebar-3.jpg">
 	<div class="logo">
 		<a href="{site_url}dashboard_user" class="simple-text logo-normal">
-			<img src="{base_url}/assets/themes/frontend/assets/img/icon/logo_yeejub.png" alt="logo" style="width:100%">&emsp;
+			<img src="{base_url}/assets/themes/frontend/assets/img/icon/logo_yeejub.png" alt="logo" style="width:50%">&emsp;
 		</a>
 	</div>
 	<div class="sidebar-wrapper">
@@ -46,6 +46,12 @@
 				<a class="nav-link" href="{site_url}promotions/promotions">
 					<i class="material-icons">event</i>
 					<p>ตั้งค่าโปรโมชั่นสินค้า</p>
+				</a>
+			</li>
+			<li class="nav-item <?php if ($this->uri->segment(1) == '' || $this->uri->segment(1) == 'popups') { ?>active<?php } ?>">
+				<a class="nav-link" href="{site_url}popups/popups">
+					<i class="material-icons">settings</i>
+					<p>ตั้งค่า (Popup)</p>
 				</a>
 			</li>
 			<li class="nav-item <?php if ($this->uri->segment(1) == '' || $this->uri->segment(1) == 'settings_admin') { ?>active<?php } ?>">

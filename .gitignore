@@ -1,17 +1,62 @@
-*/config/development
-*/logs/log-*.php
-!*/logs/index.html
-*/cache/*
-!*/cache/index.html
-!*/cache/.htaccess
+# ===== OS =====
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 
-user_guide_src/build/*
-user_guide_src/cilexer/build/*
-user_guide_src/cilexer/dist/*
-user_guide_src/cilexer/pycilexer.egg-info/*
+# ===== Editor / IDE =====
+.idea/
+*.sublime-project
+*.sublime-workspace
+# .vscode/ ปลดคอมเมนต์บรรทัดนี้ถ้าไม่ต้องการแชร์การตั้งค่า VSCode
 
-#codeigniter 3
+# ===== Composer =====
+/vendor/
+composer.phar
+
+# ===== CodeIgniter 3 =====
+# Cache (เก็บเฉพาะ index.html กันการ list directory)
+application/cache/*
+!application/cache/index.html
+!application/cache/.htaccess
+
+# Logs
 application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
-/vendor/
+
+# Sessions
+application/session/*
+!application/session/index.html
+
+# ===== Logs & Database dumps =====
+error_log
+*.log
+*.sql
+*.sql.gz
+
+# ===== Archives / backups (ไฟล์ใหญ่ ห้ามขึ้น git) =====
+*.zip
+*.rar
+*.7z
+*.tar
+*.tar.gz
+*.tgz
+assets/uploads/backup_img/
+
+# ===== Backup / temp files =====
+*.bak
+*.tmp
+*.swp
+*~
+index_up*to*hosting.php
+
+# ===== Uploads (ปลดคอมเมนต์ถ้ามีโฟลเดอร์ uploads ที่ไม่ต้องการ commit) =====
+# assets/uploads/*
+# !assets/uploads/index.html
+
+# ===== Environment =====
+.env

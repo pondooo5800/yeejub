@@ -61,11 +61,11 @@
         <div class="row">
             <!-- Center colunm-->
             <div class="center_column col-xs-12 col-sm-12" id="center_column">
-                <!-- view-product-list-->
+                <!-- view-product-shop-list-->
                 <?php if ($this->uri->segment(2) === 'category') { ?>
-                    <div id="view-product-list" class="view-product-list">
+                    <div id="view-product-shop-list" class="view-product-shop-list">
                         <h2 class="page-heading"><span class="page-heading-title"><?php echo $product_type_name ?></span></h2>
-                        <ul class="row product-list style2 grid">
+                        <ul class="row product-shop style2 grid">
                             <p id="oneflashsale" style="display:none">EXPIRED</p>
                             <?php
                             foreach ($products as $value) { ?>
@@ -107,7 +107,7 @@
                         </ul>
                         <!-- ./PRODUCT LIST -->
                     </div>
-                    <!-- ./view-product-list-->
+                    <!-- ./view-product-shop-list-->
                     <div class="sortPagiBar">
                         <div class="bottom-pagination">
                             <nav>
@@ -117,9 +117,9 @@
 
                     </div>
                 <?php } else if ($this->uri->segment(2) === 'brand') { ?>
-                    <div id="view-product-list" class="view-product-list">
+                    <div id="view-product-shop-list" class="view-product-shop-list">
                         <h2 class="page-heading"><span class="page-heading-title"><?php echo $banner_name ?></span></h2>
-                        <ul class="row product-list style2 grid">
+                        <ul class="row product-shop style2 grid">
                             <p id="oneflashsale" style="display:none">EXPIRED</p>
                             <?php
                             if (is_array($banners)) {
@@ -164,7 +164,7 @@
                         </ul>
                         <!-- ./PRODUCT LIST -->
                     </div>
-                    <!-- ./view-product-list-->
+                    <!-- ./view-product-shop-list-->
                     <div class="sortPagiBar">
                         <div class="bottom-pagination">
                             <nav>
@@ -174,9 +174,9 @@
 
                     </div>
                 <?php } else if ($this->uri->segment(2) === 'promotion') { ?>
-                    <div id="view-product-list" class="view-product-list">
+                    <div id="view-product-shop-list" class="view-product-shop-list">
                         <h2 class="page-heading"><span class="page-heading-title"><?php echo $promotion_name ?></span></h2>
-                        <ul class="row product-list style2 grid">
+                        <ul class="row product-shop style2 grid">
                             <p id="oneflashsale" style="display:none">EXPIRED</p>
                             <?php
                             if (is_array($promotions)) {
@@ -221,7 +221,7 @@
                         </ul>
                         <!-- ./PRODUCT LIST -->
                     </div>
-                    <!-- ./view-product-list-->
+                    <!-- ./view-product-shop-list-->
                     <div class="sortPagiBar">
                         <div class="bottom-pagination">
                             <nav>
@@ -231,9 +231,9 @@
 
                     </div>
                 <?php } else { ?>
-                    <div id="view-product-list" class="view-product-list">
+                    <div id="view-product-shop-shop" class="view-product-shop-shop">
                         <h2 class="page-heading"><span class="page-heading-title">สินค้าทั้งหมด</span></h2>
-                        <ul class="row product-list style2 grid">
+                        <ul class="row product-shop style2 grid">
                             <p id="oneflashsale" style="display:none">EXPIRED</p>
                             <?php
                             foreach ($products as $value) { ?>
@@ -275,7 +275,7 @@
                         </ul>
                         <!-- ./PRODUCT LIST -->
                     </div>
-                    <!-- ./view-product-list-->
+                    <!-- ./view-product-shop-list-->
                     <div class="sortPagiBar">
                         <div class="bottom-pagination">
                             <nav>
@@ -305,7 +305,8 @@
                 </div>
             </div>
             <div class='modal-footer text-left'>
-                <form method='post' action='<?php echo base_url('shop/addToCart/'); ?>'>
+            <form class="form-horizontal" id="formAddCart" accept-charset="utf-8">
+						{csrf_protection_field}
                     <div class="row vertical-align">
                     <div class="col-sm-12 col-md-5">
                             <div class="button-container" style="align-items: center;justify-content: center;">
@@ -327,7 +328,7 @@
                                 <button class="cart-qty-plus" type="button" value="+">+</button>
 
                                 <span>
-                                <button style="width: 100px;" type='submit' name='submit' value="submit" class="btn btn-success">สั่งซื้อ</button>
+                                <button id="btnSaveCart" style="width: 100px;" name='submit' value="submit" class="btn btn-success">สั่งซื้อ</button>
                                 </span>
                             </div>
                         </div>

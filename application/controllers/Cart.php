@@ -17,8 +17,9 @@ class Cart extends CI_Controller
   public function __construct()
   {
     parent::__construct();
-    // chkMemberPerm();
-    // Load cart library
+		// chkMemberPerm();
+		// Load cart library
+		$this->load->model('common_model');
     $this->load->library('cart');
     $this->load->model('product_model', 'product');
 
@@ -70,46 +71,70 @@ class Cart extends CI_Controller
 
   public function index()
   {
-    $data['cart_value'] = $this->cart->contents();
-    $this->data['cartItems'] = $data['cart_value'];
-    $this->render_view('cart');
-  }
+		$member_id = $this->session->userdata('member_id');
 
-  public function updateItemQty()
-  {
-    $update = 0;
+		$data['cart_value'] = $this->common_model->custom_query("
+        SELECT *, (qty * price) as subtotal
+        FROM `product_cats`
+        WHERE member_id = $member_id
+        GROUP BY product_id, name, price, qty
+    ");
+		$data['total'] = $this->common_model->custom_query("
+        SELECT SUM(qty * price) as total
+        FROM `product_cats`
+        WHERE member_id = $member_id
+    ");
 
-    // Get cart item info
-    $rowid = $this->input->get('rowid');
-    $qty = $this->input->get('qty');
+		$total_price = isset($data['total'][0]['total']) ? $data['total'][0]['total'] : 0;
+		$this->data['cartItems'] = $data['cart_value'];
+		$this->data['cartTotals'] = $total_price;
+		$this->render_view('cart');  }
 
-    // Update item in the cart
-    if (!empty($rowid) && !empty($qty)) {
-      $data = array(
-        'rowid' => $rowid,
-        'qty'   => $qty
-      );
-      $update = $this->cart->update($data);
-    }
+	public function updateItemQty()
+	{
+		// Get cart item info
+		$rowid = $this->input->get('rowid');
+		$qty = $this->input->get('qty');
 
-    // Return response
-    echo $update ? 'ok' : 'err';
-  }
+		// Initialize response
+		$response = 'err';
+
+		// Update item quantity in the database
+		if (!empty($rowid) && !empty($qty)) {
+			$this->load->model('common_model');
+			$data = array(
+				'qty' => $qty
+			);
+			$this->db->where('id', $rowid);
+			$update = $this->db->update('product_cats', $data);
+
+			// Check if update was successful
+			if ($update) {
+				$response = 'ok';
+			}
+		}
+
+		// Return response
+		echo $response;
+	}
+
 
   public function removeItem($rowid)
   {
-    $remove = $this->cart->remove($rowid);
+		$this->db->where('id', $rowid);
+		$remove = $this->db->delete('product_cats');
     redirect('cart');
   }
   public function checkout()
   {
+    $post = $this->input->post(NULL, TRUE);
     $custData = $data = array();
     // If order request is submitted
     $custData = array(
       'name'     => $this->session->userdata('member_fname') . ' ' . $this->session->userdata('member_lname'),
       'email'     => $this->session->userdata('member_email_addr'),
       'phone'     => $this->session->userdata('member_mobile_no'),
-      'address' => $this->session->userdata('member_email_addr'),
+      'address' => $post['member_addr'],
       'member_id' => $this->session->userdata('member_id')
     );
     $insert = $this->product->insertCustomer($custData);
@@ -129,26 +154,42 @@ class Cart extends CI_Controller
   }
   public function placeOrder($custID)
   {
+		$member_id = $this->session->userdata('member_id');
+		$data['cart_value'] = $this->common_model->custom_query("
+        SELECT *, (qty * price) as subtotal
+        FROM `product_cats`
+        WHERE member_id = $member_id
+        GROUP BY product_id, name, price, qty
+    ");
+		$data['total'] = $this->common_model->custom_query("
+        SELECT SUM(qty * price) as total
+        FROM `product_cats`
+        WHERE member_id = $member_id
+    ");
+
+		$total_price = isset($data['total'][0]['total']) ? $data['total'][0]['total'] : 0;
+
     // Insert order data
     $ordData = array(
       'customer_id' => $custID,
-      'grand_total' => $this->cart->total(),
-      'member_id' => $this->session->userdata('member_id')
+      'grand_total' => $total_price,
+      'member_id' => $member_id
     );
     $insertOrder = $this->product->insertOrder($ordData);
 
     if ($insertOrder) {
       // Retrieve cart data from the session
-      $cartItems = $this->cart->contents();
+
+      $cartItems = $data['cart_value'];
 
       // Cart items
       $ordItemData = array();
       $i = 0;
       foreach ($cartItems as $item) {
         $ordItemData[$i]['order_id']     = $insertOrder;
-        $ordItemData[$i]['product_id']     = $item['id'];
+        $ordItemData[$i]['product_id']     = $item['product_id'];
         $ordItemData[$i]['quantity']     = $item['qty'];
-        $ordItemData[$i]['sub_total']     = $item["subtotal"];
+        $ordItemData[$i]['sub_total']     = ($item['qty'] * $item["price"]);
         $i++;
       }
 
@@ -157,15 +198,27 @@ class Cart extends CI_Controller
         $insertOrderItems = $this->product->insertOrderItems($ordItemData);
 
         if ($insertOrderItems) {
-          // Remove items from the cart
-          $this->cart->destroy();
-
+					// Remove items from the cart
+					foreach ($cartItems as $item) {
+						$this->db->where('id', $item['id']);
+						$this->db->delete('product_cats');
+					}
           // Return order ID
           return $insertOrder;
         }
       }
     }
     return false;
+  }
+  public function viewOrder()
+  {
+  //   echo("TET");
+  //   	// 	$mpdf = new \Mpdf\Mpdf();
+	// // 	$mpdf->WriteHTML('<h1>Hello world!</h1>');
+	// // 	$mpdf->Output();
+
+    // $this->load->view('order_pdfView');
+    phpinfo();
   }
   public function orderSuccess($ordID)
   {
@@ -200,6 +253,7 @@ class Cart extends CI_Controller
 
       'default_font' => 'sarabun'
     ]);
+    $mpdf->curlAllowUnsafeSslRequests = true;
     $order['order'] = $this->product->getOrder_PDF($ordID);
     $order['order_product'] = $this->product->getOrderProduct_PDF($ordID);
     $html = $this->load->view('order_pdfView', array(
@@ -216,8 +270,13 @@ class Cart extends CI_Controller
   public function order_sendMail($ordID)
   {
     $post = $this->input->post(NULL, TRUE);
-    if ($post['member_email_order'] != '') {
-      $to = $post['member_email_order'];
+    // print_r($post);
+    // echo"<br>";
+    // print_r($ordID);
+    // die();
+
+    if (@$post['member_email_order'] != '') {
+      $to = @$post['member_email_order'];
       $mpdf = new \Mpdf\Mpdf([
         'default_font_size' => 9,
         'default_font' => 'sarabun'
@@ -243,6 +302,7 @@ class Cart extends CI_Controller
 
         'default_font' => 'sarabun'
       ]);
+      $mpdf->curlAllowUnsafeSslRequests = true;
       $order['order'] = $this->product->getOrder_PDF($ordID);
       $order['order_product'] = $this->product->getOrderProduct_PDF($ordID);
       $html = $this->load->view('order_pdfView', array(
@@ -299,6 +359,7 @@ class Cart extends CI_Controller
 
         'default_font' => 'sarabun'
       ]);
+      $mpdf->curlAllowUnsafeSslRequests = true;
       $order['order'] = $this->product->getOrder_PDF($ordID);
       $order['order_product'] = $this->product->getOrderProduct_PDF($ordID);
       $html = $this->load->view('order_pdfView', array(
@@ -313,7 +374,7 @@ class Cart extends CI_Controller
       $filename = "order.pdf";
       $fromMail = "admin@yeejub.net";
       $fromName = "YeeJub | Order";
-      $mailTo = "pondooo5800@gmail.com";
+      $mailTo = "yeejub20@gmail.com";
 
       $this->load->library('email');
       $this->email->set_mailtype("html");

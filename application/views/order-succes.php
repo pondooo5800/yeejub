@@ -100,7 +100,7 @@
             <div class="center_column col-xs-12 col-sm-12" id="center_column">
                 <div class="content-text clearfix">
                     <div style="padding: 0px 50px;">
-                        <img src="{base_url}assets/images/kbank.jpg" style="width: 300px; height: auto;" alt="">
+                        <img src="{base_url}assets/images/Payment-QRCode.jpeg" style="width: 300px; height: auto;" alt="">
                     </div>
                     <!-- <p><span style="font-size:14px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>ธนาคาร:</b> ธนาคารกสิกรไทย</span></p>
                     <p><span style="font-size:14px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>สาขา:</b> บางมด</span></p>

@@ -20,11 +20,12 @@ class Registers extends CRUD_Controller
 		$this->num_links = 6;
 		$this->uri_segment = 4;
 		$this->load->model('registers/Registers_model', 'Registers');
+		// $this->load->model('members/Members_branch_model', 'Members_Branch');
 		$this->load->model('FileUpload_model', 'FileUpload');
 		$this->data['page_url'] = site_url('registers/registers');
-		$this->file_allow_type = @array_values($this->file_allow);
-		$this->file_allow_mime = @array_keys($this->file_allow);
-		$this->file_check_name = '';
+		// $this->file_allow_type = @array_values($this->file_allow);
+		// $this->file_allow_mime = @array_keys($this->file_allow);
+		// $this->file_check_name = '';
 		$js_url = 'assets/js_modules/registers/registers.js?ft=' . filemtime('assets/js_modules/registers/registers.js');
 		$this->another_js = '<script src="' . base_url($js_url) . '"></script>';
 	}
@@ -204,8 +205,8 @@ class Registers extends CRUD_Controller
 		$frm = $this->form_validation;
 
 		$frm->set_rules('member_mobile_no', 'เบอร์โทรศัพท์', 'trim|required');
-		$frm->set_rules('cus_passwd', 'รหัสผ่าน', 'trim|required');
-		$frm->set_rules('confirmpassword', 'ยืนยันรหัสผ่าน', 'trim|required');
+		// $frm->set_rules('cus_passwd', 'รหัสผ่าน', 'trim|required');
+		// $frm->set_rules('confirmpassword', 'ยืนยันรหัสผ่าน', 'trim|required');
 		$frm->set_rules('member_fname', 'ชื่อ', 'trim|required');
 		$frm->set_rules('member_lname', 'นามสกุล', 'trim|required');
 		$frm->set_rules('member_shop', 'ชื่อร้าน', 'trim|required');
@@ -216,8 +217,8 @@ class Registers extends CRUD_Controller
 		if ($frm->run() == FALSE) {
 			$message  = '';
 			$message .= form_error('member_mobile_no');
-			$message .= form_error('cus_passwd');
-			$message .= form_error('confirmpassword');
+			// $message .= form_error('cus_passwd');
+			// $message .= form_error('confirmpassword');
 			$message .= form_error('member_fname');
 			$message .= form_error('member_lname');
 			$message .= form_error('member_shop');
@@ -259,23 +260,22 @@ class Registers extends CRUD_Controller
 		$message .= $this->formValidate();
 		$post = $this->input->post(NULL, TRUE);
 		$id = $post['member_mobile_no'];
-		$check_id =$this->Registers->check_id($id);
-			if($check_id > 0)
-			{
-				$message = 'เบอร์โทรศัพท์นี้มีในระบบแล้ว';
-			}
-		$password = strlen($post['cus_passwd']);
-		$confirmpassword = strlen($post['confirmpassword']);
-
-		if ($password < 6 ) {
-			$success = FALSE;
-			$message .= "- รหัสผ่านต้องอย่างน้อย 6 ตัว";
+		$check_id = $this->Registers->check_id($id);
+		if ($check_id > 0) {
+			$message = 'เบอร์โทรศัพท์นี้มีในระบบแล้ว';
 		}
+		// $password = strlen(@$post['cus_passwd']);
+		// $confirmpassword = strlen(@$post['confirmpassword']);
 
-		if ($password != $confirmpassword) {
-			$success = FALSE;
-			$message = "รหัสผ่านไม่ตรงกัน";
-		}
+		// if ($password < 6 ) {
+		// 	$success = FALSE;
+		// 	$message .= "- รหัสผ่านต้องอย่างน้อย 6 ตัว";
+		// }
+
+		// if ($password != $confirmpassword) {
+		// 	$success = FALSE;
+		// 	$message = "รหัสผ่านไม่ตรงกัน";
+		// }
 
 		if ($message != '') {
 			$json = json_encode(array(
@@ -286,6 +286,7 @@ class Registers extends CRUD_Controller
 		} else {
 			$encrypt_id = '';
 			$id = $this->Registers->create($post);
+			//   $this->Members_Branch->create_first($post,$id);
 
 			if ($id != '') {
 				$success = TRUE;

@@ -12,6 +12,18 @@
 					<form class="form-horizontal" name="formSearch" method="post" action="{page_url}/search">
 						{csrf_protection_field}
 						<div class="row">
+						<div class="col-sm-12">
+								<div class="row justify-content-end">
+									<div class="col-md-3">
+										<div class="form-group bmd-form-group">
+											<a style="float: right;" href="{page_url}/add_display"  class="btn btn-success" data-toggle="tooltip" title="ตั้งค่าลำดับแสดงผล">
+												<i class="fa fa-picture-o"></i></span>&nbsp;&nbsp;ตั้งค่าลำดับแสดงผล&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+
 							<div class="col-sm-12">
 								<div class="row align-items-center">
 									<div class="col-md-2">
@@ -64,16 +76,19 @@
 						<table class="table table-striped">
 							<thead>
 								<tr>
-									<th class="text-center">#</th>
+								<th class="text-center">ที่</th>
 									<th class="text-center">ชื่อหมวดหมู่สินค้า</th>
+									<th class="text-center">แสดงผลหน้าแรก</th>
 									<th class="text-center">สถานะ</th>
 									<th class="text-center" style="width:200px">เครื่องมือ</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr parser-repeat="[data_list]" id="row_{record_number}">
-									<td style="text-align:center;">{record_number}</td>
+								<tr parser-repeat="[data_list]" id="{product_type_sort}">
+									<!-- <td style="text-align:center;">{record_number}</td> -->
+									<td style="text-align:center;">{product_type_sort}</td>
 									<td style="text-align:left;">{product_type_name}</td>
+									<td style="text-align:center;">{preview_page_fag_allow}</td>
 									<td style="text-align:center;">{preview_fag_allow}</td>
 									<td class="td-actions text-center">
 										<a href="{page_url}/preview/{url_encrypt_id}" class="my-tooltip btn btn-info btn-md" data-toggle="tooltip" title="แสดงข้อมูลรายละเอียด">
@@ -150,3 +165,35 @@
 	var param_search_field = '{search_field}';
 	var param_current_page = '{current_page_offset}';
 </script>
+<!-- <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+<script>
+$(document).ready(function(){
+ $( "#page_list" ).sortable({
+  placeholder : "ui-state-highlight",
+  update  : function(event, ui)
+  {
+   var page_id_array = new Array();
+   $('#page_list tr').each(function(){
+    page_id_array.push($(this).attr("id"));
+   });
+   var frm_action = site_url('products_types/products_types/updateAjax');
+
+   console.log(page_id_array);
+   $.ajax({
+				type: "POST",
+				url: frm_action,
+				dataType: "json",
+				data: {
+					data:page_id_array,
+				},
+				success:function(data)
+    {
+		console.log(data)
+    }
+			});
+  }
+ });
+
+});
+</script> -->

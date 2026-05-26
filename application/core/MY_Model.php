@@ -26,7 +26,7 @@ class MY_Model extends CI_Model
 		if($this->session->userdata('use_default_database') == FALSE){
 			// If change new DB
 			$session_new_db = $this->session->userdata('session_new_db');
-			if($session_new_db != ''){
+			if($session_new_db != '' && $this->db->database !== $session_new_db){
 				$this->config->load("new_database");
 				$db_config = $this->config->item('new_db'); // Load default config
 				$db_config['database'] = $session_new_db;   // Set new database name

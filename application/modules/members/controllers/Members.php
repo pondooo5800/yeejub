@@ -22,11 +22,12 @@ class Members extends CRUD_Controller
 		$this->num_links = 6;
 		$this->uri_segment = 4;
 		$this->load->model('members/Members_model', 'Members');
+		$this->load->model('members/Members_branch_model', 'Members_Branch');
 		$this->load->model('FileUpload_model', 'FileUpload');
 		$this->data['page_url'] = site_url('members/members');
-		$this->file_allow_type = @array_values($this->file_allow);
-		$this->file_allow_mime = @array_keys($this->file_allow);
-		$this->file_check_name = '';
+		// $this->file_allow_type = @array_values($this->file_allow);
+		// $this->file_allow_mime = @array_keys($this->file_allow);
+		// $this->file_check_name = '';
 		$js_url = 'assets/js_modules/members/members.js?ft=' . filemtime('assets/js_modules/members/members.js');
 		$this->another_js = '<script src="' . base_url($js_url) . '"></script>';
 	}
@@ -169,7 +170,7 @@ class Members extends CRUD_Controller
 	 */
 	public function preview($encrypt_id = "")
 	{
-
+		$this->load->model('common_model');
 		$encrypt_id = urldecode($encrypt_id);
 		$id = decrypt($encrypt_id);
 		if ($id == "") {
@@ -181,6 +182,8 @@ class Members extends CRUD_Controller
 				$this->data['message'] = "ไม่พบข้อมูลตามรหัสอ้างอิง <b>$id</b>";
 				$this->render_view('ci_message/danger');
 			} else {
+				$branch = $this->db->query("select * FROM tb_members_branch WHERE member_id = " . $id . " AND fag_allow = 'allow'");
+				$this->data['branch'] = $branch->result_array();
 				$this->setPreviewFormat($results);
 				$this->render_view('members/members/preview_view');
 			}
@@ -196,6 +199,14 @@ class Members extends CRUD_Controller
 	{
 		$this->data['data_id'] = 0;
 		$this->render_view('members/members/add_view');
+	}
+
+	public function add_branch_view($id = '')
+	{
+		$this->data['data_id'] = 0;
+		$this->data['check_member_id'] = $id;
+
+		$this->render_view('members/members/add_branch_view');
 	}
 
 	// ------------------------------------------------------------------------
@@ -219,6 +230,25 @@ class Members extends CRUD_Controller
 			$message  = '';
 			$message .= form_error('product_name');
 			$message .= form_error('fag_allow');
+			return $message;
+		}
+	}
+
+	public function formValidateBranch()
+	{
+		$this->load->library('form_validation');
+		$frm = $this->form_validation;
+
+		$frm->set_rules('member_shop', 'ชื่อร้าน', 'trim|required');
+		$frm->set_rules('member_addr', 'ที่อยู่', 'trim|required');
+
+		$frm->set_message('required', '- กรุณาใส่ข้อมูล %s');
+		$frm->set_message('is_natural', '- %s ต้องระบุตัวเลขจำนวนเต็ม');
+
+		if ($frm->run() == FALSE) {
+			$message  = '';
+			$message .= form_error('member_shop');
+			$message .= form_error('member_addr');
 			return $message;
 		}
 	}
@@ -293,6 +323,42 @@ class Members extends CRUD_Controller
 			echo $json;
 		}
 	}
+	public function saveBranch()
+	{
+		$message = '';
+		$message .= $this->formValidateBranch();
+		if ($message != '') {
+			$json = json_encode(array(
+				'is_successful' => FALSE,
+				'message' => $message
+			));
+			echo $json;
+		} else {
+
+			$post = $this->input->post(NULL, TRUE);
+			$encrypt_id = '';
+
+			$id = $this->Members_Branch->create($post);
+			// print_r($this->db->last_query());
+			// die();
+			if ($id != '') {
+				$success = TRUE;
+				$encrypt_id = encrypt($id);
+				$message = '<strong>บันทึกข้อมูลเรียบร้อย</strong>';
+			} else {
+				$success = FALSE;
+				$message = 'Error : ' . $this->Members->error_message;
+			}
+
+			$json = json_encode(array(
+				'is_successful' => $success,
+				'encrypt_id' =>  $encrypt_id,
+				'message' => $message,
+				'id' => $id
+			));
+			echo $json;
+		}
+	}
 
 
 	// ------------------------------------------------------------------------
@@ -301,10 +367,30 @@ class Members extends CRUD_Controller
 	 * Load data to form
 	 * @param String encrypt id
 	 */
+	public function edit_branch_view($id = '')
+	{
+		$this->load->model('common_model');
+		$rows = rowArray($this->common_model->custom_query("select * FROM tb_members_branch WHERE member_branch_id = " . $id . " AND fag_allow = 'allow'"));
+		$pk1 = $rows['member_branch_id'];
+		$this->data['url_encrypt_id'] = urlencode(encrypt($pk1));
+		if ($pk1 != '') {
+			$pk1 = encrypt($pk1);
+		}
+		$this->data['check_member_id'] = $rows['member_id'];
+		$this->data['encrypt_member_branch_id'] = $pk1;
+		$this->data['record_member_shop'] = $rows['member_shop'];
+		$this->data['record_member_addr'] = $rows['member_addr'];
+		$this->render_view('members/members/edit_branch_view');
+	}
 	public function edit($encrypt_id = '')
 	{
+		$this->load->model('common_model');
 		$encrypt_id = urldecode($encrypt_id);
 		$id = decrypt($encrypt_id);
+		$branch = $this->db->query("select * FROM tb_members_branch WHERE member_id = " . $id . " AND fag_allow = 'allow'");
+		$this->data['branch'] = $branch->result_array();
+		$this->data['check_member_id'] = $id;
+
 		if ($id == "") {
 			$this->data['message'] = "กรุณาระบุรหัสอ้างอิงที่ต้องการแก้ไขข้อมูล";
 			$this->render_view('ci_message/warning');
@@ -330,6 +416,15 @@ class Members extends CRUD_Controller
 		$member_id = ci_decrypt($data['encrypt_member_id']);
 		if ($member_id == '') {
 			$error .= '- รหัส member_id';
+		}
+		return $error;
+	}
+	public function checkRecordKeyBranch($data)
+	{
+		$error = '';
+		$member_id = ci_decrypt($data['encrypt_member_branch_id']);
+		if ($member_id == '') {
+			$error .= '- รหัส member_branch_id';
 		}
 		return $error;
 	}
@@ -375,7 +470,6 @@ class Members extends CRUD_Controller
 		$message = '';
 		$message .= $this->formValidateUpdate();
 		$post = $this->input->post(NULL, TRUE);
-		// die(print_r($post));
 		$error_pk_id = $this->checkRecordKey($post);
 		if ($error_pk_id != '') {
 			$message .= "รหัสอ้างอิงที่ใช้สำหรับอัพเดตข้อมูลไม่ถูกต้อง";
@@ -389,6 +483,8 @@ class Members extends CRUD_Controller
 		} else {
 
 			$result = $this->Members->update_member($post);
+			// $this->Members_Branch->update_first($post);
+
 			if ($result == false) {
 				$message = $this->Members->error_message;
 				$ok = FALSE;
@@ -401,6 +497,75 @@ class Members extends CRUD_Controller
 				'message' => $message
 			));
 
+			echo $json;
+		}
+	}
+	public function update_member_Allbranch()
+	{
+		$message = '';
+		$message .= $this->formValidateBranch();
+		$post = $this->input->post(NULL, TRUE);
+		// die(print_r($post));
+		$error_pk_id = $this->checkRecordKeyBranch($post);
+		if ($error_pk_id != '') {
+			$message .= "รหัสอ้างอิงที่ใช้สำหรับอัพเดตข้อมูลไม่ถูกต้อง";
+		}
+		if ($message != '') {
+			$json = json_encode(array(
+				'is_successful' => FALSE,
+				'message' => $message
+			));
+			echo $json;
+		} else {
+
+			$result = $this->Members_Branch->update_all($post);
+
+			if ($result == false) {
+				$message = $this->Members->error_message;
+				$ok = FALSE;
+			} else {
+				$message = '<strong>บันทึกข้อมูลเรียบร้อย</strong>' . $this->Members->error_message;
+				$ok = TRUE;
+			}
+			$json = json_encode(array(
+				'is_successful' => $ok,
+				'message' => $message
+			));
+
+			echo $json;
+		}
+	}
+	public function update_member_branch()
+	{
+		$message = '';
+		// $message .= $this->formValidate();
+		if ($message != '') {
+			$json = json_encode(array(
+				'is_successful' => FALSE,
+				'message' => $message
+			));
+			echo $json;
+		} else {
+
+			$post = $this->input->post(NULL, TRUE);
+			$encrypt_id = '';
+
+			$id = $this->Members->update_member_branch($post);
+			if ($id != '') {
+				$success = TRUE;
+				$encrypt_id = encrypt($id);
+				$message = '<strong>บันทึกข้อมูลเรียบร้อย</strong>';
+			} else {
+				$success = FALSE;
+				$message = 'Error : ' . $this->Members->error_message;
+			}
+
+			$json = json_encode(array(
+				'is_successful' => $success,
+				'encrypt_id' =>  $encrypt_id,
+				'message' => $message,
+				'id' => $id
+			));
 			echo $json;
 		}
 	}
@@ -438,6 +603,24 @@ class Members extends CRUD_Controller
 			echo $json;
 		}
 	}
+	public function delBranch()
+	{
+		$message = '';
+		$post = $this->input->post(NULL, TRUE);
+		$result = $this->Members_Branch->delete($post);
+		if ($result == false) {
+			$message = $this->Members->error_message;
+			$ok = FALSE;
+		} else {
+			$message = '<strong>ลบข้อมูลเรียบร้อย</strong>';
+			$ok = TRUE;
+		}
+		$json = json_encode(array(
+			'is_successful' => $ok,
+			'message' => $message
+		));
+		echo $json;
+	}
 
 
 	/**
@@ -458,7 +641,7 @@ class Members extends CRUD_Controller
 			}
 			$data[$i]['encrypt_member_id'] = $pk1;
 			$data[$i]['record_member_user_id'] = $data[$i]['member_user_id'];
-			$data[$i]['record_fullname'] = $data[$i]['member_fname'] .' '. $data[$i]['member_lname'];
+			$data[$i]['record_fullname'] = $data[$i]['member_fname'] . ' ' . $data[$i]['member_lname'];
 			$data[$i]['record_member_email_addr'] = $data[$i]['member_email_addr'];
 			$data[$i]['record_member_mobile_no'] = $data[$i]['member_mobile_no'];
 			$data[$i]['record_member_shop'] = $data[$i]['member_shop'];
@@ -529,8 +712,8 @@ class Members extends CRUD_Controller
 		$this->data['record_member_id'] = $data['member_id'];
 		$this->data['record_cus_passwd'] = $data['cus_passwd'];
 		$this->data['record_member_user_id'] =  $data['member_user_id'];
-		$this->data['record_member_fname'] =$data['member_fname'];
-		$this->data['record_member_lname'] =$data['member_lname'];
+		$this->data['record_member_fname'] = $data['member_fname'];
+		$this->data['record_member_lname'] = $data['member_lname'];
 		$this->data['record_member_email_addr'] = $data['member_email_addr'];
 		$this->data['record_member_mobile_no'] = $data['member_mobile_no'];
 		$this->data['record_member_shop'] = $data['member_shop'];

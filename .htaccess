@@ -1,4 +1,68 @@
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php/$1 [L]
+DirectoryIndex index.php index.html
+
+<IfModule mod_php7.c>
+    php_flag display_errors off
+    php_flag expose_php off
+</IfModule>
+<IfModule mod_php.c>
+    php_flag display_errors off
+    php_flag expose_php off
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /2025/yeejub/
+
+    # Removes access to the system folder by users.
+    # Additionally this will allow you to create a System.php controller,
+    RewriteCond %{REQUEST_URI} ^system.*
+    RewriteRule ^(.*)$ index.php?/$1 [L]
+
+    # When your application folder isn't in the system folder
+    RewriteCond %{REQUEST_URI} ^application.*
+    RewriteRule ^(.*)$ index.php?/$1 [L]
+
+    # Checks to see if the user is attempting to access a valid file,
+    # such as an image or css document, if this isn't true it sends the
+    # request to index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php/$1 [L]
+</IfModule>
+
+<IfModule !mod_rewrite.c>
+    ErrorDocument 404 /index.php
+</IfModule>
+
+
+
+
+# RewriteEngine On
+# RewriteCond %{SERVER_PORT} 80
+# RewriteRule ^(.*)$ https://yeejub.net/$1 [R,L]
+
+# RewriteEngine on
+# RewriteBase /
+# RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteRule ^(.*)$ index.php?/$1 [L]
+
+# RewriteCond %{HTTP_HOST} .
+# RewriteCond %{HTTP_HOST} !^yeejub.net [NC]
+# RewriteRule (.*) https://yeejub.net/$1 [R=301,L]
+# # <IfModule mod_rewrite.c>
+# # RewriteEngine On
+# # RewriteCond %{REQUEST_FILENAME} !-f
+# # RewriteCond %{REQUEST_FILENAME} !-d
+# # RewriteRule ^(.*)$ index.php/$1 [L]
+# # RewriteCond %{ENV:HTTPS} !=on
+# # RewriteRule ^.*$ https://%{SERVER_NAME}%{REQUEST_URI} [R,L]
+
+# # </IfModule>
+
+# # php -- BEGIN cPanel-generated handler, do not edit
+# # Set the “ea-php74” package as the default “PHP” programming language.
+# <IfModule mime_module>
+#   AddHandler application/x-httpd-ea-php74 .php .php7 .phtml
+# </IfModule>
+# # php -- END cPanel-generated handler, do not edit

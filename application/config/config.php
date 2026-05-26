@@ -29,7 +29,7 @@ $directory = str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT
 $base_url = $potocal . '://'.$_SERVER['HTTP_HOST'] . $directory;
 
 $config['base_url'] = $base_url;
-//$config['base_url'] = '';
+// $config['base_url'] = 'http://localhost:8888/freelance/yeejub';
 
 
 /*
@@ -393,9 +393,10 @@ $config['encryption_key'] = 'your_encrypt_key@ci.gen.2018';
 
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'ci_session';
-$config['sess_expiration'] = 7200;
-$config['sess_save_path'] = NULL;
+$config['sess_expiration'] = 2592000;
+$config['sess_save_path'] = sys_get_temp_dir();
 $config['sess_match_ip'] = FALSE;
+$config['sess_expire_on_close'] = FALSE;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;
 

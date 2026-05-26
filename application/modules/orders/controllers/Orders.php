@@ -597,7 +597,7 @@ class Orders extends CRUD_Controller
 			}
 			$data[$i]['encrypt_id'] = $pk1;
 			$data[$i]['member_user_id'] = $data[$i]['code_id'];
-			$data[$i]['grand_total'] = $data[$i]['grand_total'];
+			$data[$i]['grand_total'] = number_format($data[$i]['grand_total'], 2);
 			$data[$i]['status'] = $this->setFagAllowOrder($data[$i]['status']);
 			$data[$i]['created'] = setThaiDate($data[$i]['created']);
 			$data[$i]['modified'] = setThaiDate($data[$i]['modified']);
@@ -608,6 +608,9 @@ class Orders extends CRUD_Controller
 	{
 		$subject = '';
 		switch ($value) {
+			case '4':
+				$subject = 'รอจัดสินค้า';
+				break;
 			case '1':
 				$subject = 'รอชำระเงิน';
 				break;

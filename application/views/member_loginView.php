@@ -140,12 +140,10 @@ section .section-title {
 </style>
 <div class="container login-container">
 	<div class="row w-100 mx-0">
-		<div class="col-lg-6 mx-auto">
-			<div class="form-row justify-content-center ">
-				<a href="{site_url}index" class="simple-text logo-normal">
-					<img src="{base_url}/assets/themes/frontend/assets/img/icon/logo_yeejub.png" alt="logo" width="80%">
-				</a>
-			</div>
+		<div class="col-12 text-center">
+			<a href="{site_url}index" class="simple-text logo-normal">
+				<img src="{base_url}/assets/themes/frontend/assets/img/icon/logo_yeejub.png" alt="logo" style="max-width: 250px; width: 100%; height: auto;">
+			</a>
 		</div>
 	</div>
 	<br>
@@ -159,12 +157,12 @@ section .section-title {
 				<div class="form-group">
 					<input type="text" class="form-control form-control" placeholder="เบอร์โทรศัพท์ (ใช้สำหรับเข้าสู่เว็บไซต์) *" id="member_mobile_no" name="member_mobile_no" value="" OnKeyPress="return chkNumber(this)" />
 				</div>
-				<div class="form-group">
+				<!-- <div class="form-group">
 					<input type="password" class="form-control form-control " id="cus_passwd" name="cus_passwd" placeholder="รหัสผ่าน (อย่างน้อย 6 ตัว) *" value="" />
 				</div>
 				<div class="form-group">
 					<input type="password" class="form-control " id="confirmpassword" name="confirmpassword" placeholder="ยืนยันรหัสผ่าน (อย่างน้อย 6 ตัว) *" value="" />
-				</div>
+				</div> -->
 				<div class="form-group">
 					<input type="text" class="form-control form-control " id="member_fname" name="member_fname" placeholder="ชื่อ *" value="" />
 				</div>
@@ -191,9 +189,9 @@ section .section-title {
 				<div class="form-group">
 					<input type="text" class="form-control form-control" name="input_username" id="input_username" class="form-control" placeholder="เบอร์โทรศัพท์ *" OnKeyPress="return chkNumber(this)" required autofocus>
 				</div>
-				<div class="form-group">
+				<!-- <div class="form-group">
 					<input type="password" class="form-control form-control" name="input_password" id="input_password" placeholder="รหัสผ่าน *" required>
-				</div>
+				</div> -->
 				<div class="mt-3">
 					<button class="btn btn-block btn-success btn font-weight-medium auth-form-btn" id="btn_login" type="submit"><i class="fas fa-store"></i> &nbsp;เข้าสู่ร้านค้า&nbsp;&nbsp;</button>
 				</div>

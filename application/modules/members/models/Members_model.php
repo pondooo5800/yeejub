@@ -47,8 +47,6 @@ class Members_model extends MY_Model
 		);
 		return $this->add_record($data);
 	}
-
-
 	/**
 	 * List all data
 	 * @param $start_row	Number offset record start
@@ -129,21 +127,22 @@ class Members_model extends MY_Model
 
 	public function update_member($post)
 	{
-		if ($post['same'] == 1) {
-			$data = array(
-				'member_user_id' => $post['member_user_id'],
-				'member_fname' => $post['member_fname'],
-				'member_lname' => $post['member_lname'],
-				'member_shop' => $post['member_shop'],
-				'member_email_addr' => $post['member_email_addr'],
-				'member_mobile_no' => $post['member_mobile_no'],
-				'member_addr' => $post['member_addr'],
-				'member_same' => $post['member_addr'],
-				'member_note' => $post['member_note'],
-				'same' => $post['same'],
-			);
-			} else {
-				$data = array(
+		if (!empty($post['same'])) {
+						$data = array(
+						'member_user_id' => $post['member_user_id'],
+						'member_fname' => $post['member_fname'],
+						'member_lname' => $post['member_lname'],
+						'member_shop' => $post['member_shop'],
+						'member_email_addr' => $post['member_email_addr'],
+						'member_mobile_no' => $post['member_mobile_no'],
+						'member_addr' => $post['member_addr'],
+						'member_same' => $post['member_addr'],
+						'member_note' => $post['member_note'],
+						'same' => 1,
+						);
+
+		}else{
+							$data = array(
 					'member_user_id' => $post['member_user_id'],
 					'member_fname' => $post['member_fname'],
 					'member_lname' => $post['member_lname'],
@@ -156,14 +155,13 @@ class Members_model extends MY_Model
 					'same' => 0,
 
 				);
-			}
 
+		}
 
 		$member_id = checkEncryptData($post['encrypt_member_id']);
 		$this->set_where("$this->my_table.member_id = $member_id");
 		return $this->update_record($data);
 	}
-
 
 	public function delete($post)
 	{

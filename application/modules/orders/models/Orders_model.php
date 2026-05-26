@@ -71,11 +71,14 @@ class Orders_model extends MY_Model
 			$order_sort = $this->order_sort;
 			$order_by	= " $this->my_table.$order_field $order_sort";
 		}
-
 		if ($search_field != '' && $value != '') {
-			$search_method_field = "$this->my_table.$search_field";
 			$search_method_value = '';
 			if ($search_field == 'id') {
+				$search_method_field = "$this->my_table.$search_field";
+				$search_method_value = "LIKE '%$value%'";
+			}
+			if ($search_field == 'member_user_id') {
+				$search_method_field = "tb_members.member_user_id";
 				$search_method_value = "LIKE '%$value%'";
 			}
 			$where	.= ($where != '' ? ' AND ' : '') . " $search_method_field $search_method_value ";

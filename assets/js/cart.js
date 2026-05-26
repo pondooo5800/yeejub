@@ -1,7 +1,7 @@
 $('.add-cart').on('click', function () {
     var cart = $('.br-icon');
     var imgtodrag = $(this).parent().parent().parent().parent().prev().find("img").eq(0);
-    console.log(imgtodrag);
+    // console.log(imgtodrag);
     if (imgtodrag) {
         var imgclone = imgtodrag.clone()
             .offset({
@@ -45,7 +45,7 @@ $(document).ready(function() {
         var promotion_name = rowId.promotion_name;
         var promotion_detail = rowId.promotion_detail;
         var promotion_img1 = rowId.promotion_img1;
-        console.log(promotion_img1);
+        // console.log(promotion_img1);
         document.getElementById("promotion_detail_text").innerHTML = promotion_detail;
 
         $('#my_image_promotion').attr('src', promotion_img1);
@@ -53,7 +53,7 @@ $(document).ready(function() {
     });
     $('#my_modal').on('show.bs.modal', function(e) {
         var rowId = $(e.relatedTarget).data('row-id');
-        console.log(rowId);
+        // console.log(rowId);
         var product_id = rowId.product_id;
         $(e.currentTarget).find('input[name="product_id"]').val(product_id);
         var product_name = rowId.product_name;
@@ -69,6 +69,7 @@ $(document).ready(function() {
 
     });
     $('.add_cart').click(function(e) {
+
         var url = baseURL + "shop/addToCart";
         var product_id = $(this).data("productid");
         var product_name = $(this).data("productname");
@@ -86,10 +87,12 @@ $(document).ready(function() {
                     qty: quantity
                 },
                 success: function(data) {
-                    cart = JSON && JSON.parse(data) || $.parseJSON(data);
-                    $(".cartcount").html(cart.num_of_items);
-                    $(".total").html("ราคาทั้งหมด " + cart.total_price + " บาท");
-                    $(".qty").val("1");
+				   var data = JSON.parse(data); // Parse the JSON response
+						// console.log("[data]", data);
+						// Update the cart count and total price
+						$(".cartcount").html(data.total_qty);
+						$(".total").html("ราคาทั้งหมด " + data.total_price + " บาท");
+						$(".qty").val("1");
                 }
             });
         } else {
@@ -123,4 +126,32 @@ function chkNumber(ele) {
     if ((vchar < '0' || vchar > '9') && (vchar != '.')) return false;
     ele.onKeyPress = vchar;
 }
+var Cart_Modal = {
+	saveFormDataModal: function(){
+		var frm_action = site_url('shop/addToCart/');
+			var fdata = $("#formAddCart").serialize();
+			fdata += "&" + csrf_token_name + "=" + $.cookie(csrf_cookie_name);
+        $.ajax({
+					url: frm_action,
+					method: "POST",
+					data: fdata,
+					success: function (data) {
+						var data = JSON.parse(data); // Parse the JSON response
+						// console.log("[data]", data);
+						// Update the cart count and total price
+						$(".cartcount").html(data.total_qty);
+						$(".total").html("ราคาทั้งหมด " + data.total_price + " บาท");
+						$(".qty").val("1");
+					},
+				});
+		return false;
+	},
+}
 
+$(document).ready(function() {
+	$('#btnSaveCart').click(function() {
+		$('#my_modal').modal('hide');
+		Cart_Modal.saveFormDataModal();
+		return false;
+	});//click
+});

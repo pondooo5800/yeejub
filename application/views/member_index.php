@@ -19,6 +19,8 @@
                                 <ul class="tree-menu">
 
                                     <li><span></span><a href="{site_url}index/member_index/<?php echo ($this->session->userdata('url_encrypt_id'))?>">ข้อมูลลูกค้า</a></li>
+                                    <li><span></span><a href="{site_url}index/member_branch">สาขา</a></li>
+                                    <li><span></span><a href="{site_url}index/member_order">ประวัติการสั่งซื้อ</a></li>
                                     <li><span></span><a href="{site_url}member_login/destroy">ออกจากระบบ</a></li>
                                     <!-- <li><span></span><a href="member-history.html">แจ้งชำระเงิน</a></li>
                                     <li><span></span><a href="member-howto_pay.html">การชำระเงิน</a></li>

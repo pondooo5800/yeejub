@@ -358,17 +358,37 @@ class Products extends CRUD_Controller
 		if ($dir != '' && substr($dir, 0, 1) != '/') {
 			$dir = '/' . $dir;
 		}
+
 		$path = $this->upload_store_path . $dir;
+
+		// print_r($file_name);
+		// die();
 		//เปิดคอนฟิก Auto ชื่อไฟล์ใหม่ด้วย
 		$config['upload_path']          = $path;
 		$config['allowed_types']        = $this->file_allow_type;
 		$config['encrypt_name']		= TRUE;
+		$config['max_size']      = 1024;
 		$this->load->library('upload', $config);
 		if ($this->upload->do_upload($file_name)) {
 			$encrypt_name = $this->upload->file_name;
 			$orig_name = $this->upload->orig_name;
 			$this->FileUpload->create($encrypt_name, $orig_name);
 			$file_path = $path . '/' . $encrypt_name; //ไม่ต้องใช้ Path เต็ม
+			$thumb_width = 800;
+            $thumb_height = 600;
+			// Image resize config
+			$config['image_library']    = 'gd2';
+			$config['source_image']     = $file_path;
+			$config['new_image']         = $path;
+			$config['maintain_ratio']     = TRUE;
+			$config['quality'] = '80%';
+			$config['width']            = $thumb_width;
+			$config['height']           = $thumb_height;
+			// Load and initialize image_lib library
+			$this->load->library('image_lib', $config);
+			// Resize image and create thumbnail
+			$this->image_lib->resize();
+
 			$data = array(
 				'result' => TRUE,
 				'file_path' => $file_path,
@@ -418,7 +438,7 @@ class Products extends CRUD_Controller
 			// 	$upload_error++;
 			// 	$upload_error_msg .= '<br/>' . print_r($arr['error'], TRUE);
 			// }
-			// die(print_r($arr = $this->uploadFile('product_img3')));
+			// die(print_r($arr = $this->uploadFile('product_img1')));
 
 			$encrypt_id = '';
 			if ($upload_error == 0) {
@@ -466,15 +486,22 @@ class Products extends CRUD_Controller
 					$orig_name = $this->upload->orig_name;
 					$this->FileUpload->create($encrypt_name, $orig_name);
 					$file_path = $path . '/' . $encrypt_name; //ไม่ต้องใช้ Path เต็ม
+					// Image resize config
+					$configi['image_library']    = 'gd2';
+					$configi['source_image']     = $file_path;
+					$configi['new_image']         = $path;
+					$configi['maintain_ratio']     = TRUE;
+					$configi['quality'] = '80%';
+					$configi['width']            = 800;
+					$configi['height']           = 600;
+					// Load and initialize image_lib library
+					$this->load->library('image_lib');
+					$this->image_lib->initialize($configi);
+					 // Resize image and create thumbnail
+					$this->image_lib->resize();
+
 					$this->Products->create_file_img($file_path);
 					$data = $this->upload->data();
-	// 				$output .= '
-    //  <div class="col-md-3">
-	//  <p style="text-align: center;">
-	// 	Upload File Success
-	// </p>
-	//  </div>
-    //  ';
 				}
 			}
 			echo $output;
@@ -684,7 +711,7 @@ class Products extends CRUD_Controller
 			$arr = explode('/', $data[$i]['product_img1']);
 			$encrypt_file_name = end($arr);
 			$filename = $this->Products->getValueOf('tb_uploads_filename', 'filename', "encrypt_name = '$encrypt_file_name'", $this->db);
-			$data[$i]['product_img1'] = $data[$i]['product_img1'];
+			$data[$i]['product_img1'] = ($data[$i]['product_img1'] == '' ? 'assets/images/icon/file_not_found.png' : $data[$i]['product_img1']);
 			$data[$i]['preview_product_img1'] = setAttachLink('product_img1', $data[$i]['product_img1'], $filename);
 			$data[$i]['preview_products_img1'] = setAttachProductPreview('product_img1', $data[$i]['product_img1'], $filename);
 			// 		echo '<pre>';
@@ -768,6 +795,23 @@ class Products extends CRUD_Controller
 
 
 		$this->data['preview_products_img1'] = setAttachProductPreview('product_img1', $data['product_img1'], $filename);
+	}
+	public function deleteRows()
+	{
+		$ids = $this->input->post('ids');
+
+		if (!empty($ids)) {
+			$this->db->where_in('product_id', $ids);
+			$this->db->update('tb_products', array('fag_allow' => 'delete'));
+
+			if ($this->db->affected_rows() > 0) {
+				echo json_encode(array("status" => "success"));
+			} else {
+				echo json_encode(array("status" => "error", "message" => "Failed to update records"));
+			}
+		} else {
+			echo json_encode(array("status" => "error", "message" => "No IDs received"));
+		}
 	}
 }
 /*---------------------------- END Controller Class --------------------------------*/

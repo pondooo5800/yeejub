@@ -45,7 +45,7 @@ class Member_login extends CRUD_Controller
         $frm = $this->form_validation;
 
         $frm->set_rules('input_username', 'ชื่อผู้ใช้งาน', 'trim|required');
-        $frm->set_rules('input_password', 'รหัสผ่าน', 'trim|required');
+        // $frm->set_rules('input_password', 'รหัสผ่าน', 'trim|required');
 
         $frm->set_message('required', 'กรุณากรอก %s');
 
@@ -57,7 +57,7 @@ class Member_login extends CRUD_Controller
         if ($frm->run() == FALSE) {
             $message  = '';
             $message .= form_error('input_username');
-            $message .= form_error('input_password');
+            // $message .= form_error('input_password');
             $data = array(
                     'is_successful' => false,
                     'message' => $message

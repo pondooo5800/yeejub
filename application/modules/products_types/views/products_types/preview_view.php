@@ -28,6 +28,10 @@
 									<td>{record_product_name}</td>
 								</tr>
 								<tr>
+									<td class="text-right fit"><b>สถานะแสดงผลหน้าแรก :</b></td>
+									<td>{preview_page_fag_allow}</td>
+								</tr>
+								<tr>
 									<td class="text-right fit"><b>สถานะ :</b></td>
 									<td>{preview_fag_allow}</td>
 								</tr>

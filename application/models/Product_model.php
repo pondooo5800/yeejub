@@ -14,6 +14,7 @@ class Product_model extends CI_Model{
      * Fetch products data from the database
      * @param id returns a single record if specified, otherwise all records
      */
+
     public function getRows($id = ''){
         $this->db->select('*');
         $this->db->from($this->proTable);
@@ -56,16 +57,17 @@ class Product_model extends CI_Model{
         return !empty($result)?$result:false;
     }
     public function getOrderProduct_PDF($id){
-        $this->db->select('oi.*, p.product_code, p.product_name, p.price, p.product_img1');
+        $this->db->select('oi.*, p.product_code, p.product_name, p.price, p.product_img1, u.product_unit_name');
         $this->db->from('order_items as oi');
         $this->db->join('tb_products as p', 'p.product_id = oi.product_id', 'left');
+        $this->db->join('tb_products_units as u', 'p.product_unit_id = u.product_unit_id', 'left');
         $this->db->where('oi.order_id', $id);
         $query = $this->db->get();
         $result = $query->result_array();
         return !empty($result)?$result:false;
     }
     public function getOrder_PDF($id){
-        $this->db->select('o.*, c.name, c.email, c.phone, c.address, m.member_user_id, m.member_addr, m.member_same, m.member_note');
+        $this->db->select('o.*, c.name, c.email, c.phone, c.address, m.member_user_id, m.member_shop, m.member_addr, m.member_same, m.member_note');
         $this->db->from($this->ordTable.' as o');
         $this->db->join($this->custTable.' as c', 'c.id = o.customer_id', 'left');
         $this->db->join('tb_members as m', 'm.member_id = c.member_id', 'left');
@@ -127,5 +129,6 @@ class Product_model extends CI_Model{
         // Return the status
         return $insert?true:false;
     }
+
 
 }

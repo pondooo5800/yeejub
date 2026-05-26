@@ -24,9 +24,9 @@ class Products_types extends CRUD_Controller
 		$this->load->model('products_types/Products_types_model', 'Products_types');
 		$this->load->model('FileUpload_model', 'FileUpload');
 		$this->data['page_url'] = site_url('products_types/products_types');
-		$this->file_allow_type = @array_values($this->file_allow);
-		$this->file_allow_mime = @array_keys($this->file_allow);
-		$this->file_check_name = '';
+		// $this->file_allow_type = @array_values($this->file_allow);
+		// $this->file_allow_mime = @array_keys($this->file_allow);
+		// $this->file_check_name = '';
 		$js_url = 'assets/js_modules/products_types/products_types.js?ft=' . filemtime('assets/js_modules/products_types/products_types.js');
 		$this->another_js = '<script src="' . base_url($js_url) . '"></script>';
 	}
@@ -195,6 +195,17 @@ class Products_types extends CRUD_Controller
 		$this->data['data_id'] = 0;
 		$this->render_view('products_types/products_types/add_view');
 	}
+	public function add_display()
+	{
+		$this->load->model('common_model');
+		$this->data['data_id'] = 0;
+		$dis_row = $this->db->query("select product_type_id,product_type_sort FROM tb_products_types WHERE page_fag_allow = 'allow' AND fag_allow = 'allow' ORDER BY product_type_id ASC");
+		$dis = $this->db->query("select * FROM tb_products_types WHERE page_fag_allow = 'allow' AND fag_allow = 'allow'");
+		$this->data['dis'] = $dis->result_array();
+		$this->data['dis_row'] = $dis_row->result_array();
+
+		$this->render_view('products_types/products_types/add_display_view');
+	}
 
 	// ------------------------------------------------------------------------
 
@@ -208,6 +219,7 @@ class Products_types extends CRUD_Controller
 		$frm = $this->form_validation;
 
 		$frm->set_rules('product_type_name', 'ขื่อหมวดหมู่สินค้า', 'trim|required');
+		$frm->set_rules('page_fag_allow', 'สถานะแสดงผลหน้าแรก', 'trim|required');
 		$frm->set_rules('fag_allow', 'สถานะ', 'trim|required');
 
 		$frm->set_message('required', '- กรุณาใส่ข้อมูล %s');
@@ -216,6 +228,7 @@ class Products_types extends CRUD_Controller
 		if ($frm->run() == FALSE) {
 			$message  = '';
 			$message .= form_error('product_type_name');
+			$message .= form_error('page_fag_allow');
 			$message .= form_error('fag_allow');
 			return $message;
 		}
@@ -233,6 +246,8 @@ class Products_types extends CRUD_Controller
 		$frm = $this->form_validation;
 
 		$frm->set_rules('product_type_name', 'ขื่อหมวดหมู่สินค้า', 'trim|required');
+		$frm->set_rules('page_fag_allow', 'สถานะแสดงผลหน้าแรก', 'trim|required');
+
 		$frm->set_rules('fag_allow', 'สถานะ', 'trim|required');
 
 		$frm->set_message('required', '- กรุณาใส่ข้อมูล %s');
@@ -242,6 +257,7 @@ class Products_types extends CRUD_Controller
 			$message  = '';
 			$message .= form_error('product_type_name');
 			$message .= form_error('fag_allow');
+			$message .= form_error('page_fag_allow');
 			return $message;
 		}
 	}
@@ -360,6 +376,49 @@ class Products_types extends CRUD_Controller
 			echo $json;
 		}
 	}
+	public function updateDis()
+	{
+		$message = '';
+		$message .= $this->formValidate();
+		if ($message != '') {
+			$json = json_encode(array(
+				'is_successful' => FALSE,
+				'message' => $message
+			));
+			echo $json;
+		} else {
+
+			$post = $this->input->post(NULL, TRUE);
+			// die(print_r($post));
+
+			$arr = $post['product_type_sort'];
+			$this->load->model("common_model");
+			foreach ($arr as $key => $value) {
+				$id_new = $this->common_model->update(
+					"tb_products_types",
+					array(
+						'user_add' => get_session('user_id'),
+						'datetime_add' => date("Y-m-d H:i:s"),
+						'user_update' => get_session('user_id'),
+						'datetime_update' => date("Y-m-d H:i:s"),
+						'product_type_name' => $post['product_type_name'][$key],
+						'product_type_sort' => $post['product_type_sort'][$key],
+						'page_fag_allow' => "allow",
+						'fag_allow' => "allow"
+					),
+					array('product_type_id' => $post['product_type_id'][$key])
+
+				);
+				$id_self[] = $id_new;
+			}
+			$json = json_encode(array(
+				'is_successful' => true,
+				'message' => "เพิ่มข้อมูลเรียบร้อย",
+				'id_self' => $id_self
+			));
+			echo $json;
+		}
+	}
 
 	/**
 	 * Delete Record
@@ -414,17 +473,18 @@ class Products_types extends CRUD_Controller
 			}
 			$data[$i]['encrypt_product_type_id'] = $pk1;
 			$data[$i]['preview_fag_allow'] = $this->setFagAllowSubject($data[$i]['fag_allow']);
+			$data[$i]['preview_page_fag_allow'] = $this->setPageFagAllowSubject($data[$i]['page_fag_allow']);
 			$data[$i]['datetime_add'] = setThaiDate($data[$i]['datetime_add']);
 			$data[$i]['datetime_update'] = setThaiDate($data[$i]['datetime_update']);
 			$data[$i]['datetime_delete'] = setThaiDate($data[$i]['datetime_delete']);
-			$arr = explode('/', $data[$i]['product_img1']);
+			@$arr = explode('/', $data[$i]['product_img1']);
 			$encrypt_file_name = end($arr);
 			$filename = $this->Products_types->getValueOf('tb_uploads_filename', 'filename', "encrypt_name = '$encrypt_file_name'", $this->db);
-			$data[$i]['preview_product_img1'] = setAttachLink('product_img1', $data[$i]['product_img1'], $filename);
-			$arr = explode('/', $data[$i]['product_img2']);
+			@$data[$i]['preview_product_img1'] = setAttachLink('product_img1', $data[$i]['product_img1'], $filename);
+			@$arr = explode('/', $data[$i]['product_img2']);
 			$encrypt_file_name = end($arr);
 			$filename = $this->Products_types->getValueOf('tb_uploads_filename', 'filename', "encrypt_name = '$encrypt_file_name'", $this->db);
-			$data[$i]['preview_product_img2'] = setAttachLink('product_img2', $data[$i]['product_img2'], $filename);
+			@$data[$i]['preview_product_img2'] = setAttachLink('product_img2', $data[$i]['product_img2'], $filename);
 		}
 		return $data;
 	}
@@ -444,6 +504,19 @@ class Products_types extends CRUD_Controller
 				break;
 			case 'delete':
 				$subject = 'ลบ';
+				break;
+		}
+		return $subject;
+	}
+	private function setPageFagAllowSubject($value)
+	{
+		$subject = '';
+		switch ($value) {
+			case 'allow':
+				$subject = 'แสดง';
+				break;
+			case 'block':
+				$subject = 'ไม่แสดง';
 				break;
 		}
 		return $subject;
@@ -471,11 +544,77 @@ class Products_types extends CRUD_Controller
 		$this->data['record_datetime_update'] = $data['datetime_update'];
 		$this->data['record_datetime_delete'] = $data['datetime_delete'];
 		$this->data['preview_fag_allow'] = $this->setFagAllowSubject($data['fag_allow']);
+		$this->data['preview_page_fag_allow'] = $this->setPageFagAllowSubject($data['page_fag_allow']);
+		$this->data['record_page_fag_allow'] = $data['page_fag_allow'];
 		$this->data['record_fag_allow'] = $data['fag_allow'];
 
 		$this->data['record_datetime_delete'] = setThaiDate($data['datetime_delete']);
 		$this->data['record_datetime_add'] = setThaiDate($data['datetime_add']);
 		$this->data['record_datetime_update'] = setThaiDate($data['datetime_update']);
+	}
+	public function updateAjax()
+	{
+		$message = '';
+		$post = $this->input->post(NULL, TRUE);
+		$arr = $post['data'];
+		$this->load->model("common_model");
+		// 	foreach ($arr as $key => $value) {
+		// 		{
+		// 		$menuData = array(
+		// 			'product_type_sort' => $post['data'][$key]
+		// 		);
+		// 		$this->db->where('product_type_id', $post['data'][$key]);
+		// 		$this->db->update('tb_products_types', $menuData);
+		// 	}
+		// }
+		foreach ($arr as $key => $value) {
+			$this->common_model->update(
+				"tb_products_types",
+				array(
+					'product_type_sort' => $key + 1,
+					'datetime_update' => date("Y-m-d H:i:s"),
+
+				),
+				array('product_type_id' => $post['data'][$key])
+			);
+		}
+		//  print_r($this->db->last_query());
+		//  die();
+
+
+		// 		$orders = array();
+
+		// for ($i=0; $i < count($post); $i++) {
+
+		//         $orders[] = array( 'id'=>null,
+		//         'product_type_sort' => $post[$i],
+		//         );
+		//     }
+		// 	// for($i=0; $i<count($post); $i++)
+		// // {
+		// //  $query = "
+		// //  UPDATE page
+		// //  SET page_order = '".$i."'
+		// //  WHERE page_id = '".$_POST["page_id_array"][$i]."'";
+		// //  mysqli_query($connect, $query);
+		// // }
+		// 	print '<pre>';
+		// print_r($post);
+		// print '</pre>';
+		// die();
+		// $result = $this->Products_types->updateAjax($post);
+		// if ($result == false) {
+		// 	$message = $this->Products_types->error_message;
+		// 	$ok = FALSE;
+		// } else {
+		// 	$message = '<strong>บันทึกข้อมูลเรียบร้อย</strong>' . $this->Products_types->error_message;
+		// 	$ok = TRUE;
+		// }
+		// 	$json = json_encode(array(
+		// 		'is_successful' => $ok,
+		// 		'message' => $message
+		// 	));
+		// 	echo $json;
 	}
 }
 /*---------------------------- END Controller Class --------------------------------*/

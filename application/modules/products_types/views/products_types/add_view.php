@@ -39,6 +39,20 @@
 									</select>
 								</div>
 							</div>
+							<div class="form-row justify-content-around">
+								<div class="form-group col-md-4">
+									<label class="control-label" for="page_fag_allow">แสดงผลหน้าแรก :</label>
+									<select id="page_fag_allow" name="page_fag_allow" value="">
+											<option value="">- เลือก สถานะ -</option>
+											<option value="allow">แสดง</option>
+											<option value="block">ไม่แสดง</option>
+									</select>
+								</div>
+								<div class="form-group col-md-4">
+								</div>
+
+							</div>
+
 						</div>
 						<br>
 						<div class="form-group">

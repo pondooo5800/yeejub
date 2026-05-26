@@ -23,6 +23,7 @@
 										<div class="form-group has-warning bmd-form-group" id="search">
 											<select class="select2-search" name="search_field" class="span2">
 												<option value="id">เลขที่ใบสั่งซื้อ</option>
+												<option value="member_user_id">รหัสสมาชิก</option>
 											</select>
 										</div>
 									</div>
@@ -165,6 +166,7 @@
 						<select id="status" class="status" name="status" value="">
 							<option value="">- เลือก สถานะ -</option>
 							<option value="1">รอชำระเงิน</option>
+							<option value="4">รอจัดสินค้า</option>
 							<option value="2">อยู่ระหว่างจัดส่ง</option>
 							<option value="3">ดำเนินการเรียบร้อย</option>
 						</select>

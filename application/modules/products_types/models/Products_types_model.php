@@ -43,6 +43,7 @@ class Products_types_model extends MY_Model
 	{
 		$data = array(
 			'product_type_name' => $post['product_type_name'],
+			'page_fag_allow' => $post['page_fag_allow'],
 			'fag_allow' => $post['fag_allow'],
 		);
 		return $this->add_record($data);
@@ -61,7 +62,7 @@ class Products_types_model extends MY_Model
 		$value 	= trim($value);
 
 		$where	= '';
-		$order_by	= 'product_type_id DESC ';
+		$order_by	= 'product_type_sort DESC ';
 		if ($this->order_field != '') {
 			$order_field = $this->order_field;
 			$order_sort = $this->order_sort;
@@ -108,12 +109,26 @@ class Products_types_model extends MY_Model
 	{
 		$data = array(
 			'product_type_name' => $post['product_type_name'],
+			'page_fag_allow' => $post['page_fag_allow'],
 			'fag_allow' => $post['fag_allow']
 		);
 
 		$product_type_id = checkEncryptData($post['encrypt_product_type_id']);
 		$this->set_where("$this->my_table.product_type_id = $product_type_id");
 		return $this->update_record($data);
+	}
+
+	public function updateDis($post)
+	{
+		$data = array(
+			'product_type_name' => $post['product_type_name'],
+			'page_fag_allow' => "fag_allow",
+			'fag_allow' => "fag_allow"
+		);
+		return $this->add_record($post);
+
+		// die(print_r($data));
+
 	}
 
 

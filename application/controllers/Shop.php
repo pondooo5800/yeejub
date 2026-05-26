@@ -20,6 +20,7 @@ class Shop extends CI_Controller
 		parent::__construct();
         // Load cart library
 		chkMemberPerm();
+		$this->load->model('common_model');
 		$this->load->model("Shop_model");
     	$this->load->library("pagination");
 		$this->load->library('cart');
@@ -285,31 +286,56 @@ class Shop extends CI_Controller
 
 		$this->render_view('shop');
 	}
-	public function addToCart(){
+	public function addToCart()
+	{
+		$this->load->model('common_model');
+
 		$proID = $this->input->post('product_id');
-        $product = $this->product->getRows($proID);
+		$product = $this->product->getRows($proID);
 		$post = $this->input->post(NULL, TRUE);
-		$data = array(
-            'id'    => $product['product_id'],
-            'qty'    => $post['qty'],
-            'price'    => $product['price'],
-            'name'    => $product['product_name'],
-			'image' => $product['product_img1'],
-        );
-        $this->cart->insert($data);
-		if ($post['segment'] === 'ajax') {
-			$cart = array(
-				'num_of_items' => $this->cart->total_items(),
-				'total_price' => number_format($this->cart->total())
-				);
-				echo json_encode($cart);
-		} elseif ($post['segment'] === 'index'){
-			redirect('index');
-		} elseif ($post['segment'] === 'category'){
-			redirect('shop/category/' . $post['product_type']);
-		} elseif ($post['segment'] === 'shop'){
-			redirect('shop');
+		$member_id = $this->session->userdata('member_id');
+
+		// Check if product_id and member_id already exist in product_cats table
+		$existing_entry = $this->db->get_where('product_cats', array('product_id' => $proID, 'member_id' => $member_id))->row_array();
+
+		if ($existing_entry) {
+			// Update the existing entry
+			$data = array(
+				'qty' => $existing_entry['qty'] + $post['qty'],
+				'price' => $product['price'],
+				'name' => $product['product_name'],
+				'image' => $product['product_img1'],
+			);
+
+			$this->db->where('product_id', $proID);
+			$this->db->where('member_id', $member_id);
+			$this->db->update('product_cats', $data);
+		} else {
+			// Insert new entry
+			$data = array(
+				'product_id' => $product['product_id'],
+				'member_id' => $member_id,
+				'qty' => $post['qty'],
+				'price' => $product['price'],
+				'name' => $product['product_name'],
+				'image' => $product['product_img1'],
+			);
+
+			$this->db->insert('product_cats', $data);
 		}
+
+		// Get the sum of quantities and prices for the logged-in member
+		$result = $this->common_model->custom_query("SELECT SUM(qty) as total_qty, SUM(price * qty) as total_price FROM `product_cats` WHERE member_id = $member_id");
+
+		$total_qty = isset($result[0]['total_qty']) ? $result[0]['total_qty'] : 0;
+		$total_price = isset($result[0]['total_price']) ? $result[0]['total_price'] : 0;
+
+		$response = array(
+			'total_qty' => $total_qty,
+			'total_price' => number_format($total_price, 2)
+		);
+
+		echo json_encode($response);
 	}
 	public function search()
 	{

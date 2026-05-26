@@ -52,7 +52,7 @@ class Member_login_model extends CI_Model
 
 				// echo $this->secure_pass($password);
 				//if (password_verify($key_encrypt, $row->password))
-				if ($password==$row->cus_passwd)
+				if ($username==$row->member_mobile_no)
 				{
 					return $row;
 				}

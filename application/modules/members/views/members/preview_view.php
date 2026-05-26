@@ -67,6 +67,40 @@
 							</tbody>
 						</table>
 					</div>
+					<br>
+					<div class="container-fluid">
+
+					<div class="row">
+							<div class="col-sm-12">
+								<div class="row align-items-left">
+									<div class="col-md-2">
+									<h4 style="font-weight: bold;">ที่อยู่สาขา</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					<div class="table-responsive">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th class="text-center"style="width:30%">สาขา</th>
+									<th class="text-center"style="width:50%">ที่อยู่</th>
+								</tr>
+							</thead>
+							<tbody>
+							<?php
+                                    foreach ($branch as $key => $value) { ?>
+								<tr>
+									<td style="text-align:center;"><?php echo $value['member_shop'] ?></td>
+									<td style="text-align:center;"><?php echo $value['member_addr'] ?></td>
+								</tr>
+								<?php } ?>
+
+							</tbody>
+						</table>
+					</div>
+
 				</div>
 				<div class="form-group">
 					<div class="col-sm-12 text-right">

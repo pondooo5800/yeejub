@@ -43,14 +43,14 @@ class Products_model extends MY_Model
 	{
 		$data = array(
 			'product_code' => getAutoNumber('tb_products','product_code','',5),
-			'product_name' => $post['product_name'],
-			'product_type' => $post['product_type'],
-			'banner_type' => $post['banner_type'],
-			'product_unit_id' => $post['product_unit_id'],
-			'product_pro_id' => $post['product_pro_id'],
-			'price' => $post['price'],
-			'product_img1' => ($post['product_img1'] != '' ? $post['product_img1'] : ''),
-			'fag_allow' => ($post['fag_allow'] != '' ? $post['fag_allow'] : 'allow'),
+			'product_name' => @$post['product_name'],
+			'product_type' => @$post['product_type'],
+			'banner_type' => @$post['banner_type'],
+			'product_unit_id' => @$post['product_unit_id'],
+			'product_pro_id' => @$post['product_pro_id'],
+			'price' => @$post['price'],
+			'product_img1' => (@$post['product_img1'] != '' ? @$post['product_img1'] : ''),
+			'fag_allow' => (@$post['fag_allow'] != '' ? @$post['fag_allow'] : 'allow'),
 		);
 		return $this->add_record($data);
 	}
@@ -150,14 +150,14 @@ class Products_model extends MY_Model
 	public function update($post)
 	{
 		$data = array(
-			'product_code' => $post['product_code'],
-			'product_name' => $post['product_name'],
-			'product_type' => $post['product_type'],
-			'banner_type' => $post['banner_type'],
-			'product_unit_id' => $post['product_unit_id'],
-			'product_pro_id' => $post['product_pro_id'],
-			'price' => $post['price'],
-			'fag_allow' => $post['fag_allow'],
+			'product_code' => @$post['product_code'],
+			'product_name' => @$post['product_name'],
+			'product_type' => @$post['product_type'],
+			'banner_type' => @$post['banner_type'],
+			'product_unit_id' => @$post['product_unit_id'],
+			'product_pro_id' => @$post['product_pro_id'],
+			'price' => @$post['price'],
+			'fag_allow' => @$post['fag_allow'],
 		);
 
 		if (isset($post['product_img1'])) {
