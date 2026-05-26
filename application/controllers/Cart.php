@@ -226,16 +226,23 @@ class Cart extends CI_Controller
     $this->data['order'] = $data['order_value'];
     $this->render_view('order-succes');
   }
-  public function orderPDF($ordID)
+  /**
+   * สร้าง mPDF ของใบสั่งซื้อ พร้อมฟอนต์ไทยและตั้ง resource limit
+   * ให้รองรับ order ที่มีรายการสินค้าจำนวนมาก (หลักพันแถว)
+   * ใช้ร่วมกันทั้งหน้าดาวน์โหลด PDF และการแนบไฟล์ส่งอีเมล
+   */
+  private function buildOrderPDF($ordID)
   {
-    $mpdf = new \Mpdf\Mpdf([
-      'default_font_size' => 9,
-      'default_font' => 'sarabun'
-    ]);
-    $defaultConfig = (new Mpdf\Config\ConfigVariables())->getDefaults();
+    // ใบสั่งซื้อที่มีรายการจำนวนมากทำให้ mPDF ใช้ memory/เวลามาก และ HTML ยาวเกิน
+    // pcre.backtrack_limit เดิม (1,000,000) -> เพิ่ม limit เพื่อกัน HTTP 500
+    @ini_set('memory_limit', '1024M');
+    @ini_set('pcre.backtrack_limit', '50000000');
+    @set_time_limit(300);
+
+    $defaultConfig = (new \Mpdf\Config\ConfigVariables())->getDefaults();
     $fontDirs = $defaultConfig['fontDir'];
 
-    $defaultFontConfig = (new Mpdf\Config\FontVariables())->getDefaults();
+    $defaultFontConfig = (new \Mpdf\Config\FontVariables())->getDefaults();
     $fontData = $defaultFontConfig['fontdata'];
 
     $mpdf = new \Mpdf\Mpdf([
@@ -250,10 +257,11 @@ class Cart extends CI_Controller
           'BI' => 'THSarabunNew BoldItalic.ttf',
         ]
       ],
-
-      'default_font' => 'sarabun'
+      'default_font' => 'sarabun',
+      'packTableData' => true, // ลด peak memory สำหรับตารางรายการสินค้าขนาดใหญ่
     ]);
     $mpdf->curlAllowUnsafeSslRequests = true;
+
     $order['order'] = $this->product->getOrder_PDF($ordID);
     $order['order_product'] = $this->product->getOrderProduct_PDF($ordID);
     $html = $this->load->view('order_pdfView', array(
@@ -264,6 +272,13 @@ class Cart extends CI_Controller
     $mpdf->AddPage();
     $html_img = $this->load->view('order_img_pdfView', [], true);
     $mpdf->WriteHTML($html_img);
+
+    return $mpdf;
+  }
+
+  public function orderPDF($ordID)
+  {
+    $mpdf = $this->buildOrderPDF($ordID);
     $file_name = 'ใบสั่งซื้อสินค้า.pdf';
     $mpdf->Output($file_name, 'I');
   }
@@ -277,42 +292,7 @@ class Cart extends CI_Controller
 
     if (@$post['member_email_order'] != '') {
       $to = @$post['member_email_order'];
-      $mpdf = new \Mpdf\Mpdf([
-        'default_font_size' => 9,
-        'default_font' => 'sarabun'
-      ]);
-      $defaultConfig = (new Mpdf\Config\ConfigVariables())->getDefaults();
-      $fontDirs = $defaultConfig['fontDir'];
-
-      $defaultFontConfig = (new Mpdf\Config\FontVariables())->getDefaults();
-      $fontData = $defaultFontConfig['fontdata'];
-
-      $mpdf = new \Mpdf\Mpdf([
-        'fontDir' => array_merge($fontDirs, [
-          __DIR__ . '/tmp',
-        ]),
-        'fontdata' => $fontData + [
-          'sarabun' => [
-            'R' => 'THSarabunNew.ttf',
-            'I' => 'THSarabunNew Italic.ttf',
-            'B' => 'THSarabunNew Bold.ttf',
-            'BI' => 'THSarabunNew BoldItalic.ttf',
-          ]
-        ],
-
-        'default_font' => 'sarabun'
-      ]);
-      $mpdf->curlAllowUnsafeSslRequests = true;
-      $order['order'] = $this->product->getOrder_PDF($ordID);
-      $order['order_product'] = $this->product->getOrderProduct_PDF($ordID);
-      $html = $this->load->view('order_pdfView', array(
-        'order'  =>  $order['order'],
-        'order_product'  =>  $order['order_product']
-      ), true);
-      $mpdf->WriteHTML(($html));
-      $mpdf->AddPage();
-      $html_img = $this->load->view('order_img_pdfView', [], true);
-      $mpdf->WriteHTML($html_img);
+      $mpdf = $this->buildOrderPDF($ordID);
       $content = $mpdf->Output('', 'S');
       $filename = "order.pdf";
       $fromMail = "admin@yeejub.net";
@@ -334,42 +314,7 @@ class Cart extends CI_Controller
         redirect($this->controller . '/orderSuccess/' . $ordID);
       }
     } else {
-      $mpdf = new \Mpdf\Mpdf([
-        'default_font_size' => 9,
-        'default_font' => 'sarabun'
-      ]);
-      $defaultConfig = (new Mpdf\Config\ConfigVariables())->getDefaults();
-      $fontDirs = $defaultConfig['fontDir'];
-
-      $defaultFontConfig = (new Mpdf\Config\FontVariables())->getDefaults();
-      $fontData = $defaultFontConfig['fontdata'];
-
-      $mpdf = new \Mpdf\Mpdf([
-        'fontDir' => array_merge($fontDirs, [
-          __DIR__ . '/tmp',
-        ]),
-        'fontdata' => $fontData + [
-          'sarabun' => [
-            'R' => 'THSarabunNew.ttf',
-            'I' => 'THSarabunNew Italic.ttf',
-            'B' => 'THSarabunNew Bold.ttf',
-            'BI' => 'THSarabunNew BoldItalic.ttf',
-          ]
-        ],
-
-        'default_font' => 'sarabun'
-      ]);
-      $mpdf->curlAllowUnsafeSslRequests = true;
-      $order['order'] = $this->product->getOrder_PDF($ordID);
-      $order['order_product'] = $this->product->getOrderProduct_PDF($ordID);
-      $html = $this->load->view('order_pdfView', array(
-        'order'  =>  $order['order'],
-        'order_product'  =>  $order['order_product']
-      ), true);
-      $mpdf->WriteHTML(($html));
-      $mpdf->AddPage();
-      $html_img = $this->load->view('order_img_pdfView', [], true);
-      $mpdf->WriteHTML($html_img);
+      $mpdf = $this->buildOrderPDF($ordID);
       $content = $mpdf->Output('', 'S');
       $filename = "order.pdf";
       $fromMail = "admin@yeejub.net";
