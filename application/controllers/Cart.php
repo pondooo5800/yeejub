@@ -129,6 +129,18 @@ class Cart extends CI_Controller
   {
     $post = $this->input->post(NULL, TRUE);
     $custData = $data = array();
+
+    // Guard: cart already empty (double-submit / refresh after order placed)
+    // -> back to cart page instead of creating an empty order
+    $member_id = (int) $this->session->userdata('member_id');
+    $cartCount = $this->common_model->custom_query("
+        SELECT COUNT(*) as cnt FROM `product_cats` WHERE member_id = $member_id
+    ");
+    if (empty($cartCount[0]['cnt'])) {
+      redirect($this->controller);
+      return;
+    }
+
     // If order request is submitted
     $custData = array(
       'name'     => $this->session->userdata('member_fname') . ' ' . $this->session->userdata('member_lname'),
@@ -168,6 +180,12 @@ class Cart extends CI_Controller
     ");
 
 		$total_price = isset($data['total'][0]['total']) ? $data['total'][0]['total'] : 0;
+
+    // Guard: empty cart (e.g. double-submit after the first order already
+    // cleared the cart) must not create an empty 0-baht order row
+    if (empty($data['cart_value']) || $total_price <= 0) {
+      return false;
+    }
 
     // Insert order data
     $ordData = array(
@@ -297,13 +315,38 @@ class Cart extends CI_Controller
   private function getOrderPdfContent($ordID)
   {
     $cacheFile = $this->orderPdfCacheDir() . 'order_' . (int) $ordID . '.pdf';
-    if (is_file($cacheFile) && filesize($cacheFile) > 0) {
-      return file_get_contents($cacheFile); // cache hit: ข้ามการ render ของ mPDF
+    if (is_file($cacheFile)) {
+      $cached = file_get_contents($cacheFile);
+      if ($this->isValidPdf($cached)) {
+        return $cached; // cache hit: ข้ามการ render ของ mPDF
+      }
+      // ไฟล์ cache เสีย (เช่น เขียนไม่จบเพราะ process ถูก kill/ดิสก์เต็ม)
+      // ลบทิ้งแล้ว render ใหม่ ไม่ให้เสิร์ฟ PDF พังซ้ำ
+      @unlink($cacheFile);
     }
     $mpdf = $this->buildOrderPDF($ordID);
     $content = $mpdf->Output('', 'S');
-    @file_put_contents($cacheFile, $content, LOCK_EX);
+    if ($this->isValidPdf($content)) {
+      // เขียนแบบ atomic: ลง tmp ก่อนแล้วค่อย rename กันไฟล์ครึ่งเดียวค้างใน cache
+      $tmpFile = $cacheFile . '.' . uniqid('tmp', true);
+      if (@file_put_contents($tmpFile, $content, LOCK_EX) === strlen($content)) {
+        @rename($tmpFile, $cacheFile);
+      } else {
+        @unlink($tmpFile);
+      }
+    }
     return $content;
+  }
+
+  /**
+   * เช็คว่า binary เป็น PDF ที่สมบูรณ์ (มี header %PDF และ trailer %%EOF)
+   * ใช้กันไฟล์ cache ที่เขียนไม่จบถูกเสิร์ฟออกไป
+   */
+  private function isValidPdf($content)
+  {
+    return is_string($content)
+      && strncmp($content, '%PDF', 4) === 0
+      && strpos(substr($content, -1024), '%%EOF') !== false;
   }
 
   public function orderPDF($ordID)
