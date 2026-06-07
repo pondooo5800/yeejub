@@ -85,7 +85,8 @@
 					</table>
 				</div>
 				<div class="content-text clearfix">
-					<form class="form-inline" method='post' action='<?php echo base_url('cart/checkout'); ?>'>
+					<form class="form-inline" method='post' action='<?php echo base_url('cart/checkout'); ?>'
+						onsubmit="var b=this.querySelector('button[type=submit]'); if(b){ if(b.disabled){return false;} b.disabled=true; b.innerHTML='กำลังสั่งซื้อ กรุณารอสักครู่...'; } return true;">
 
 						<div class="container">
 							<div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-6">
