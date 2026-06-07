@@ -56,6 +56,10 @@
 	$is_production = (!isset($_SERVER['HTTP_HOST']) || (strpos($_SERVER['HTTP_HOST'], 'localhost') === false && strpos($_SERVER['HTTP_HOST'], '127.0.0.1') === false));
 	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : ($is_production ? 'production' : 'development'));
 
+	// Use Thailand timezone for all date()/time() calls (order created time,
+	// PDF export, etc.) regardless of the server's default timezone
+	date_default_timezone_set('Asia/Bangkok');
+
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING
