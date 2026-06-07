@@ -154,8 +154,12 @@ class Cart extends CI_Controller
     if ($insert) {
       $order = $this->placeOrder($insert);
       if ($order) {
+        // Redirect the browser to the success page immediately, then keep
+        // working in the background (render PDF + send email) so large
+        // orders don't make the user wait tens of seconds after clicking
+        $this->finishRequestThenContinue(site_url($this->controller . '/orderSuccess/' . $order));
         $this->order_sendMail($order);
-        redirect($this->controller . '/orderSuccess/' . $order);
+        exit;
       } else {
         $data['error_msg'] = 'Order submission failed, please try again.';
       }
@@ -164,6 +168,34 @@ class Cart extends CI_Controller
     }
     $this->render_view('cart');
   }
+  /**
+   * ส่ง redirect ให้ browser แล้วปิด connection ทันที
+   * เพื่อให้ PHP ทำงานหนักต่อ (render PDF / ส่งเมล) โดยผู้ใช้ไม่ต้องรอ
+   */
+  private function finishRequestThenContinue($redirectUrl)
+  {
+    ignore_user_abort(true);
+    @set_time_limit(300);
+    // ปิด session ก่อน ไม่ให้ lock ค้างจน request ถัดไป (หน้า orderSuccess) ต้องรอ
+    if (function_exists('session_write_close')) {
+      session_write_close();
+    }
+    header('Location: ' . $redirectUrl, true, 302);
+    if (function_exists('litespeed_finish_request')) {
+      litespeed_finish_request(); // LiteSpeed (prod)
+    } elseif (function_exists('fastcgi_finish_request')) {
+      fastcgi_finish_request(); // PHP-FPM
+    } else {
+      // Fallback: บอก browser ว่า response จบแล้วและ flush ออกไป
+      header('Connection: close');
+      header('Content-Length: 0');
+      while (ob_get_level() > 0) {
+        ob_end_flush();
+      }
+      flush();
+    }
+  }
+
   public function placeOrder($custID)
   {
 		$member_id = $this->session->userdata('member_id');
